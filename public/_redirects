@@ -1,0 +1,37 @@
+# Redirections pour Netlify
+
+# Redirection de la racine vers la page d'accueil
+/ /index.html 200
+
+# Redirection des pages d'authentification
+/login /pages/auth/login.html 200
+/register /pages/auth/register.html 200
+/reset-password /pages/auth/reset-password.html 200
+
+# Redirection des pages admin
+/admin /pages/admin/dashboard.html 200
+/admin/dashboard /pages/admin/dashboard.html 200
+/admin/biens /pages/admin/biens.html 200
+/admin/clients /pages/admin/clients.html 200
+/admin/visites /pages/admin/visites.html 200
+/admin/messagerie /pages/admin/messagerie.html 200
+/admin/parametres /pages/admin/parametres.html 200
+
+# Redirection des pages client
+/client /pages/client/dashboard.html 200
+/client/dashboard /pages/client/dashboard.html 200
+/client/biens /pages/client/biens.html 200
+/client/favoris /pages/client/favoris.html 200
+/client/visites /pages/client/visites.html 200
+/client/messagerie /pages/client/messagerie.html 200
+/client/profil /pages/client/profil.html 200
+
+# Redirection des pages d'erreur
+/404 /pages/404.html 404
+/500 /pages/500.html 500
+
+# Redirection des composants
+/cookies /pages/cookie-popup.html 200
+
+# Fallback pour toutes les autres routes
+/* /pages/404.html 404

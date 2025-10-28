@@ -1,0 +1,67 @@
+[build]
+  # Dossier de build (optionnel, Netlify détecte automatiquement)
+  publish = "."
+  
+  # Commande de build (optionnel si pas de build nécessaire)
+  command = "echo 'No build step required'"
+
+[build.environment]
+  # Variables d'environnement si nécessaire
+  NODE_VERSION = "18"
+
+# Redirections
+[[redirects]]
+  from = "/"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/login"
+  to = "/pages/auth/login.html"
+  status = 200
+
+[[redirects]]
+  from = "/register"
+  to = "/pages/auth/register.html"
+  status = 200
+
+[[redirects]]
+  from = "/admin"
+  to = "/pages/admin/dashboard.html"
+  status = 200
+
+[[redirects]]
+  from = "/client"
+  to = "/pages/client/dashboard.html"
+  status = 200
+
+# Gestion des erreurs
+[[redirects]]
+  from = "/*"
+  to = "/pages/404.html"
+  status = 404
+
+# Headers de sécurité
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Cache pour les assets statiques
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
