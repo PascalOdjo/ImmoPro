@@ -21,16 +21,21 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
         }
         
         .welcome-container {
             text-align: center;
             max-width: 600px;
+            width: 90%;
             padding: 40px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 20px;
             backdrop-filter: blur(10px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
         
         .logo {
@@ -146,8 +151,13 @@
         }
         
         @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
             .welcome-container {
-                margin: 20px;
+                width: 100%;
+                max-width: none;
+                margin: 0;
                 padding: 30px 20px;
             }
             .logo-text {
@@ -164,6 +174,21 @@
                 width: 100%;
                 max-width: 300px;
                 justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .welcome-container {
+                padding: 20px 15px;
+            }
+            .logo-text {
+                font-size: 24px;
+            }
+            .welcome-title {
+                font-size: 20px;
+            }
+            .welcome-subtitle {
+                font-size: 16px;
             }
         }
     </style>
