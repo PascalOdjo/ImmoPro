@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImmoPro - Mes Favoris</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/components.css">
+    <link rel="stylesheet" href="../../css/style_client.css">
+    <link rel="stylesheet" href="../../css/style_client_favoris.css">
+</head>
+
+<body>
+    <div class="sidebar client-space" id="sidebar">
+        <div class="logo">
+            <div class="logo-icon"></div>
+            <span>ImmoPro</span>
+        </div>
+
+        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+            <span class="material-icons">menu</span>
+        </button>
+
+        <a href="dashboard.html" class="menu-item">
+            <span class="material-icons menu-icon">dashboard</span>
+            <span>Tableau de bord</span>
+        </a>
+
+        <a href="biens.html" class="menu-item">
+            <span class="material-icons menu-icon">home</span>
+            <span>Mes biens</span>
+        </a>
+
+        <a href="favoris.html" class="menu-item active">
+            <span class="material-icons menu-icon">favorite</span>
+            <span>Mes favoris</span>
+        </a>
+
+        <a href="visites.html" class="menu-item">
+            <span class="material-icons menu-icon">event</span>
+            <span>Mes visites</span>
+        </a>
+
+        <a href="messagerie.html" class="menu-item">
+            <span class="material-icons menu-icon">chat</span>
+            <span>Messagerie</span>
+        </a>
+
+        <a href="profil.html" class="menu-item">
+            <span class="material-icons menu-icon">person</span>
+            <span>Mon profil</span>
+        </a>
+
+        <a href="#" class="logout" onclick="handleLogout(event)">
+            <span class="material-icons menu-icon">logout</span>
+            <span>Déconnexion</span>
+        </a>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <div class="search-bar">
+                <span class="material-icons search-icon">search</span>
+                <input type="text" placeholder="Rechercher dans mes favoris...">
+            </div>
+
+            <div class="header-right">
+                <div class="notification-icon">
+                    <span class="material-icons">notifications</span>
+                    <span class="notification-badge">1</span>
+                </div>
+                <div class="user-profile">
+                    <div class="avatar"></div>
+                    <div class="user-info">
+                        <div class="user-name">Marie Dubois</div>
+                        <div class="user-role">Client</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Page Mes Favoris -->
+            <div id="page-favoris" class="page-favoris active">
+                <div class="page-header">
+                    <h1 class="page-title">Mes Biens Favoris</h1>
+                    <div class="header-actions">
+                        <button class="btn-secondary" onclick="toggleView('list')">
+                            <span class="material-icons">view_list</span>
+                            <span>Liste</span>
+                        </button>
+                        <button class="btn-secondary active" onclick="toggleView('grid')">
+                            <span class="material-icons">view_module</span>
+                            <span>Grille</span>
+                        </button>
+                        <button class="btn-primary" onclick="clearAllFavorites()">
+                            <span class="material-icons">clear_all</span>
+                            <span>Vider la liste</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Statistiques des favoris -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <span class="material-icons">favorite</span>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-label">Total des favoris</div>
+                            <div class="stat-value">8</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <span class="material-icons">euro</span>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-label">Prix moyen</div>
+                            <div class="stat-value">725 000 €</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <span class="material-icons">location_on</span>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-label">Zones préférées</div>
+                            <div class="stat-value">3</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <span class="material-icons">event</span>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-label">Visites planifiées</div>
+                            <div class="stat-value">3</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filtres et actions -->
+                <div class="filters-bar">
+                    <div class="filter-group">
+                        <label>Type de bien</label>
+                        <select class="filter-select">
+                            <option value="">Tous les types</option>
+                            <option value="apartment">Appartement</option>
+                            <option value="house">Maison</option>
+                            <option value="studio">Studio</option>
+                            <option value="loft">Loft</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Statut</label>
+                        <select class="filter-select">
+                            <option value="">Tous les statuts</option>
+                            <option value="available">Disponible</option>
+                            <option value="pending">En attente</option>
+                            <option value="sold">Vendu</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Prix min</label>
+                        <input type="number" class="filter-input" placeholder="0 €">
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Prix max</label>
+                        <input type="number" class="filter-input" placeholder="2 000 000 €">
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Localisation</label>
+                        <input type="text" class="filter-input" placeholder="Paris, Lyon...">
+                    </div>
+
+                    <div class="filter-actions">
+                        <button class="btn-filter" onclick="applyFilters()">Filtrer</button>
+                        <button class="btn-filter secondary" onclick="resetFilters()">Réinitialiser</button>
+                    </div>
+                </div>
+
+                <!-- Liste des favoris -->
+                <div class="favorites-container">
+                    <!-- Vue grille -->
+                    <div id="favorites-grid" class="favorites-grid active">
+                        <div class="favorite-card" data-id="1">
+                            <div class="favorite-image-container">
+                                <img src="../../assets/images/bien_1.jpg" alt="Appartement moderne" class="favorite-image">
+                                <div class="favorite-overlay">
+                                    <button class="overlay-btn" onclick="scheduleVisit(1)" title="Planifier une visite">
+                                        <span class="material-icons">event</span>
+                                    </button>
+                                    <button class="overlay-btn" onclick="contactAgent(1)" title="Contacter l'agent">
+                                        <span class="material-icons">chat</span>
+                                    </button>
+                                    <button class="overlay-btn" onclick="removeFromFavorites(1)" title="Retirer des favoris">
+                                        <span class="material-icons">favorite</span>
+                                    </button>
+                                </div>
+                                <div class="favorite-status">
+                                    <span class="status-badge status-available">Disponible</span>
+                                </div>
+                                <div class="favorite-date">
+                                    <span class="material-icons">schedule</span>
+                                    <span>Ajouté il y a 2 jours</span>
+                                </div>
+                            </div>
+                            <div class="favorite-info">
+                                <div class="favorite-title">Appartement moderne, Paris 15ème</div>
+                                <div class="favorite-location">
+                                    <span class="material-icons">location_on</span>
+                                    <span>Paris 15ème, 75015</span>
+                                </div>
+                                <div class="favorite-details">
+                                    <span class="detail-item">
+                                        <span class="material-icons">bed</span>
+                                    <span>3 chambres</span>
+                                    </span>
+                                    <span class="detail-item">
+                                        <span class="material-icons">bathtub</span>
+                                    <span>2 salles de bain</span>
+                                    </span>
+                                    <span class="detail-item">
+                                        <span class="material-icons">square_foot</span>
+                                    <span>85 m²</span>
+                                    </span>
+                                </div>
+                                <div class="favorite-price">650 000 €</div>
+                                <div class="favorite-agent">
+                                    <div class="agent-info">
+                                        <div class="agent-avatar"></div>
+                                        <div class="agent-details">
+                                            <div class="agent-name">Sophie Martin</div>
+                                            <div class="agent-phone">06 12 34 56 78</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="favorite-actions">
+                                    <button class="action-btn primary" onclick="viewPropertyDetails(1)">
+                                        <span class="material-icons">visibility</span>
+                                        <span>Voir les détails</span>
+                                    </button>
+                                    <button class="action-btn secondary" onclick="scheduleVisit(1)">
+                                        <span class="material-icons">event</span>
+                                        <span>Planifier visite</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="favorite-card" data-id="2">
+                            <div class="favorite-image-container">
+                                <img src="../../assets/images/bien_2.jpg" alt="Maison avec jardin" class="favorite-image">
+                                <div class="favorite-overlay">
+                                    <button class="overlay-btn" onclick="scheduleVisit(2)" title="Planifier une visite">
+                                        <span class="material-icons">event</span>
+                                    </button>
+                                    <button class="overlay-btn" onclick="contactAgent(2)" title="Contacter l'agent">
+                                        <span class="material-icons">chat</span>
+                                    </button>
+                                    <button class="overlay-btn" onclick="removeFromFavorites(2)" title="Retirer des favoris">
+                                        <span class="material-icons">favorite</span>
+                                    </button>
+                                </div>
+                                <div class="favorite-status">
+                                    <span class="status-badge status-pending">En attente</span>
+                                </div>
+                                <div class="favorite-date">
+                                    <span class="material-icons">schedule</span>
+                                    <span>Ajouté il y a 1 semaine</span>
+                                </div>
+                            </div>
+                            <div class="favorite-info">
+                                <div class="favorite-title">Maison avec jardin, Neuilly</div>
+                                <div class="favorite-location">
+                                    <span class="material-icons">location_on</span>
+                                    <span>Neuilly-sur-Seine, 92200</span>
+                                </div>
+                                <div class="favorite-details">
+                                    <span class="detail-item">
+                                        <span class="material-icons">bed</span>
+                                    <span>4 chambres</span>
+                                    </span>
+                                    <span class="detail-item">
+                                        <span class="material-icons">bathtub</span>
+                                    <span>3 salles de bain</span>
+                                    </span>
+                                    <span class="detail-item">
+                                        <span class="material-icons">square_foot</span>
+                                    <span>120 m²</span>
+                                    </span>
+                                </div>
+                                <div class="favorite-price">1 200 000 €</div>
+                                <div class="favorite-agent">
+                                    <div class="agent-info">
+                                        <div class="agent-avatar"></div>
+                                        <div class="agent-details">
+                                            <div class="agent-name">Pierre Durand</div>
+                                            <div class="agent-phone">06 98 76 54 32</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="favorite-actions">
+                                    <button class="action-btn primary" onclick="viewPropertyDetails(2)">
+                                        <span class="material-icons">visibility</span>
+                                        <span>Voir les détails</span>
+                                    </button>
+                                    <button class="action-btn secondary" onclick="scheduleVisit(2)">
+                                        <span class="material-icons">event</span>
+                                        <span>Planifier visite</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="favorite-card" data-id="3">
+                            <div class="favorite-image-container">
+                                <img src="../../assets/images/bien_3.jpg" alt="Loft industriel" class="favorite-image">
+                                <div class="favorite-overlay">
+                                    <button class="overlay-btn" onclick="scheduleVisit(3)" title="Planifier une visite">
+                                        <span class="material-icons">event</span>
+                                    </button>
+                                    <button class="overlay-btn" onclick="contactAgent(3)" title="Contacter l'agent">
+                                        <span class="material-icons">chat</span>
+                                    </button>
+                                    <button class="overlay-btn" onclick="removeFromFavorites(3)" title="Retirer des favoris">
+                                        <span class="material-icons">favorite</span>
+                                    </button>
+                                </div>
+                                <div class="favorite-status">
+                                    <span class="status-badge status-available">Disponible</span>
+                                </div>
+                                <div class="favorite-date">
+                                    <span class="material-icons">schedule</span>
+                                    <span>Ajouté il y a 3 jours</span>
+                                </div>
+                            </div>
+                            <div class="favorite-info">
+                                <div class="favorite-title">Loft industriel, Lyon Confluence</div>
+                                <div class="favorite-location">
+                                    <span class="material-icons">location_on</span>
+                                    <span>Lyon 2ème, 69002</span>
+                                </div>
+                                <div class="favorite-details">
+                                    <span class="detail-item">
+                                        <span class="material-icons">bed</span>
+                                    <span>2 chambres</span>
+                                    </span>
+                                    <span class="detail-item">
+                                        <span class="material-icons">bathtub</span>
+                                    <span>1 salle de bain</span>
+                                    </span>
+                                    <span class="detail-item">
+                                        <span class="material-icons">square_foot</span>
+                                    <span>95 m²</span>
+                                    </span>
+                                </div>
+                                <div class="favorite-price">750 000 €</div>
+                                <div class="favorite-agent">
+                                    <div class="agent-info">
+                                        <div class="agent-avatar"></div>
+                                        <div class="agent-details">
+                                            <div class="agent-name">Marie Leroy</div>
+                                            <div class="agent-phone">06 45 67 89 01</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="favorite-actions">
+                                    <button class="action-btn primary" onclick="viewPropertyDetails(3)">
+                                        <span class="material-icons">visibility</span>
+                                        <span>Voir les détails</span>
+                                    </button>
+                                    <button class="action-btn secondary" onclick="scheduleVisit(3)">
+                                        <span class="material-icons">event</span>
+                                        <span>Planifier visite</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="favorite-card" data-id="4">
+                            <div class="favorite-image-container">
+                                <img src="../../assets/images/bien_3.jpg" alt="Studio moderne" class="favorite-image">
+                                <div class="favorite-overlay">
+                                    <button class="overlay-btn" onclick="scheduleVisit(4)" title="Planifier une visite">
+                                        <span class="material-icons">event</span>
+                                    </button>
+                                    <button class="overlay-btn" onclick="contactAgent(4)" title="Contacter l'agent">
+                                        <span class="material-icons">chat</span>
+                                    </button>
+                                    <button class="overlay-btn" onclick="removeFromFavorites(4)" title="Retirer des favoris">
+                                        <span class="material-icons">favorite</span>
+                                    </button>
+                                </div>
+                                <div class="favorite-status">
+                                    <span class="status-badge status-sold">Vendu</span>
+                                </div>
+                                <div class="favorite-date">
+                                    <span class="material-icons">schedule</span>
+                                    <span>Ajouté il y a 2 semaines</span>
+                                </div>
+                            </div>
+                            <div class="favorite-info">
+                                <div class="favorite-title">Studio moderne centre-ville</div>
+                                <div class="favorite-location">
+                                    <span class="material-icons">location_on</span>
+                                    <span>Paris 4ème, 75004</span>
+                                </div>
+                                <div class="favorite-details">
+                                    <span class="detail-item">
+                                        <span class="material-icons">bed</span>
+                                    <span>1 chambre</span>
+                                    </span>
+                                    <span class="detail-item">
+                                        <span class="material-icons">bathtub</span>
+                                    <span>1 salle de bain</span>
+                                    </span>
+                                    <span class="detail-item">
+                                        <span class="material-icons">square_foot</span>
+                                    <span>35 m²</span>
+                                    </span>
+                                </div>
+                                <div class="favorite-price">420 000 €</div>
+                                <div class="favorite-agent">
+                                    <div class="agent-info">
+                                        <div class="agent-avatar"></div>
+                                        <div class="agent-details">
+                                            <div class="agent-name">Thomas Petit</div>
+                                            <div class="agent-phone">06 11 22 33 44</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="favorite-actions">
+                                    <button class="action-btn primary" onclick="viewPropertyDetails(4)">
+                                        <span class="material-icons">visibility</span>
+                                        <span>Voir les détails</span>
+                                    </button>
+                                    <button class="action-btn disabled" disabled>
+                                        <span class="material-icons">event</span>
+                                        <span>Bien vendu</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vue liste -->
+                    <div id="favorites-list" class="favorites-list">
+                        <div class="favorites-table-container">
+                            <table class="favorites-table">
+                                <thead>
+                                    <tr>
+                                        <th>Bien</th>
+                                        <th>Localisation</th>
+                                        <th>Type</th>
+                                        <th>Prix</th>
+                                        <th>Statut</th>
+                                        <th>Agent</th>
+                                        <th>Date d'ajout</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr data-id="1">
+                                        <td>
+                                            <div class="favorite-cell">
+                                                <img src="../../assets/images/bien_1.jpg" alt="Appartement moderne" class="favorite-thumb">
+                                                <div class="favorite-cell-info">
+                                                    <div class="favorite-cell-title">Appartement moderne, Paris 15ème</div>
+                                                    <div class="favorite-cell-details">3 chambres • 85 m²</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>Paris 15ème</td>
+                                        <td>Appartement</td>
+                                        <td class="price-cell">650 000 €</td>
+                                        <td><span class="status-badge status-available">Disponible</span></td>
+                                        <td>Sophie Martin</td>
+                                        <td>Il y a 2 jours</td>
+                                        <td>
+                                            <div class="table-actions">
+                                                <button class="table-btn" onclick="viewPropertyDetails(1)" title="Voir">
+                                                    <span class="material-icons">visibility</span>
+                                                </button>
+                                                <button class="table-btn" onclick="scheduleVisit(1)" title="Planifier visite">
+                                                    <span class="material-icons">event</span>
+                                                </button>
+                                                <button class="table-btn" onclick="contactAgent(1)" title="Contacter">
+                                                    <span class="material-icons">chat</span>
+                                                </button>
+                                                <button class="table-btn delete" onclick="removeFromFavorites(1)" title="Retirer">
+                                                    <span class="material-icons">favorite</span>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr data-id="2">
+                                        <td>
+                                            <div class="favorite-cell">
+                                                <img src="../../assets/images/bien_2.jpg" alt="Maison avec jardin" class="favorite-thumb">
+                                                <div class="favorite-cell-info">
+                                                    <div class="favorite-cell-title">Maison avec jardin, Neuilly</div>
+                                                    <div class="favorite-cell-details">4 chambres • 120 m²</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>Neuilly-sur-Seine</td>
+                                        <td>Maison</td>
+                                        <td class="price-cell">1 200 000 €</td>
+                                        <td><span class="status-badge status-pending">En attente</span></td>
+                                        <td>Pierre Durand</td>
+                                        <td>Il y a 1 semaine</td>
+                                        <td>
+                                            <div class="table-actions">
+                                                <button class="table-btn" onclick="viewPropertyDetails(2)" title="Voir">
+                                                    <span class="material-icons">visibility</span>
+                                                </button>
+                                                <button class="table-btn" onclick="scheduleVisit(2)" title="Planifier visite">
+                                                    <span class="material-icons">event</span>
+                                                </button>
+                                                <button class="table-btn" onclick="contactAgent(2)" title="Contacter">
+                                                    <span class="material-icons">chat</span>
+                                                </button>
+                                                <button class="table-btn delete" onclick="removeFromFavorites(2)" title="Retirer">
+                                                    <span class="material-icons">favorite</span>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr data-id="3">
+                                        <td>
+                                            <div class="favorite-cell">
+                                                <img src="../../assets/images/bien_3.jpg" alt="Loft industriel" class="favorite-thumb">
+                                                <div class="favorite-cell-info">
+                                                    <div class="favorite-cell-title">Loft industriel, Lyon Confluence</div>
+                                                    <div class="favorite-cell-details">2 chambres • 95 m²</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>Lyon 2ème</td>
+                                        <td>Loft</td>
+                                        <td class="price-cell">750 000 €</td>
+                                        <td><span class="status-badge status-available">Disponible</span></td>
+                                        <td>Marie Leroy</td>
+                                        <td>Il y a 3 jours</td>
+                                        <td>
+                                            <div class="table-actions">
+                                                <button class="table-btn" onclick="viewPropertyDetails(3)" title="Voir">
+                                                    <span class="material-icons">visibility</span>
+                                                </button>
+                                                <button class="table-btn" onclick="scheduleVisit(3)" title="Planifier visite">
+                                                    <span class="material-icons">event</span>
+                                                </button>
+                                                <button class="table-btn" onclick="contactAgent(3)" title="Contacter">
+                                                    <span class="material-icons">chat</span>
+                                                </button>
+                                                <button class="table-btn delete" onclick="removeFromFavorites(3)" title="Retirer">
+                                                    <span class="material-icons">favorite</span>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr data-id="4">
+                                        <td>
+                                            <div class="favorite-cell">
+                                                <img src="../../assets/images/bien_3.jpg" alt="Studio moderne" class="favorite-thumb">
+                                                <div class="favorite-cell-info">
+                                                    <div class="favorite-cell-title">Studio moderne centre-ville</div>
+                                                    <div class="favorite-cell-details">1 chambre • 35 m²</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>Paris 4ème</td>
+                                        <td>Studio</td>
+                                        <td class="price-cell">420 000 €</td>
+                                        <td><span class="status-badge status-sold">Vendu</span></td>
+                                        <td>Thomas Petit</td>
+                                        <td>Il y a 2 semaines</td>
+                                        <td>
+                                            <div class="table-actions">
+                                                <button class="table-btn" onclick="viewPropertyDetails(4)" title="Voir">
+                                                    <span class="material-icons">visibility</span>
+                                                </button>
+                                                <button class="table-btn disabled" disabled title="Bien vendu">
+                                                    <span class="material-icons">event</span>
+                                                </button>
+                                                <button class="table-btn" onclick="contactAgent(4)" title="Contacter">
+                                                    <span class="material-icons">chat</span>
+                                                </button>
+                                                <button class="table-btn delete" onclick="removeFromFavorites(4)" title="Retirer">
+                                                    <span class="material-icons">favorite</span>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Message si aucun favori -->
+                <div id="no-favorites-message" class="no-favorites-message" style="display: none;">
+                    <div class="empty-state">
+                        <span class="material-icons">favorite_border</span>
+                        <h3>Aucun bien en favori</h3>
+                        <p>Commencez par explorer nos biens immobiliers et ajoutez ceux qui vous intéressent à vos favoris.</p>
+                        <button class="btn-primary" onclick="window.location.href='../admin/biens.html'">
+                            <span class="material-icons">search</span>
+                            <span>Explorer les biens</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="site-footer" role="contentinfo" aria-label="Pied de page">
+            <div class="footer-left">© 2025 ImmoPro — Tous droits réservés</div>
+            <div class="footer-links">
+                <a href="../auth/mentions-legales.html">Mentions légales</a>
+                <a href="../auth/privacy.html">Politique de confidentialité</a>
+                <a href="../auth/contact.html">Contact</a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="../../js/script.js"></script>
+    <script src="../../js/client_favoris.js"></script>
+</body>
+
+</html>

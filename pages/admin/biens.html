@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImmoPro - Biens</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/components.css">
+    <link rel="stylesheet" href="../../css/style_admin.css">
+    <link rel="stylesheet" href="../../css/style_admin_biens.css">
+</head>
+
+<body>
+    <div class="sidebar" id="sidebar">
+        <div class="logo">
+            <div class="logo-icon"></div>
+            <span>ImmoPro</span>
+        </div>
+
+        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+            <span class="material-icons">menu</span>
+        </button>
+
+        <a href="dashboard.html" class="menu-item">
+            <span class="material-icons menu-icon">dashboard</span>
+            <span>Tableau de bord</span>
+        </a>
+
+        <a href="biens.html" class="menu-item active">
+            <span class="material-icons menu-icon">home</span>
+            <span>Biens immobiliers</span>
+        </a>
+
+        <a href="clients.html" class="menu-item">
+            <span class="material-icons menu-icon">people</span>
+            <span>Clients</span>
+        </a>
+
+        <a href="visites.html" class="menu-item">
+            <span class="material-icons menu-icon">event</span>
+            <span>Visites</span>
+        </a>
+
+        <a href="messagerie.html" class="menu-item">
+            <span class="material-icons menu-icon">chat</span>
+            <span>Messages</span>
+        </a>
+
+        <a href="parametres.html" class="menu-item">
+            <span class="material-icons menu-icon">settings</span>
+            <span>Paramètres</span>
+        </a>
+
+        <a href="#" class="logout" onclick="handleLogout(event)">
+            <span class="material-icons menu-icon">logout</span>
+            <span>Déconnexion</span>
+        </a>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <div class="search-bar">
+                <span class="material-icons search-icon">search</span>
+                <input type="text" placeholder="Rechercher un bien, un client...">
+            </div>
+
+            <div class="header-right">
+                <div class="notification-icon">
+                    <span class="material-icons">notifications</span>
+                </div>
+                <div class="user-profile">
+                    <div class="avatar"></div>
+                    <div class="user-info">
+                        <div class="user-name">John Doe</div>
+                        <div class="user-role">Agent immobilier</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Page Biens Immobiliers -->
+            <main id="page-biens" class="page-biens" role="main" aria-label="Gestion des biens immobiliers">
+                <header class="page-header">
+                    <h1 class="page-title">Biens immobiliers</h1>
+                    <a href="bien-form.html" class="add-btn" title="Ajouter un bien">
+                        <span class="material-icons" aria-hidden="true" style="font-size: 18px;">add</span>
+                        <span>Ajouter un bien</span>
+                    </a>
+                </header>
+
+                <!-- Filtres -->
+                <form id="filters-form" class="filters-bar" role="search" aria-label="Filtres des biens">
+                    <div class="filter-group">
+                        <label for="filter-type" class="filter-label">Type de bien</label>
+                        <select id="filter-type" name="type" class="filter-select">
+                            <option value="">Tous les types</option>
+                            <option value="appartement">Appartement</option>
+                            <option value="maison">Maison</option>
+                            <option value="villa">Villa</option>
+                            <option value="loft">Loft</option>
+                            <option value="terrain">Terrain</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="filter-city" class="filter-label">Ville</label>
+                        <select id="filter-city" name="city" class="filter-select">
+                            <option value="">Toutes les villes</option>
+                            <option value="paris">Paris</option>
+                            <option value="lyon">Lyon</option>
+                            <option value="marseille">Marseille</option>
+                            <option value="nice">Nice</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="filter-price" class="filter-label">Prix max</label>
+                        <input id="filter-price" name="max_price" type="number" class="filter-input" placeholder="Ex: 500000">
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="filter-status" class="filter-label">Statut</label>
+                        <select id="filter-status" name="status" class="filter-select">
+                            <option value="">Tous les statuts</option>
+                            <option value="available">Disponible</option>
+                            <option value="pending">En attente</option>
+                            <option value="sold">Vendu</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-actions">
+                        <button type="submit" class="btn-filter btn-primary" aria-label="Rechercher">
+                            <span class="material-icons" aria-hidden="true" style="font-size: 16px; vertical-align: middle;">search</span>
+                            Rechercher
+                        </button>
+                        <button type="reset" class="btn-filter btn-secondary" onclick="resetFilters()" aria-label="Réinitialiser les filtres">Réinitialiser</button>
+                    </div>
+
+                    <div class="view-toggle" role="toolbar" aria-label="Affichage">
+                        <button type="button" class="view-btn active" onclick="toggleView('grid')" aria-pressed="true" aria-label="Vue grille">
+                            <span class="material-icons" aria-hidden="true">grid_view</span>
+                        </button>
+                        <button type="button" class="view-btn" onclick="toggleView('list')" aria-pressed="false" aria-label="Vue liste">
+                            <span class="material-icons" aria-hidden="true">view_list</span>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Grille de biens -->
+                <section class="properties-grid active" id="properties-grid" aria-live="polite" aria-label="Liste des biens">
+                    <!-- Bien 1 -->
+                    <article id="prop-1" class="property-card-full" role="article" aria-labelledby="prop-1-name">
+                        <div class="property-image-wrapper">
+                            <img src="../../assets/images/bien_1.jpg" alt="Villa d'architecte" class="property-image-full" loading="lazy">
+                            <span class="property-badge badge-featured" aria-hidden="true">⭐ En vedette</span>
+                            <div class="property-actions">
+                                <a href="bien-form.html" class="action-btn" title="Modifier" aria-label="Modifier la propriété Villa d'architecte">
+                                    <span class="material-icons" aria-hidden="true" style="font-size: 18px;">edit</span>
+                                </a>
+                                <button class="action-btn" title="Supprimer" aria-label="Supprimer la propriété Villa d'architecte" data-id="1">
+                                    <span class="material-icons" aria-hidden="true" style="font-size: 18px;">delete</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="property-content">
+                            <div class="property-location">
+                                <span class="material-icons" aria-hidden="true" style="font-size: 16px;">location_on</span> Paris 16ème
+                            </div>
+                            <h3 id="prop-1-name" class="property-name">Villa d'architecte avec piscine</h3>
+                            <div class="property-features">
+                                <span class="feature-item">
+                                    <span class="material-icons" aria-hidden="true" style="font-size: 16px;">bed</span> 5 chambres
+                                </span>
+                                <span class="feature-item">
+                                    <span class="material-icons" aria-hidden="true" style="font-size: 16px;">bathtub</span> 3 SDB
+                                </span>
+                                <span class="feature-item">
+                                    <span class="material-icons" aria-hidden="true" style="font-size: 16px;">square_foot</span> 180 m²
+                                </span>
+                            </div>
+                            <div class="property-footer">
+                                <span class="property-price-full">2 500 000 €</span>
+                                <span class="property-status status-available">Disponible</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Bien 2 -->
+                    <article id="prop-2" class="property-card-full" role="article" aria-labelledby="prop-2-name">
+                        <div class="property-image-wrapper">
+                            <img src="../../assets/images/bien_2.jpg" alt="Loft industriel" class="property-image-full" loading="lazy">
+                            <span class="property-badge badge-new" aria-hidden="true">🆕 Nouveau</span>
+                            <div class="property-actions">
+                                <a href="bien-form.html" class="action-btn" title="Modifier" aria-label="Modifier le Loft industriel">
+                                    <span class="material-icons" aria-hidden="true" style="font-size: 18px;">edit</span>
+                                </a>
+                                <button class="action-btn" title="Supprimer" aria-label="Supprimer le Loft industriel" data-id="2">
+                                    <span class="material-icons" aria-hidden="true" style="font-size: 18px;">delete</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="property-content">
+                            <div class="property-location">
+                                <span class="material-icons" aria-hidden="true" style="font-size: 16px;">location_on</span> Lyon Confluence
+                            </div>
+                            <h3 id="prop-2-name" class="property-name">Loft industriel rénové</h3>
+                            <div class="property-features">
+                                <span class="feature-item">
+                                    <span class="material-icons" aria-hidden="true" style="font-size: 16px;">bed</span> 3 chambres
+                                </span>
+                                <span class="feature-item">
+                                    <span class="material-icons" aria-hidden="true" style="font-size: 16px;">bathtub</span> 2 SDB
+                                </span>
+                                <span class="feature-item">
+                                    <span class="material-icons" aria-hidden="true" style="font-size: 16px;">square_foot</span> 120 m²
+                                </span>
+                            </div>
+                            <div class="property-footer">
+                                <span class="property-price-full">850 000 €</span>
+                                <span class="property-status status-pending">En attente</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Bien 3 -->
+                    <article id="prop-3" class="property-card-full" role="article" aria-labelledby="prop-3-name">
+                        <div class="property-image-wrapper">
+                            <img src="../../assets/images/bien_3.jpg" alt="Appartement" class="property-image-full" loading="lazy">
+                            <div class="property-actions">
+                                <a href="bien-form.html" class="action-btn" title="Modifier" aria-label="Modifier l'appartement Haussmannien">
+                                    <span class="material-icons" aria-hidden="true" style="font-size: 18px;">edit</span>
+                                </a>
+                                <button class="action-btn" title="Supprimer" aria-label="Supprimer l'appartement Haussmannien" data-id="3">
+                                    <span class="material-icons" aria-hidden="true" style="font-size: 18px;">delete</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="property-content">
+                            <div class="property-location">
+                                <span class="material-icons" aria-hidden="true" style="font-size: 16px;">location_on</span> Paris Le Marais
+                            </div>
+                            <h3 id="prop-3-name" class="property-name">Appartement haussmannien</h3>
+                            <div class="property-features">
+                                <span class="feature-item">
+                                    <span class="material-icons" aria-hidden="true" style="font-size: 16px;">bed</span> 4 chambres
+                                </span>
+                                <span class="feature-item">
+                                    <span class="material-icons" aria-hidden="true" style="font-size: 16px;">bathtub</span> 2 SDB
+                                </span>
+                                <span class="feature-item">
+                                    <span class="material-icons" aria-hidden="true" style="font-size: 16px;">square_foot</span> 95 m²
+                                </span>
+                            </div>
+                            <div class="property-footer">
+                                <span class="property-price-full">1 200 000 €</span>
+                                <span class="property-status status-available">Disponible</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Bien 4 -->
+                    <article id="prop-4" class="property-card-full" role="article" aria-labelledby="prop-4-name">
+                        <div class="property-image-wrapper">
+                            <img src="../../assets/images/bien_4.jpg" alt="Maison" class="property-image-full" loading="lazy">
+                            <div class="property-actions">
+                                <a href="bien-form.html" class="action-btn" title="Modifier" aria-label="Modifier la villa vue mer">
+                                    <span class="material-icons" aria-hidden="true" style="font-size: 18px;">edit</span>
+                                </a>
+                                <button class="action-btn" title="Supprimer" aria-label="Supprimer la villa vue mer" data-id="4">
+                                    <span class="material-icons" aria-hidden="true" style="font-size: 18px;">delete</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="property-content">
+                            <div class="property-location">
+                                <span class="material-icons" aria-hidden="true" style="font-size: 16px;">location_on</span> Nice Mont Boron
+                            </div>
+                            <h3 id="prop-4-name" class="property-name">Villa vue mer exceptionnelle</h3>
+                            <div class="property-features">
+                                <span class="feature-item">
+                                    <span class="material-icons" aria-hidden="true" style="font-size: 16px;">bed</span> 6 chambres
+                                </span>
+                                <span class="feature-item">
+                                    <span class="material-icons" aria-hidden="true" style="font-size: 16px;">bathtub</span> 4 SDB
+                                </span>
+                                <span class="feature-item">
+                                    <span class="material-icons" aria-hidden="true" style="font-size: 16px;">square_foot</span> 250 m²
+                                </span>
+                            </div>
+                            <div class="property-footer">
+                                <span class="property-price-full">3 800 000 €</span>
+                                <span class="property-status status-available">Disponible</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Bien 5 -->
+                    <article id="prop-5" class="property-card-full" role="article" aria-labelledby="prop-5-name">
+                        <div class="property-image-wrapper">
+                            <img src="../../assets/images/bien_5.jpg" alt="Maison" class="property-image-full" loading="lazy">
+                            <div class="property-actions">
+                                <a href="bien-form.html" class="action-btn" title="Modifier" aria-label="Modifier la maison contemporaine">
+                                    <span class="material-icons" aria-hidden="true" style="font-size: 18px;">edit</span>
+                                </a>
+                                <button class="action-btn" title="Supprimer" aria-label="Supprimer la maison contemporaine" data-id="5">
+                                    <span class="material-icons" aria-hidden="true" style="font-size: 18px;">delete</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="property-content">
+                            <div class="property-location">
+                                <span class="material-icons" aria-hidden="true" style="font-size: 16px;">location_on</span> Marseille Endoume
+                            </div>
+                            <h3 id="prop-5-name" class="property-name">Maison contemporaine</h3>
+                            <div class="property-features">
+                                <span class="feature-item">
+                                    <span class="material-icons" aria-hidden="true" style="font-size: 16px;">bed</span> 4 chambres
+                                </span>
+                                <span class="feature-item">
+                                    <span class="material-icons" aria-hidden="true" style="font-size: 16px;">bathtub</span> 3 SDB
+                                </span>
+                                <span class="feature-item">
+                                    <span class="material-icons" aria-hidden="true" style="font-size: 16px;">square_foot</span> 160 m²
+                                </span>
+                            </div>
+                            <div class="property-footer">
+                                <span class="property-price-full">1 450 000 €</span>
+                                <span class="property-status status-sold">Vendu</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Bien 6 -->
+                    <article id="prop-6" class="property-card-full" role="article" aria-labelledby="prop-6-name">
+                        <div class="property-image-wrapper">
+                            <img src="../../assets/images/bien_6.jpg" alt="Appartement" class="property-image-full" loading="lazy">
+                            <span class="property-badge badge-new" aria-hidden="true">🆕 Nouveau</span>
+                            <div class="property-actions">
+                                <a href="bien-form.html" class="action-btn" title="Modifier" aria-label="Modifier le studio moderne">
+                                    <span class="material-icons" aria-hidden="true" style="font-size: 18px;">edit</span>
+                                </a>
+                                <button class="action-btn" title="Supprimer" aria-label="Supprimer le studio moderne" data-id="6">
+                                    <span class="material-icons" aria-hidden="true" style="font-size: 18px;">delete</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="property-content">
+                            <div class="property-location">
+                                <span class="material-icons" aria-hidden="true" style="font-size: 16px;">location_on</span> Lyon Presqu'île
+                            </div>
+                            <h3 id="prop-6-name" class="property-name">Studio moderne centre-ville</h3>
+                            <div class="property-features">
+                                <span class="feature-item">
+                                    <span class="material-icons" aria-hidden="true" style="font-size: 16px;">bed</span> 1 chambre
+                                </span>
+                                <span class="feature-item">
+                                    <span class="material-icons" aria-hidden="true" style="font-size: 16px;">bathtub</span> 1 SDB
+                                </span>
+                                <span class="feature-item">
+                                    <span class="material-icons" aria-hidden="true" style="font-size: 16px;">square_foot</span> 35 m²
+                                </span>
+                            </div>
+                            <div class="property-footer">
+                                <span class="property-price-full">245 000 €</span>
+                                <span class="property-status status-available">Disponible</span>
+                            </div>
+                        </div>
+                    </article>
+                </section>
+
+                <!-- Vue liste -->
+                <section class="properties-list" id="properties-list" aria-label="Vue liste des biens">
+                    <!-- Table view for agency management -->
+                    <div class="properties-table-wrapper">
+                        <table class="properties-table" id="properties-table" role="table" aria-label="Tableau des biens">
+                            <thead>
+                                <tr>
+                                    <th>Réf.</th>
+                                    <th>Titre</th>
+                                    <th>Ville</th>
+                                    <th>Type</th>
+                                    <th>Prix</th>
+                                    <th>Statut</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr data-id="1">
+                                    <td>PROP-001</td>
+                                    <td>Villa d'architecte avec piscine</td>
+                                    <td>Paris 16ème</td>
+                                    <td>Villa</td>
+                                    <td>2 500 000 €</td>
+                                    <td>Disponible</td>
+                                    <td class="table-actions">
+                                        <a href="bien-form.html" class="action-btn" title="Modifier"> <span class="material-icons">edit</span></a>
+                                        <button class="action-btn delete-row" data-id="1" title="Supprimer"><span class="material-icons">delete</span></button>
+                                    </td>
+                                </tr>
+                                <tr data-id="2">
+                                    <td>PROP-002</td>
+                                    <td>Loft industriel rénové</td>
+                                    <td>Lyon Confluence</td>
+                                    <td>Loft</td>
+                                    <td>850 000 €</td>
+                                    <td>En attente</td>
+                                    <td class="table-actions">
+                                        <a href="bien-form.html" class="action-btn" title="Modifier"> <span class="material-icons">edit</span></a>
+                                        <button class="action-btn delete-row" data-id="2" title="Supprimer"><span class="material-icons">delete</span></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <ul style="list-style:none; padding:0; margin:0;">
+                        <li class="property-card" role="listitem">
+                            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=200&h=200&fit=crop" alt="Villa" class="property-image">
+                            <div class="property-info">
+                                <div class="property-title">Villa d'architecte avec piscine</div>
+                                <div class="property-details">Villa • 5 chambres • 180 m² • Paris 16ème</div>
+                                <div class="property-price">2 500 000 €</div>
+                            </div>
+                            <span class="status-badge status-online">Disponible</span>
+                        </li>
+
+                        <li class="property-card" role="listitem">
+                            <img src="https://images.unsplash.com/photo-1502672260066-6bc35f0a1611?w=200&h=200&fit=crop" alt="Loft" class="property-image">
+                            <div class="property-info">
+                                <div class="property-title">Loft industriel rénové</div>
+                                <div class="property-details">Loft • 3 chambres • 120 m² • Lyon Confluence</div>
+                                <div class="property-price">850 000 €</div>
+                            </div>
+                            <span class="status-badge status-waiting">En attente</span>
+                        </li>
+                    </ul>
+                </section>
+            </main>
+            <!-- Fin Page Biens Immobiliers -->
+        </div>
+        <footer class="site-footer" role="contentinfo" aria-label="Pied de page">
+            <div class="footer-left">© 2025 ImmoPro — Tous droits réservés</div>
+            <div class="footer-links">
+                <a href="../client/mentions-legales.html">Mentions légales</a>
+                <a href="../client/privacy.html">Politique de confidentialité</a>
+                <a href="../client/contact.html">Contact</a>
+            </div>
+        </footer>
+    </div>
+    <script src="../../js/script.js"></script>
+    <script src="../../js/admin_biens.js"></script>
+</body>
+
+</html>

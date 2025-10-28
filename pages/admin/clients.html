@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImmoPro - Clients</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/components.css">
+    <link rel="stylesheet" href="../../css/style_admin.css">
+    <link rel="stylesheet" href="../../css/style_admin_clients.css">
+</head>
+
+<body>
+    <div class="sidebar" id="sidebar">
+        <div class="logo">
+            <div class="logo-icon"></div>
+            <span>ImmoPro</span>
+        </div>
+
+        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+            <span class="material-icons">menu</span>
+        </button>
+
+        <a href="dashboard.html" class="menu-item">
+            <span class="material-icons menu-icon">dashboard</span>
+            <span>Tableau de bord</span>
+        </a>
+
+        <a href="biens.html" class="menu-item">
+            <span class="material-icons menu-icon">home</span>
+            <span>Biens immobiliers</span>
+        </a>
+
+        <a href="clients.html" class="menu-item active">
+            <span class="material-icons menu-icon">people</span>
+            <span>Clients</span>
+        </a>
+
+        <a href="visites.html" class="menu-item">
+            <span class="material-icons menu-icon">event</span>
+            <span>Visites</span>
+        </a>
+
+        <a href="messagerie.html" class="menu-item">
+            <span class="material-icons menu-icon">chat</span>
+            <span>Messages</span>
+        </a>
+
+        <a href="parametres.html" class="menu-item">
+            <span class="material-icons menu-icon">settings</span>
+            <span>Paramètres</span>
+        </a>
+
+        <a href="#" class="logout" onclick="handleLogout(event)">
+            <span class="material-icons menu-icon">logout</span>
+            <span>Déconnexion</span>
+        </a>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <div class="search-bar">
+                <span class="material-icons search-icon">search</span>
+                <input type="text" placeholder="Rechercher un client...">
+            </div>
+
+            <div class="header-right">
+                <div class="notification-icon">
+                    <span class="material-icons">notifications</span>
+                </div>
+                <div class="user-profile">
+                    <div class="avatar"></div>
+                    <div class="user-info">
+                        <div class="user-name">John Doe</div>
+                        <div class="user-role">Agent immobilier</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Page Clients -->
+            <main id="page-clients" class="page-clients" role="main" aria-label="Gestion des clients">
+                <header class="page-header">
+                    <h1 class="page-title">Clients</h1>
+                    <a href="client-form.html" class="add-btn" title="Ajouter un client">
+                        <span class="material-icons" aria-hidden="true" style="font-size: 18px;">person_add</span>
+                        <span>Ajouter un client</span>
+                    </a>
+                </header>
+
+                <!-- Filtres -->
+                <form id="filters-form" class="filters-bar" role="search" aria-label="Filtres des clients">
+                    <div class="filter-group">
+                        <label for="filter-type" class="filter-label">Type</label>
+                        <select id="filter-type" name="type" class="filter-select">
+                            <option value="">Tous les types</option>
+                            <option value="acheteur">Acheteur</option>
+                            <option value="vendeur">Vendeur</option>
+                            <option value="les-deux">Acheteur & Vendeur</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="filter-status" class="filter-label">Statut</label>
+                        <select id="filter-status" name="status" class="filter-select">
+                            <option value="">Tous les statuts</option>
+                            <option value="actif">Actif</option>
+                            <option value="en-attente">En attente</option>
+                            <option value="inactif">Inactif</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="filter-agent" class="filter-label">Agent assigné</label>
+                        <select id="filter-agent" name="agent" class="filter-select">
+                            <option value="">Tous les agents</option>
+                            <option value="john-doe">John Doe</option>
+                            <option value="jane-smith">Jane Smith</option>
+                            <option value="mike-johnson">Mike Johnson</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-actions">
+                        <button type="submit" class="btn-filter btn-primary" aria-label="Rechercher">
+                            <span class="material-icons" aria-hidden="true" style="font-size: 16px;">search</span>
+                            Rechercher
+                        </button>
+                        <button type="reset" class="btn-filter btn-secondary" onclick="resetFilters()" aria-label="Réinitialiser les filtres">Réinitialiser</button>
+                    </div>
+                </form>
+
+                <!-- Liste des clients -->
+                <section class="clients-list" aria-label="Liste des clients">
+                    <!-- Client 1 -->
+                    <article class="client-card" role="article">
+                        <div class="client-info">
+                            <div class="client-avatar">
+                                <span class="material-icons">account_circle</span>
+                            </div>
+                            <div class="client-details">
+                                <h3 class="client-name">Sophie Martin</h3>
+                                <div class="client-meta">
+                                    <span class="client-type">Acheteur</span>
+                                    <span class="client-id">ID: #CL001</span>
+                                </div>
+                                <div class="client-contact">
+                                    <span class="material-icons" aria-hidden="true">email</span> sophie.martin@email.com
+                                </div>
+                                <div class="client-contact">
+                                    <span class="material-icons" aria-hidden="true">phone</span> 06 12 34 56 78
+                                </div>
+                            </div>
+                        </div>
+                        <div class="client-activity">
+                            <div class="activity-item">
+                                <span class="activity-label">Dernière visite</span>
+                                <span class="activity-value">15 Oct 2025</span>
+                            </div>
+                            <div class="activity-item">
+                                <span class="activity-label">Biens visités</span>
+                                <span class="activity-value">4</span>
+                            </div>
+                            <div class="activity-item">
+                                <span class="activity-label">Statut</span>
+                                <span class="status-badge status-active">Actif</span>
+                            </div>
+                        </div>
+                        <div class="client-actions">
+                            <button class="action-btn" title="Voir le profil">
+                                <span class="material-icons">visibility</span>
+                            </button>
+                            <button class="action-btn" title="Modifier">
+                                <span class="material-icons">edit</span>
+                            </button>
+                            <button class="action-btn" title="Supprimer">
+                                <span class="material-icons">delete</span>
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- Client 2 -->
+                    <article class="client-card" role="article">
+                        <div class="client-info">
+                            <div class="client-avatar">
+                                <span class="material-icons">account_circle</span>
+                            </div>
+                            <div class="client-details">
+                                <h3 class="client-name">Thomas Dubois</h3>
+                                <div class="client-meta">
+                                    <span class="client-type">Vendeur</span>
+                                    <span class="client-id">ID: #CL002</span>
+                                </div>
+                                <div class="client-contact">
+                                    <span class="material-icons" aria-hidden="true">email</span> thomas.dubois@email.com
+                                </div>
+                                <div class="client-contact">
+                                    <span class="material-icons" aria-hidden="true">phone</span> 06 98 76 54 32
+                                </div>
+                            </div>
+                        </div>
+                        <div class="client-activity">
+                            <div class="activity-item">
+                                <span class="activity-label">Biens en vente</span>
+                                <span class="activity-value">2</span>
+                            </div>
+                            <div class="activity-item">
+                                <span class="activity-label">Dernière activité</span>
+                                <span class="activity-value">20 Oct 2025</span>
+                            </div>
+                            <div class="activity-item">
+                                <span class="activity-label">Statut</span>
+                                <span class="status-badge status-active">Actif</span>
+                            </div>
+                        </div>
+                        <div class="client-actions">
+                            <button class="action-btn" title="Voir le profil">
+                                <span class="material-icons">visibility</span>
+                            </button>
+                            <button class="action-btn" title="Modifier">
+                                <span class="material-icons">edit</span>
+                            </button>
+                            <button class="action-btn" title="Supprimer">
+                                <span class="material-icons">delete</span>
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- Client 3 -->
+                    <article class="client-card" role="article">
+                        <div class="client-info">
+                            <div class="client-avatar">
+                                <span class="material-icons">account_circle</span>
+                            </div>
+                            <div class="client-details">
+                                <h3 class="client-name">Marie Lambert</h3>
+                                <div class="client-meta">
+                                    <span class="client-type">Acheteur & Vendeur</span>
+                                    <span class="client-id">ID: #CL003</span>
+                                </div>
+                                <div class="client-contact">
+                                    <span class="material-icons" aria-hidden="true">email</span> marie.lambert@email.com
+                                </div>
+                                <div class="client-contact">
+                                    <span class="material-icons" aria-hidden="true">phone</span> 06 23 45 67 89
+                                </div>
+                            </div>
+                        </div>
+                        <div class="client-activity">
+                            <div class="activity-item">
+                                <span class="activity-label">Dernière visite</span>
+                                <span class="activity-value">22 Oct 2025</span>
+                            </div>
+                            <div class="activity-item">
+                                <span class="activity-label">Total transactions</span>
+                                <span class="activity-value">3</span>
+                            </div>
+                            <div class="activity-item">
+                                <span class="activity-label">Statut</span>
+                                <span class="status-badge status-pending">En attente</span>
+                            </div>
+                        </div>
+                        <div class="client-actions">
+                            <button class="action-btn" title="Voir le profil">
+                                <span class="material-icons">visibility</span>
+                            </button>
+                            <button class="action-btn" title="Modifier">
+                                <span class="material-icons">edit</span>
+                            </button>
+                            <button class="action-btn" title="Supprimer">
+                                <span class="material-icons">delete</span>
+                            </button>
+                        </div>
+                    </article>
+                </section>
+            </main>
+            <!-- Fin Page Clients -->
+        </div>
+        <footer class="site-footer" role="contentinfo" aria-label="Pied de page">
+            <div class="footer-left">© 2025 ImmoPro — Tous droits réservés</div>
+            <div class="footer-links">
+                <a href="../client/mentions-legales.html">Mentions légales</a>
+                <a href="../client/privacy.html">Politique de confidentialité</a>
+                <a href="../client/contact.html">Contact</a>
+            </div>
+        </footer>
+    </div>
+    <script src="../../js/script.js"></script>
+    <script src="../../js/admin_clients.js"></script>
+</body>
+
+</html>

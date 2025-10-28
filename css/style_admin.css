@@ -1,0 +1,104 @@
+/* Styles spécifiques pour l'espace admin - Couleurs principales */
+
+
+/* Variables de couleurs pour l'admin */
+
+:root {
+    /* Couleurs principales admin */
+    --primary-blue: #1C3F60;
+    --primary-blue-light: #2a5a7a;
+    --link-hover: #2a5a7a;
+}
+
+
+/* Application des couleurs admin uniquement dans l'espace admin */
+
+body:not(.client-space) {
+    --primary-blue: #1C3F60;
+    --primary-blue-light: #2a5a7a;
+    --link-hover: #2a5a7a;
+}
+
+
+/* Surcharge pour les éléments spécifiques à l'admin */
+
+.admin-space {
+    --primary-blue: #1C3F60;
+    --primary-blue-light: #2a5a7a;
+    --link-hover: #2a5a7a;
+}
+
+
+/* Application des couleurs admin sur la sidebar */
+
+body:not(.client-space) .sidebar {
+    background-color: #1C3F60;
+}
+
+
+/* Application des couleurs admin sur les boutons principaux */
+
+body:not(.client-space) .btn-primary {
+    background-color: #1C3F60;
+    border-color: #1C3F60;
+}
+
+body:not(.client-space) .btn-primary:hover {
+    background-color: #2a5a7a;
+    border-color: #2a5a7a;
+}
+
+
+/* Application des couleurs admin sur les éléments actifs */
+
+body:not(.client-space) .menu-item.active {
+    background-color: #2a5a7a;
+}
+
+
+/* Correction du hover pour améliorer la lisibilité du texte */
+
+body:not(.client-space) .menu-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+body:not(.client-space) .logout:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+
+/* Application des couleurs admin sur les liens */
+
+body:not(.client-space) a:hover {
+    color: #2a5a7a;
+}
+
+
+/* Application des couleurs admin sur les éléments de focus */
+
+body:not(.client-space) .search-bar input:focus {
+    border-color: #1C3F60;
+    box-shadow: 0 0 0 2px rgba(28, 63, 96, 0.2);
+}
+
+
+/* Application des couleurs admin sur les badges et statuts */
+
+body:not(.client-space) .status-badge.status-online {
+    background-color: #1C3F60;
+}
+
+
+/* Application des couleurs admin sur les éléments de navigation */
+
+body:not(.client-space) .page-header .add-btn {
+    background-color: #1C3F60;
+    border-color: #1C3F60;
+}
+
+body:not(.client-space) .page-header .add-btn:hover {
+    background-color: #2a5a7a;
+    border-color: #2a5a7a;
+}

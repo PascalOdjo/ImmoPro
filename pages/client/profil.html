@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImmoPro - Mon Profil</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/components.css">
+    <link rel="stylesheet" href="../../css/style_client.css">
+    <link rel="stylesheet" href="../../css/style_client_profil.css">
+</head>
+
+<body>
+    <div class="sidebar client-space" id="sidebar">
+        <div class="logo">
+            <div class="logo-icon"></div>
+            <span>ImmoPro</span>
+        </div>
+
+        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+            <span class="material-icons">menu</span>
+        </button>
+
+        <a href="dashboard.html" class="menu-item">
+            <span class="material-icons menu-icon">dashboard</span>
+            <span>Tableau de bord</span>
+        </a>
+
+        <a href="biens.html" class="menu-item">
+            <span class="material-icons menu-icon">home</span>
+            <span>Mes biens</span>
+        </a>
+
+        <a href="favoris.html" class="menu-item">
+            <span class="material-icons menu-icon">favorite</span>
+            <span>Mes favoris</span>
+        </a>
+
+        <a href="visites.html" class="menu-item">
+            <span class="material-icons menu-icon">event</span>
+            <span>Mes visites</span>
+        </a>
+
+        <a href="messagerie.html" class="menu-item">
+            <span class="material-icons menu-icon">chat</span>
+            <span>Messagerie</span>
+        </a>
+
+        <a href="profil.html" class="menu-item active">
+            <span class="material-icons menu-icon">person</span>
+            <span>Mon profil</span>
+        </a>
+
+        <a href="#" class="logout" onclick="handleLogout(event)">
+            <span class="material-icons menu-icon">logout</span>
+            <span>Déconnexion</span>
+        </a>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <div class="search-bar">
+                <span class="material-icons search-icon">search</span>
+                <input type="text" placeholder="Rechercher dans mon profil...">
+            </div>
+
+            <div class="header-right">
+                <div class="notification-icon">
+                    <span class="material-icons">notifications</span>
+                    <span class="notification-badge">1</span>
+                </div>
+                <div class="user-profile">
+                    <div class="avatar"></div>
+                    <div class="user-info">
+                        <div class="user-name">Marie Dubois</div>
+                        <div class="user-role">Client</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Page Profil -->
+            <div id="page-profil" class="page-profil active">
+                <div class="page-header">
+                    <h1 class="page-title">Mon Profil</h1>
+                    <div class="header-actions">
+                        <button class="btn-secondary" onclick="exportData()">
+                            <span class="material-icons">download</span>
+                            <span>Exporter mes données</span>
+                        </button>
+                        <button class="btn-primary" onclick="saveProfile()">
+                            <span class="material-icons">save</span>
+                            <span>Sauvegarder</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Onglets de navigation -->
+                <div class="profile-tabs">
+                    <button class="tab-btn active" onclick="showTab('personal')">
+                        <span class="material-icons">person</span>
+                        <span>Informations personnelles</span>
+                    </button>
+                    <button class="tab-btn" onclick="showTab('security')">
+                        <span class="material-icons">security</span>
+                        <span>Sécurité</span>
+                    </button>
+                    <button class="tab-btn" onclick="showTab('preferences')">
+                        <span class="material-icons">settings</span>
+                        <span>Préférences</span>
+                    </button>
+                    <button class="tab-btn" onclick="showTab('notifications')">
+                        <span class="material-icons">notifications</span>
+                        <span>Notifications</span>
+                    </button>
+                    <button class="tab-btn" onclick="showTab('account')">
+                        <span class="material-icons">account_circle</span>
+                        <span>Gestion du compte</span>
+                    </button>
+                </div>
+
+                <!-- Contenu des onglets -->
+                <div class="profile-content">
+                    <!-- Onglet Informations personnelles -->
+                    <div id="tab-personal" class="tab-content active">
+                        <div class="profile-section">
+                            <div class="section-header">
+                                <h2>Informations personnelles</h2>
+                                <p>Gérez vos informations de base et votre profil public</p>
+                            </div>
+
+                            <div class="profile-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="first-name">Prénom</label>
+                                        <input type="text" id="first-name" name="firstName" value="Marie" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="last-name">Nom</label>
+                                        <input type="text" id="last-name" name="lastName" value="Dubois" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" id="email" name="email" value="marie.dubois@email.com" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone">Téléphone</label>
+                                        <input type="tel" id="phone" name="phone" value="06 12 34 56 78">
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="birth-date">Date de naissance</label>
+                                        <input type="date" id="birth-date" name="birthDate" value="1985-03-15">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="gender">Genre</label>
+                                        <select id="gender" name="gender">
+                                            <option value="">Non spécifié</option>
+                                            <option value="female" selected>Féminin</option>
+                                            <option value="male">Masculin</option>
+                                            <option value="other">Autre</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="address">Adresse</label>
+                                    <textarea id="address" name="address" rows="3" placeholder="Votre adresse complète">123 rue de la République
+75011 Paris
+France</textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="bio">Biographie</label>
+                                    <textarea id="bio" name="bio" rows="4" placeholder="Parlez-nous de vous...">Je suis à la recherche d'un appartement dans Paris pour mon déménagement prévu dans 6 mois. Je travaille dans le secteur de la communication et j'apprécie les quartiers animés avec de bonnes connexions transport.</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="profile-section">
+                            <div class="section-header">
+                                <h2>Photo de profil</h2>
+                                <p>Ajoutez une photo pour personnaliser votre profil</p>
+                            </div>
+
+                            <div class="profile-photo-section">
+                                <div class="current-photo">
+                                    <div class="profile-photo">
+                                        <img src="../../assets/images/user_1.jpg" alt="Photo de profil" id="profile-photo-img">
+                                        <div class="photo-overlay">
+                                            <button class="photo-btn" onclick="changePhoto()">
+                                                <span class="material-icons">camera_alt</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="photo-info">
+                                        <h3>Marie Dubois</h3>
+                                        <p>Membre depuis janvier 2025</p>
+                                    </div>
+                                </div>
+                                <div class="photo-actions">
+                                    <button class="btn-secondary" onclick="changePhoto()">
+                                        <span class="material-icons">edit</span>
+                                        <span>Changer la photo</span>
+                                    </button>
+                                    <button class="btn-secondary" onclick="removePhoto()">
+                                        <span class="material-icons">delete</span>
+                                        <span>Supprimer</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Onglet Sécurité -->
+                    <div id="tab-security" class="tab-content">
+                        <div class="profile-section">
+                            <div class="section-header">
+                                <h2>Mot de passe</h2>
+                                <p>Modifiez votre mot de passe pour sécuriser votre compte</p>
+                            </div>
+
+                            <div class="security-form">
+                                <div class="form-group">
+                                    <label for="current-password">Mot de passe actuel</label>
+                                    <div class="password-input">
+                                        <input type="password" id="current-password" name="currentPassword" required>
+                                        <button type="button" class="password-toggle" onclick="togglePassword('current-password')">
+                                            <span class="material-icons">visibility</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="new-password">Nouveau mot de passe</label>
+                                    <div class="password-input">
+                                        <input type="password" id="new-password" name="newPassword" required>
+                                        <button type="button" class="password-toggle" onclick="togglePassword('new-password')">
+                                            <span class="material-icons">visibility</span>
+                                        </button>
+                                    </div>
+                                    <div class="password-strength">
+                                        <div class="strength-bar">
+                                            <div class="strength-fill" id="strength-fill"></div>
+                                        </div>
+                                        <span class="strength-text" id="strength-text">Mot de passe faible</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="confirm-password">Confirmer le nouveau mot de passe</label>
+                                    <div class="password-input">
+                                        <input type="password" id="confirm-password" name="confirmPassword" required>
+                                        <button type="button" class="password-toggle" onclick="togglePassword('confirm-password')">
+                                            <span class="material-icons">visibility</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="password-requirements">
+                                    <h4>Exigences du mot de passe :</h4>
+                                    <ul>
+                                        <li id="req-length">Au moins 8 caractères</li>
+                                        <li id="req-uppercase">Une majuscule</li>
+                                        <li id="req-lowercase">Une minuscule</li>
+                                        <li id="req-number">Un chiffre</li>
+                                        <li id="req-special">Un caractère spécial</li>
+                                    </ul>
+                                </div>
+
+                                <button class="btn-primary" onclick="changePassword()">
+                                    <span class="material-icons">lock</span>
+                                    <span>Modifier le mot de passe</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="profile-section">
+                            <div class="section-header">
+                                <h2>Authentification à deux facteurs</h2>
+                                <p>Ajoutez une couche de sécurité supplémentaire à votre compte</p>
+                            </div>
+
+                            <div class="two-factor-section">
+                                <div class="two-factor-status">
+                                    <div class="status-info">
+                                        <span class="material-icons">security</span>
+                                        <div>
+                                            <h3>Authentification à deux facteurs</h3>
+                                            <p>Actuellement désactivée</p>
+                                        </div>
+                                    </div>
+                                    <button class="btn-primary" onclick="enableTwoFactor()">
+                                        <span class="material-icons">add</span>
+                                        <span>Activer</span>
+                                    </button>
+                                </div>
+
+                                <div class="security-tips">
+                                    <h4>Conseils de sécurité :</h4>
+                                    <ul>
+                                        <li>Utilisez un mot de passe unique et fort</li>
+                                        <li>Activez l'authentification à deux facteurs</li>
+                                        <li>Ne partagez jamais vos identifiants</li>
+                                        <li>Déconnectez-vous après chaque session</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Onglet Préférences -->
+                    <div id="tab-preferences" class="tab-content">
+                        <div class="profile-section">
+                            <div class="section-header">
+                                <h2>Préférences générales</h2>
+                                <p>Personnalisez votre expérience sur la plateforme</p>
+                            </div>
+
+                            <div class="preferences-form">
+                                <div class="form-group">
+                                    <label for="language">Langue</label>
+                                    <select id="language" name="language">
+                                        <option value="fr" selected>Français</option>
+                                        <option value="en">English</option>
+                                        <option value="es">Español</option>
+                                        <option value="de">Deutsch</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="timezone">Fuseau horaire</label>
+                                    <select id="timezone" name="timezone">
+                                        <option value="Europe/Paris" selected>Europe/Paris (GMT+1)</option>
+                                        <option value="Europe/London">Europe/London (GMT+0)</option>
+                                        <option value="America/New_York">America/New_York (GMT-5)</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="currency">Devise</label>
+                                    <select id="currency" name="currency">
+                                        <option value="EUR" selected>Euro (€)</option>
+                                        <option value="USD">Dollar US ($)</option>
+                                        <option value="GBP">Livre Sterling (£)</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="theme">Thème</label>
+                                    <select id="theme" name="theme">
+                                        <option value="light" selected>Clair</option>
+                                        <option value="dark">Sombre</option>
+                                        <option value="auto">Automatique</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="profile-section">
+                            <div class="section-header">
+                                <h2>Préférences de recherche</h2>
+                                <p>Configurez vos critères de recherche par défaut</p>
+                            </div>
+
+                            <div class="search-preferences">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="default-property-type">Type de bien par défaut</label>
+                                        <select id="default-property-type" name="defaultPropertyType">
+                                            <option value="">Tous</option>
+                                            <option value="apartment" selected>Appartement</option>
+                                            <option value="house">Maison</option>
+                                            <option value="studio">Studio</option>
+                                            <option value="loft">Loft</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="default-transaction">Type de transaction</label>
+                                        <select id="default-transaction" name="defaultTransaction">
+                                            <option value="sale" selected>Achat</option>
+                                            <option value="rent">Location</option>
+                                            <option value="both">Les deux</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="min-price">Prix minimum (€)</label>
+                                        <input type="number" id="min-price" name="minPrice" value="300000">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="max-price">Prix maximum (€)</label>
+                                        <input type="number" id="max-price" name="maxPrice" value="800000">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="preferred-locations">Zones préférées</label>
+                                    <input type="text" id="preferred-locations" name="preferredLocations" value="Paris 11ème, Paris 15ème, Paris 20ème" placeholder="Séparez les zones par des virgules">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Onglet Notifications -->
+                    <div id="tab-notifications" class="tab-content">
+                        <div class="profile-section">
+                            <div class="section-header">
+                                <h2>Préférences de notification</h2>
+                                <p>Choisissez comment vous souhaitez être notifié</p>
+                            </div>
+
+                            <div class="notifications-settings">
+                                <div class="notification-category">
+                                    <h3>Messages et communications</h3>
+                                    <div class="notification-item">
+                                        <div class="notification-info">
+                                            <h4>Nouveaux messages</h4>
+                                            <p>Recevoir une notification pour chaque nouveau message</p>
+                                        </div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="notification-item">
+                                        <div class="notification-info">
+                                            <h4>Réponses aux messages</h4>
+                                            <p>Être notifié des réponses à vos messages</p>
+                                        </div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="notification-category">
+                                    <h3>Biens immobiliers</h3>
+                                    <div class="notification-item">
+                                        <div class="notification-info">
+                                            <h4>Nouveaux biens correspondants</h4>
+                                            <p>Alertes pour les biens qui correspondent à vos critères</p>
+                                        </div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="notification-item">
+                                        <div class="notification-info">
+                                            <h4>Modifications de prix</h4>
+                                            <p>Notifications quand le prix d'un bien favori change</p>
+                                        </div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="notification-item">
+                                        <div class="notification-info">
+                                            <h4>Biens vendus/loués</h4>
+                                            <p>Alertes quand un bien de vos favoris est vendu ou loué</p>
+                                        </div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="notification-category">
+                                    <h3>Visites et rendez-vous</h3>
+                                    <div class="notification-item">
+                                        <div class="notification-info">
+                                            <h4>Confirmations de visite</h4>
+                                            <p>Notifications de confirmation des visites planifiées</p>
+                                        </div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="notification-item">
+                                        <div class="notification-info">
+                                            <h4>Rappels de visite</h4>
+                                            <p>Rappels 24h et 1h avant vos visites</p>
+                                        </div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="notification-category">
+                                    <h3>Méthodes de notification</h3>
+                                    <div class="notification-item">
+                                        <div class="notification-info">
+                                            <h4>Notifications par email</h4>
+                                            <p>Recevoir les notifications par email</p>
+                                        </div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="notification-item">
+                                        <div class="notification-info">
+                                            <h4>Notifications push</h4>
+                                            <p>Notifications dans le navigateur</p>
+                                        </div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="notification-item">
+                                        <div class="notification-info">
+                                            <h4>Notifications SMS</h4>
+                                            <p>Recevoir des SMS pour les alertes importantes</p>
+                                        </div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Onglet Gestion du compte -->
+                    <div id="tab-account" class="tab-content">
+                        <div class="profile-section">
+                            <div class="section-header">
+                                <h2>Informations du compte</h2>
+                                <p>Gérez les paramètres de votre compte</p>
+                            </div>
+
+                            <div class="account-info">
+                                <div class="info-grid">
+                                    <div class="info-item">
+                                        <span class="info-label">ID du compte</span>
+                                        <span class="info-value">#CLI-2025-001</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Date de création</span>
+                                        <span class="info-value">15 janvier 2025</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Dernière connexion</span>
+                                        <span class="info-value">Aujourd'hui à 14:30</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Statut du compte</span>
+                                        <span class="info-value status-active">Actif</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="profile-section">
+                            <div class="section-header">
+                                <h2>Export de données</h2>
+                                <p>Téléchargez vos données personnelles</p>
+                            </div>
+
+                            <div class="data-export">
+                                <div class="export-info">
+                                    <span class="material-icons">download</span>
+                                    <div>
+                                        <h3>Exporter mes données</h3>
+                                        <p>Téléchargez toutes vos données personnelles au format JSON</p>
+                                    </div>
+                                </div>
+                                <button class="btn-secondary" onclick="exportData()">
+                                    <span class="material-icons">file_download</span>
+                                    <span>Télécharger</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="profile-section danger-zone">
+                            <div class="section-header">
+                                <h2>Zone de danger</h2>
+                                <p>Actions irréversibles sur votre compte</p>
+                            </div>
+
+                            <div class="danger-actions">
+                                <div class="danger-item">
+                                    <div class="danger-info">
+                                        <h3>Désactiver le compte</h3>
+                                        <p>Votre compte sera temporairement désactivé. Vous pourrez le réactiver en vous reconnectant.</p>
+                                    </div>
+                                    <button class="btn-danger" onclick="deactivateAccount()">
+                                        <span class="material-icons">pause_circle</span>
+                                        <span>Désactiver</span>
+                                    </button>
+                                </div>
+
+                                <div class="danger-item">
+                                    <div class="danger-info">
+                                        <h3>Supprimer le compte</h3>
+                                        <p>Cette action supprimera définitivement votre compte et toutes vos données. Cette action est irréversible.</p>
+                                    </div>
+                                    <button class="btn-danger" onclick="deleteAccount()">
+                                        <span class="material-icons">delete_forever</span>
+                                        <span>Supprimer</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="site-footer" role="contentinfo" aria-label="Pied de page">
+            <div class="footer-left">© 2025 ImmoPro — Tous droits réservés</div>
+            <div class="footer-links">
+                <a href="../auth/mentions-legales.html">Mentions légales</a>
+                <a href="../auth/privacy.html">Politique de confidentialité</a>
+                <a href="../auth/contact.html">Contact</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modal de confirmation de suppression -->
+    <div id="delete-account-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Confirmer la suppression du compte</h2>
+                <button class="modal-close" onclick="closeDeleteAccountModal()">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="warning-message">
+                    <span class="material-icons">warning</span>
+                    <div>
+                        <h3>Attention !</h3>
+                        <p>Vous êtes sur le point de supprimer définitivement votre compte. Cette action est <strong>irréversible</strong> et entraînera :</p>
+                        <ul>
+                            <li>La suppression de tous vos favoris</li>
+                            <li>L'annulation de toutes vos visites planifiées</li>
+                            <li>La suppression de votre historique de messages</li>
+                            <li>La perte de toutes vos données personnelles</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="confirmation-input">
+                    <label for="confirm-delete">Pour confirmer, tapez "SUPPRIMER" :</label>
+                    <input type="text" id="confirm-delete" placeholder="SUPPRIMER">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" onclick="closeDeleteAccountModal()">Annuler</button>
+                <button type="button" class="btn-danger" onclick="confirmDeleteAccount()" disabled>
+                    <span class="material-icons">delete_forever</span>
+                    <span>Supprimer définitivement</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/script.js"></script>
+    <script src="../../js/client_profil.js"></script>
+</body>
+
+</html>

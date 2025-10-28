@@ -1,0 +1,168 @@
+/* Styles spécifiques pour l'espace client */
+
+
+/* Utilise la couleur principale #265140 (vert foncé) au lieu du bleu */
+
+:root {
+    /* Couleurs principales pour le client */
+    --client-primary: #265140;
+    --client-primary-light: #3a7a5f;
+    --client-primary-dark: #1a3d2f;
+    --client-accent: #d8c4a0;
+    --client-accent-light: #f2e9da;
+}
+
+
+/* Override des couleurs pour l'espace client */
+
+.client-space {
+    --primary-blue: var(--client-primary);
+    --primary-blue-light: var(--client-primary-light);
+    --link-hover: var(--client-primary-light);
+}
+
+
+/* Police Poppins pour tous les éléments de formulaire dans l'espace client */
+
+.client-space input,
+.client-space button,
+.client-space textarea,
+.client-space select {
+    font-family: "Poppins", sans-serif !important;
+}
+
+
+/* Ajout d'un badge pour différencier l'espace client */
+
+.client-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    background-color: var(--client-primary);
+    color: white;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-left: 10px;
+}
+
+
+/* Styles spécifiques pour les boutons client */
+
+.client-btn-primary {
+    background-color: var(--client-primary) !important;
+    border-color: var(--client-primary) !important;
+}
+
+.client-btn-primary:hover {
+    background-color: var(--client-primary-light) !important;
+    border-color: var(--client-primary-light) !important;
+}
+
+
+/* Styles pour les statuts dans l'espace client */
+
+.client-status-online {
+    background-color: #d4f4dd;
+    color: var(--success);
+}
+
+.client-status-pending {
+    background-color: #fff3cd;
+    color: var(--warning);
+}
+
+.client-status-confirmed {
+    background-color: #d1ecf1;
+    color: var(--client-primary);
+}
+
+.client-status-completed {
+    background-color: #e2d4f6;
+    color: var(--client-primary-dark);
+}
+
+
+/* Animations spécifiques pour l'espace client */
+
+@keyframes client-pulse {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.client-pulse {
+    animation: client-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+
+/* Styles pour les cards client */
+
+.client-card {
+    border-left: 3px solid var(--client-primary);
+    transition: all 0.3s ease;
+}
+
+.client-card:hover {
+    border-left-color: var(--client-primary-light);
+    box-shadow: 0 4px 12px rgba(38, 81, 64, 0.15);
+}
+
+
+/* Badge client dans le header */
+
+.user-role.client-badge {
+    background-color: var(--client-primary);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+
+/* Sidebar avec couleur client */
+
+.sidebar.client-space {
+    background: linear-gradient(180deg, var(--client-primary) 0%, var(--client-primary-dark) 100%);
+}
+
+
+/* Correction du hover pour améliorer la lisibilité du texte dans l'espace client */
+
+.client-space .menu-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.client-space .logout:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+
+/* Amélioration des contrasts pour accessibilité */
+
+.client-text-primary {
+    color: var(--client-primary);
+}
+
+.client-text-secondary {
+    color: var(--client-primary-light);
+}
+
+
+/* Responsive spécifique client */
+
+@media (max-width: 768px) {
+    .client-badge {
+        font-size: 10px;
+        padding: 3px 8px;
+    }
+}

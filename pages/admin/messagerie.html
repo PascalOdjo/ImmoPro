@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImmoPro - Messagerie</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/components.css">
+    <link rel="stylesheet" href="../../css/style_admin.css">
+    <link rel="stylesheet" href="../../css/style_admin_messagerie.css">
+</head>
+
+<body>
+    <div class="sidebar" id="sidebar">
+        <div class="logo">
+            <div class="logo-icon"></div>
+            <span>ImmoPro</span>
+        </div>
+
+        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+            <span class="material-icons">menu</span>
+        </button>
+
+        <a href="dashboard.html" class="menu-item">
+            <span class="material-icons menu-icon">dashboard</span>
+            <span>Tableau de bord</span>
+        </a>
+
+        <a href="biens.html" class="menu-item">
+            <span class="material-icons menu-icon">home</span>
+            <span>Biens immobiliers</span>
+        </a>
+
+        <a href="clients.html" class="menu-item">
+            <span class="material-icons menu-icon">people</span>
+            <span>Clients</span>
+        </a>
+
+        <a href="visites.html" class="menu-item">
+            <span class="material-icons menu-icon">event</span>
+            <span>Visites</span>
+        </a>
+
+        <a href="messagerie.html" class="menu-item active">
+            <span class="material-icons menu-icon">chat</span>
+            <span>Messages</span>
+        </a>
+
+        <a href="parametres.html" class="menu-item">
+            <span class="material-icons menu-icon">settings</span>
+            <span>Paramètres</span>
+        </a>
+
+        <a href="#" class="logout" onclick="handleLogout(event)">
+            <span class="material-icons menu-icon">logout</span>
+            <span>Déconnexion</span>
+        </a>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <div class="search-bar">
+                <span class="material-icons search-icon">search</span>
+                <input type="text" placeholder="Rechercher un message...">
+            </div>
+
+            <div class="header-right">
+                <div class="notification-icon">
+                    <span class="material-icons">notifications</span>
+                    <span class="notification-badge">3</span>
+                </div>
+                <div class="user-profile">
+                    <div class="avatar"></div>
+                    <div class="user-info">
+                        <div class="user-name">John Doe</div>
+                        <div class="user-role">Agent immobilier</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <main class="messagerie" role="main">
+                <div class="messagerie-container">
+                    <!-- Liste des conversations -->
+                    <aside class="conversations-list" role="complementary">
+                        <div class="conversations-header">
+                            <h2>Messages</h2>
+                            <button class="new-message-btn" onclick="startNewConversation()">
+                            <span class="material-icons">edit</span>
+                            <span>Nouveau message</span>
+                        </button>
+                        </div>
+
+                        <div class="conversations-filter">
+                            <button class="filter-btn active" data-filter="all">Tous</button>
+                            <button class="filter-btn" data-filter="unread">Non lus</button>
+                            <button class="filter-btn" data-filter="archived">Archivés</button>
+                        </div>
+
+                        <div class="conversations">
+                            <!-- Conversation 1 -->
+                            <div class="conversation-item active unread" onclick="selectConversation('1')">
+                                <div class="conversation-avatar">
+                                    <img src="../../assets/images/user_1.jpg" alt="Marie Dubois">
+                                </div>
+                                <div class="conversation-content">
+                                    <div class="conversation-header">
+                                        <h3 class="conversation-name">Marie Dubois</h3>
+                                        <span class="conversation-time">14:30</span>
+                                    </div>
+                                    <p class="conversation-preview">Bonjour, je souhaiterais avoir plus d'informations sur...</p>
+                                    <div class="conversation-meta">
+                                        <span class="badge unread">2</span>
+                                        <span class="material-icons priority">priority_high</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Conversation 2 -->
+                            <div class="conversation-item" onclick="selectConversation('2')">
+                                <div class="conversation-avatar">
+                                    <img src="../../assets/images/user_2.jpg" alt="Thomas Martin">
+                                </div>
+                                <div class="conversation-content">
+                                    <div class="conversation-header">
+                                        <h3 class="conversation-name">Thomas Martin</h3>
+                                        <span class="conversation-time">Hier</span>
+                                    </div>
+                                    <p class="conversation-preview">Merci pour la visite d'hier. Je vous confirme mon intérêt pour...</p>
+                                </div>
+                            </div>
+
+                            <!-- Conversation 3 -->
+                            <div class="conversation-item" onclick="selectConversation('3')">
+                                <div class="conversation-avatar">
+                                    <img src="../../assets/images/user_3.jpg" alt="Sophie Bernard">
+                                </div>
+                                <div class="conversation-content">
+                                    <div class="conversation-header">
+                                        <h3 class="conversation-name">Sophie Bernard</h3>
+                                        <span class="conversation-time">25 Oct</span>
+                                    </div>
+                                    <p class="conversation-preview">Est-ce possible de planifier une seconde visite pour...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <!-- Zone de conversation -->
+                    <section class="conversation-view" role="region" aria-label="Conversation active">
+                        <div class="conversation-header">
+                            <div class="conversation-info">
+                                <h2>Marie Dubois</h2>
+                                <span class="status online">En ligne</span>
+                            </div>
+                            <div class="conversation-actions">
+                                <button class="action-btn" title="Appeler">
+                                <span class="material-icons">phone</span>
+                            </button>
+                                <button class="action-btn" title="Archiver">
+                                <span class="material-icons">archive</span>
+                            </button>
+                                <button class="action-btn" title="Plus d'options">
+                                <span class="material-icons">more_vert</span>
+                            </button>
+                            </div>
+                        </div>
+
+                        <div class="messages-container">
+                            <div class="message-group">
+                                <div class="message-date">Aujourd'hui</div>
+
+                                <div class="message received">
+                                    <div class="message-content">
+                                        <p>Bonjour, je souhaiterais avoir plus d'informations sur l'appartement situé au 15 rue des Lilas.</p>
+                                    </div>
+                                    <span class="message-time">14:25</span>
+                                </div>
+
+                                <div class="message sent">
+                                    <div class="message-content">
+                                        <p>Bonjour Marie, je serai ravi de vous donner plus de détails sur ce bien. Que souhaitez-vous savoir en particulier ?</p>
+                                    </div>
+                                    <span class="message-time">14:28</span>
+                                </div>
+
+                                <div class="message received">
+                                    <div class="message-content">
+                                        <p>J'aimerais connaître la surface exacte, le montant des charges et s'il y a des travaux prévus dans la copropriété.</p>
+                                    </div>
+                                    <span class="message-time">14:30</span>
+                                </div>
+                            </div>
+
+                            <div class="message-group">
+                                <div class="message-date">Hier</div>
+
+                                <div class="message sent">
+                                    <div class="message-content">
+                                        <p>Voici les informations que vous avez demandées :</p>
+                                        <ul>
+                                            <li>Surface : 65m²</li>
+                                            <li>Charges : 150€/mois</li>
+                                            <li>Aucun travaux prévu pour les 2 prochaines années</li>
+                                        </ul>
+                                        <p>Souhaitez-vous planifier une visite ?</p>
+                                    </div>
+                                    <span class="message-time">16:45</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <form class="message-input" onsubmit="sendMessage(event)">
+                            <div class="input-actions">
+                                <button type="button" class="action-btn" title="Joindre un fichier">
+                                <span class="material-icons">attach_file</span>
+                            </button>
+                            </div>
+                            <input type="text" placeholder="Votre message..." aria-label="Message">
+                            <button type="submit" class="send-btn" title="Envoyer">
+                            <span class="material-icons">send</span>
+                        </button>
+                        </form>
+                    </section>
+                </div>
+            </main>
+        </div>
+
+        <footer class="site-footer" role="contentinfo" aria-label="Pied de page">
+            <div class="footer-left">© 2025 ImmoPro — Tous droits réservés</div>
+            <div class="footer-links">
+                <a href="../client/mentions-legales.html">Mentions légales</a>
+                <a href="../client/privacy.html">Politique de confidentialité</a>
+                <a href="../client/contact.html">Contact</a>
+            </div>
+        </footer>
+    </div>
+    <script src="../../js/script.js"></script>
+    <script src="../../js/admin_messagerie.js"></script>
+</body>
+
+</html>

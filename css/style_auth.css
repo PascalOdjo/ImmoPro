@@ -1,0 +1,365 @@
+/* Page d'authentification */
+
+
+/* Police Poppins pour tous les éléments de formulaire */
+
+input,
+button,
+textarea,
+select {
+    font-family: "Poppins", sans-serif;
+}
+
+.auth-container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+}
+
+.auth-content {
+    background: rgb(255, 255, 255);
+    border-radius: 12px;
+    padding: 20px;
+    width: 100%;
+    max-width: 480px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+/* En-tête */
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.auth-header .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.logo-icon {
+    width: 32px;
+    height: 32px;
+    background-color: var(--primary-blue);
+    border-radius: 6px;
+}
+
+.logo span {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--primary-blue);
+}
+
+.auth-header h1 {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 12px 0;
+}
+
+.auth-subtitle {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+
+/* Formulaire */
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    width: 100%;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    width: 100%;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+}
+
+
+/* Labels et inputs */
+
+label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-with-icon .material-icons {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+    font-size: 20px;
+    z-index: 1;
+}
+
+.input-with-icon input {
+    padding: 12px 44px 12px 44px;
+    width: 100%;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: "Poppins", sans-serif;
+    color: var(--text-primary);
+    transition: all 0.3s;
+    position: relative;
+}
+
+.input-with-icon input:hover {
+    border-color: var(--primary-blue-light);
+}
+
+.input-with-icon input:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(28, 63, 96, 0.1);
+}
+
+
+/* Gestion du mot de passe */
+
+.password-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.forgot-password {
+    font-size: 13px;
+    color: var(--primary-blue);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.forgot-password:hover {
+    color: var(--link-hover);
+    text-decoration: underline;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    z-index: 5;
+}
+
+.toggle-password:hover {
+    color: var(--text-primary);
+}
+
+
+/* Conditions du mot de passe */
+
+.password-requirements {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.password-requirements p {
+    margin: 0 0 4px 0;
+}
+
+.password-requirements ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.password-requirements li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.password-requirements li::before {
+    content: "";
+    width: 16px;
+    height: 16px;
+    background-color: #e0e0e0;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.password-requirements li[data-valid="true"]::before {
+    background-color: var(--success);
+}
+
+
+/* Checkbox personnalisée */
+
+.checkbox-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.checkbox-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+}
+
+.checkbox-label {
+    font-size: 14px;
+    color: var(--text-primary);
+    user-select: none;
+}
+
+.checkbox-label a {
+    color: var(--primary-blue);
+    text-decoration: none;
+}
+
+.checkbox-label a:hover {
+    text-decoration: underline;
+}
+
+
+/* Bouton de soumission */
+
+.btn-large {
+    padding: 14px 24px;
+    font-size: 16px;
+    width: 100%;
+    justify-content: center;
+}
+
+
+/* Pied de formulaire */
+
+.auth-footer {
+    margin-top: 32px;
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.auth-footer a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+
+/* Responsive */
+
+@media (max-width: 480px) {
+    .auth-container {
+        padding: 16px;
+        align-items: flex-start;
+    }
+    .auth-content {
+        padding: 24px;
+        border-radius: 12px;
+    }
+    .auth-header h1 {
+        font-size: 24px;
+    }
+    .auth-subtitle {
+        font-size: 14px;
+    }
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    .btn-large {
+        padding: 12px 20px;
+        font-size: 15px;
+    }
+}
+
+
+/* Messages d'erreur */
+
+.form-error {
+    color: var(--error);
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+.input-error {
+    border-color: var(--error) !important;
+}
+
+.input-error:focus {
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1) !important;
+}
+
+
+/* Animation de chargement */
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.btn-loading {
+    position: relative;
+    color: transparent !important;
+    pointer-events: none;
+}
+
+.btn-loading::after {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    margin-left: -8px;
+    margin-top: -8px;
+    border: 2px solid #fff;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin .6s linear infinite;
+}

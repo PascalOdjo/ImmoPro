@@ -1,0 +1,173 @@
+/* Styles pour le tableau de bord */
+
+
+/* Police Poppins pour tous les éléments de formulaire */
+
+input,
+button,
+textarea,
+select {
+    font-family: "Poppins", sans-serif;
+}
+
+.page-dashboard {
+    padding: 20px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.stat-label {
+    color: var(--text-secondary);
+    font-size: 13px;
+}
+
+.stat-value {
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 8px;
+}
+
+.charts-notifs {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.charts-card {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.charts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.notifications-card {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.notifications-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 12px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.notif-item {
+    font-size: 13px;
+    color: var(--text-primary);
+}
+
+.see-all-notifs {
+    display: inline-block;
+    margin-top: 8px;
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+@media (max-width: 992px) {
+    .charts-notifs {
+        grid-template-columns: 1fr;
+    }
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+/* Ensure canvases have a visible height so Chart.js can render */
+
+.charts-grid canvas {
+    width: 100% !important;
+    height: 220px;
+    /* fixed height for charts */
+    display: block;
+}
+
+.charts-card {
+    min-height: 260px;
+}
+
+
+/* Tablet and mobile adjustments */
+
+@media (max-width: 768px) {
+    .page-dashboard {
+        padding: 12px;
+    }
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    .charts-notifs {
+        grid-template-columns: 1fr;
+    }
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+    .notifications-card {
+        order: 2;
+    }
+    .content-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    .property-card {
+        flex-direction: column;
+        gap: 12px;
+    }
+    .property-image {
+        width: 100%;
+        height: 180px;
+    }
+    .charts-grid canvas {
+        height: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-dashboard {
+        padding: 10px;
+    }
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    .stat-value {
+        font-size: 18px;
+    }
+    .charts-grid canvas {
+        height: 160px;
+    }
+    .property-image {
+        height: 140px;
+    }
+    .see-all-notifs {
+        font-size: 14px;
+    }
+}

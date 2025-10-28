@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImmoPro - Mon Espace Client</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/components.css">
+    <link rel="stylesheet" href="../../css/style_client.css">
+    <link rel="stylesheet" href="../../css/style_client_dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="sidebar client-space" id="sidebar">
+        <div class="logo">
+            <div class="logo-icon"></div>
+            <span>ImmoPro</span>
+        </div>
+
+        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+            <span class="material-icons">menu</span>
+        </button>
+
+        <a href="dashboard.html" class="menu-item active">
+            <span class="material-icons menu-icon">dashboard</span>
+            <span>Tableau de bord</span>
+        </a>
+
+        <a href="biens.html" class="menu-item">
+            <span class="material-icons menu-icon">home</span>
+            <span>Mes biens</span>
+        </a>
+
+        <a href="favoris.html" class="menu-item">
+            <span class="material-icons menu-icon">favorite</span>
+            <span>Mes favoris</span>
+        </a>
+
+        <a href="visites.html" class="menu-item">
+            <span class="material-icons menu-icon">event</span>
+            <span>Mes visites</span>
+        </a>
+
+        <a href="messagerie.html" class="menu-item">
+            <span class="material-icons menu-icon">chat</span>
+            <span>Messagerie</span>
+        </a>
+
+        <a href="profil.html" class="menu-item">
+            <span class="material-icons menu-icon">person</span>
+            <span>Mon profil</span>
+        </a>
+
+        <a href="#" class="logout" onclick="handleLogout(event)">
+            <span class="material-icons menu-icon">logout</span>
+            <span>Déconnexion</span>
+        </a>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <div class="search-bar">
+                <span class="material-icons search-icon">search</span>
+                <input type="text" placeholder="Rechercher un bien, une visite...">
+            </div>
+
+            <div class="header-right">
+                <div class="notification-icon">
+                    <span class="material-icons">notifications</span>
+                    <span class="notification-badge">2</span>
+                </div>
+                <div class="user-profile">
+                    <div class="avatar"></div>
+                    <div class="user-info">
+                        <div class="user-name">Marie Dubois</div>
+                        <div class="user-role">Client</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Page Dashboard Client -->
+            <div id="page-dashboard" class="page-dashboard active">
+                <div class="page-header">
+                    <h1 class="page-title">Mon Tableau de bord</h1>
+                    <div class="header-actions">
+                        <button class="btn-secondary" onclick="showPage('page-messagerie')">
+                            <span class="material-icons">chat</span>
+                            <span>Nouveau message</span>
+                        </button>
+                        <button class="btn-primary" onclick="showPage('page-visites')">
+                            <span class="material-icons">event</span>
+                            <span>Planifier une visite</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Statistiques principales -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <span class="material-icons">favorite</span>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-label">Biens favoris</div>
+                            <div class="stat-value">8</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <span class="material-icons">event</span>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-label">Visites planifiées</div>
+                            <div class="stat-value">3</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <span class="material-icons">chat</span>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-label">Messages non lus</div>
+                            <div class="stat-value">
+                                2
+                                <span class="badge">Nouveau</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <span class="material-icons">home</span>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-label">Mes biens</div>
+                            <div class="stat-value">2</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contenu principal -->
+                <div class="content-grid">
+                    <!-- Mes favoris récents -->
+                    <div class="section">
+                        <div class="section-header">
+                            <h2 class="section-title">Mes favoris récents</h2>
+                            <a href="favoris.html" class="see-all">Voir tout</a>
+                        </div>
+
+                        <div class="property-card">
+                            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=200&h=200&fit=crop" alt="Appartement" class="property-image">
+                            <div class="property-info">
+                                <div class="property-title">Appartement moderne, Paris 15ème</div>
+                                <div class="property-details">Appartement • 3 pièces • 85 m²</div>
+                                <div class="property-price">650 000 €</div>
+                                <div class="property-status">
+                                    <span class="status-badge status-available">Disponible</span>
+                                </div>
+                            </div>
+                            <div class="property-actions">
+                                <button class="action-btn" title="Voir les détails">
+                                    <span class="material-icons">visibility</span>
+                                </button>
+                                <button class="action-btn" title="Planifier une visite">
+                                    <span class="material-icons">event</span>
+                                </button>
+                                <button class="action-btn" title="Retirer des favoris">
+                                    <span class="material-icons">favorite</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="property-card">
+                            <img src="https://images.unsplash.com/photo-1502672260066-6bc35f0a1611?w=200&h=200&fit=crop" alt="Maison" class="property-image">
+                            <div class="property-info">
+                                <div class="property-title">Maison avec jardin, Neuilly</div>
+                                <div class="property-details">Maison • 4 pièces • 120 m²</div>
+                                <div class="property-price">1 200 000 €</div>
+                                <div class="property-status">
+                                    <span class="status-badge status-pending">En attente</span>
+                                </div>
+                            </div>
+                            <div class="property-actions">
+                                <button class="action-btn" title="Voir les détails">
+                                    <span class="material-icons">visibility</span>
+                                </button>
+                                <button class="action-btn" title="Planifier une visite">
+                                    <span class="material-icons">event</span>
+                                </button>
+                                <button class="action-btn" title="Retirer des favoris">
+                                    <span class="material-icons">favorite</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Visites à venir -->
+                    <div class="section">
+                        <div class="section-header">
+                            <h2 class="section-title">Mes visites à venir</h2>
+                            <a href="visites.html" class="see-all">Voir tout</a>
+                        </div>
+
+                        <div class="visit-item">
+                            <div class="visit-time">
+                                <div class="time-box">
+                                    <div class="time-hour">14:00</div>
+                                    <div class="time-period">PM</div>
+                                </div>
+                                <div class="visit-details">
+                                    <div class="visit-title">Appartement moderne, Paris 15ème</div>
+                                    <div class="visit-client">Avec Agent: Sophie Martin</div>
+                                    <div class="visit-status">
+                                        <span class="status-badge status-confirmed">Confirmée</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="visit-item">
+                            <div class="visit-time">
+                                <div class="time-box">
+                                    <div class="time-hour">16:30</div>
+                                    <div class="time-period">PM</div>
+                                </div>
+                                <div class="visit-details">
+                                    <div class="visit-title">Maison avec jardin, Neuilly</div>
+                                    <div class="visit-client">Avec Agent: Pierre Durand</div>
+                                    <div class="visit-status">
+                                        <span class="status-badge status-pending">En attente</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="visit-item">
+                            <div class="visit-time">
+                                <div class="time-box">
+                                    <div class="time-hour">10:00</div>
+                                    <div class="time-period">AM</div>
+                                </div>
+                                <div class="visit-details">
+                                    <div class="visit-title">Loft industriel, Lyon</div>
+                                    <div class="visit-client">Avec Agent: Marie Leroy</div>
+                                    <div class="visit-status">
+                                        <span class="status-badge status-confirmed">Confirmée</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Messages récents et notifications -->
+                <div class="messages-notifications">
+                    <div class="messages-section">
+                        <div class="section-header">
+                            <h2 class="section-title">Messages récents</h2>
+                            <a href="messagerie.html" class="see-all">Voir tout</a>
+                        </div>
+
+                        <div class="message-item">
+                            <div class="message-avatar">
+                                <div class="avatar-small"></div>
+                            </div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <div class="message-sender">Sophie Martin</div>
+                                    <div class="message-time">Il y a 2h</div>
+                                </div>
+                                <div class="message-preview">Votre visite de demain est confirmée. Je vous enverrai l'adresse exacte...</div>
+                            </div>
+                            <div class="message-status">
+                                <span class="unread-indicator"></span>
+                            </div>
+                        </div>
+
+                        <div class="message-item">
+                            <div class="message-avatar">
+                                <div class="avatar-small"></div>
+                            </div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <div class="message-sender">Pierre Durand</div>
+                                    <div class="message-time">Hier</div>
+                                </div>
+                                <div class="message-preview">Nouveau bien disponible qui pourrait vous intéresser...</div>
+                            </div>
+                            <div class="message-status">
+                                <span class="unread-indicator"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="notifications-section">
+                        <div class="section-header">
+                            <h2 class="section-title">Notifications</h2>
+                        </div>
+
+                        <div class="notification-item">
+                            <div class="notification-icon">
+                                <span class="material-icons">event</span>
+                            </div>
+                            <div class="notification-content">
+                                <div class="notification-title">Visite confirmée</div>
+                                <div class="notification-text">Votre visite de l'appartement Paris 15ème est confirmée pour demain à 14h</div>
+                                <div class="notification-time">Il y a 1h</div>
+                            </div>
+                        </div>
+
+                        <div class="notification-item">
+                            <div class="notification-icon">
+                                <span class="material-icons">home</span>
+                            </div>
+                            <div class="notification-content">
+                                <div class="notification-title">Nouveau bien ajouté</div>
+                                <div class="notification-text">Un appartement correspondant à vos critères vient d'être ajouté</div>
+                                <div class="notification-time">Il y a 3h</div>
+                            </div>
+                        </div>
+
+                        <div class="notification-item">
+                            <div class="notification-icon">
+                                <span class="material-icons">price_change</span>
+                            </div>
+                            <div class="notification-content">
+                                <div class="notification-title">Prix modifié</div>
+                                <div class="notification-text">Le prix du bien "Maison Neuilly" a été réduit de 50 000€</div>
+                                <div class="notification-time">Il y a 5h</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mes biens (si propriétaire) -->
+                <div class="my-properties-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Mes biens en ligne</h2>
+                        <a href="biens.html" class="see-all">Gérer mes biens</a>
+                    </div>
+
+                    <div class="properties-grid">
+                        <div class="property-card-full">
+                            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=300&h=200&fit=crop" alt="Mon appartement" class="property-image">
+                            <div class="property-info">
+                                <div class="property-title">Mon appartement T3</div>
+                                <div class="property-details">Appartement • 3 pièces • 75 m²</div>
+                                <div class="property-price">580 000 €</div>
+                                <div class="property-stats">
+                                    <div class="stat-item">
+                                        <span class="material-icons">visibility</span>
+                                        <span>156 vues</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="material-icons">favorite</span>
+                                        <span>12 favoris</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="material-icons">event</span>
+                                        <span>3 visites</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="property-status">
+                                <span class="status-badge status-online">En ligne</span>
+                            </div>
+                        </div>
+
+                        <div class="property-card-full">
+                            <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=300&h=200&fit=crop" alt="Ma maison" class="property-image">
+                            <div class="property-info">
+                                <div class="property-title">Ma maison familiale</div>
+                                <div class="property-details">Maison • 5 pièces • 140 m²</div>
+                                <div class="property-price">850 000 €</div>
+                                <div class="property-stats">
+                                    <div class="stat-item">
+                                        <span class="material-icons">visibility</span>
+                                        <span>89 vues</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="material-icons">favorite</span>
+                                        <span>7 favoris</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="material-icons">event</span>
+                                        <span>1 visite</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="property-status">
+                                <span class="status-badge status-pending">En attente</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="site-footer" role="contentinfo" aria-label="Pied de page">
+            <div class="footer-left">© 2025 ImmoPro — Tous droits réservés</div>
+            <div class="footer-links">
+                <a href="../auth/mentions-legales.html">Mentions légales</a>
+                <a href="../auth/privacy.html">Politique de confidentialité</a>
+                <a href="../auth/contact.html">Contact</a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="../../js/script.js"></script>
+    <script src="../../js/client_dashboard.js"></script>
+</body>
+
+</html>

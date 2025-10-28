@@ -1,0 +1,11 @@
+/* Page Utilisateurs */
+
+
+/* Police Poppins pour tous les éléments de formulaire */
+
+input,
+button,
+textarea,
+select {
+    font-family: "Poppins", sans-serif;
+}

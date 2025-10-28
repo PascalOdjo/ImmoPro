@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImmoPro - Messagerie</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/components.css">
+    <link rel="stylesheet" href="../../css/style_client.css">
+    <link rel="stylesheet" href="../../css/style_client_messagerie.css">
+</head>
+
+<body>
+    <div class="sidebar client-space" id="sidebar">
+        <div class="logo">
+            <div class="logo-icon"></div>
+            <span>ImmoPro</span>
+        </div>
+
+        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+            <span class="material-icons">menu</span>
+        </button>
+
+        <a href="dashboard.html" class="menu-item">
+            <span class="material-icons menu-icon">dashboard</span>
+            <span>Tableau de bord</span>
+        </a>
+
+        <a href="biens.html" class="menu-item">
+            <span class="material-icons menu-icon">home</span>
+            <span>Mes biens</span>
+        </a>
+
+        <a href="favoris.html" class="menu-item">
+            <span class="material-icons menu-icon">favorite</span>
+            <span>Mes favoris</span>
+        </a>
+
+        <a href="visites.html" class="menu-item">
+            <span class="material-icons menu-icon">event</span>
+            <span>Mes visites</span>
+        </a>
+
+        <a href="messagerie.html" class="menu-item active">
+            <span class="material-icons menu-icon">chat</span>
+            <span>Messagerie</span>
+        </a>
+
+        <a href="profil.html" class="menu-item">
+            <span class="material-icons menu-icon">person</span>
+            <span>Mon profil</span>
+        </a>
+
+        <a href="#" class="logout" onclick="handleLogout(event)">
+            <span class="material-icons menu-icon">logout</span>
+            <span>Déconnexion</span>
+        </a>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <div class="search-bar">
+                <span class="material-icons search-icon">search</span>
+                <input type="text" placeholder="Rechercher dans les messages...">
+            </div>
+
+            <div class="header-right">
+                <div class="notification-icon">
+                    <span class="material-icons">notifications</span>
+                    <span class="notification-badge">3</span>
+                </div>
+                <div class="user-profile">
+                    <div class="avatar"></div>
+                    <div class="user-info">
+                        <div class="user-name">Marie Dubois</div>
+                        <div class="user-role">Client</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Page Messagerie -->
+            <div id="page-messagerie" class="page-messagerie active">
+                <div class="page-header">
+                    <h1 class="page-title">Messagerie</h1>
+                    <div class="header-actions">
+                        <button class="btn-secondary" onclick="toggleView('archived')">
+                            <span class="material-icons">archive</span>
+                            <span>Archivés</span>
+                        </button>
+                        <button class="btn-secondary active" onclick="toggleView('active')">
+                            <span class="material-icons">inbox</span>
+                            <span>Actifs</span>
+                        </button>
+                        <button class="btn-primary" onclick="showNewMessageModal()">
+                            <span class="material-icons">add</span>
+                            <span>Nouveau message</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Statistiques de messagerie -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <span class="material-icons">inbox</span>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-label">Messages reçus</div>
+                            <div class="stat-value">24</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <span class="material-icons">send</span>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-label">Messages envoyés</div>
+                            <div class="stat-value">18</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <span class="material-icons">mark_email_unread</span>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-label">Non lus</div>
+                            <div class="stat-value">3</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <span class="material-icons">people</span>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-label">Conversations</div>
+                            <div class="stat-value">7</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interface de messagerie -->
+                <div class="messaging-interface">
+                    <!-- Liste des conversations -->
+                    <div class="conversations-panel">
+                        <div class="conversations-header">
+                            <h2>Conversations</h2>
+                            <div class="conversation-filters">
+                                <button class="filter-btn active" onclick="filterConversations('all')">Tous</button>
+                                <button class="filter-btn" onclick="filterConversations('unread')">Non lus</button>
+                                <button class="filter-btn" onclick="filterConversations('agents')">Agents</button>
+                            </div>
+                        </div>
+
+                        <div class="conversations-list">
+                            <div class="conversation-item active" data-id="1" onclick="selectConversation(1)">
+                                <div class="conversation-avatar">
+                                    <div class="avatar-small"></div>
+                                    <div class="online-indicator"></div>
+                                </div>
+                                <div class="conversation-content">
+                                    <div class="conversation-header">
+                                        <div class="conversation-name">Sophie Martin</div>
+                                        <div class="conversation-time">Il y a 2h</div>
+                                    </div>
+                                    <div class="conversation-preview">Votre visite de demain est confirmée. Je vous enverrai l'adresse exacte...</div>
+                                    <div class="conversation-meta">
+                                        <span class="conversation-status">Agent immobilier</span>
+                                        <span class="unread-count">2</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="conversation-item" data-id="2" onclick="selectConversation(2)">
+                                <div class="conversation-avatar">
+                                    <div class="avatar-small"></div>
+                                </div>
+                                <div class="conversation-content">
+                                    <div class="conversation-header">
+                                        <div class="conversation-name">Pierre Durand</div>
+                                        <div class="conversation-time">Hier</div>
+                                    </div>
+                                    <div class="conversation-preview">Nouveau bien disponible qui pourrait vous intéresser...</div>
+                                    <div class="conversation-meta">
+                                        <span class="conversation-status">Agent immobilier</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="conversation-item" data-id="3" onclick="selectConversation(3)">
+                                <div class="conversation-avatar">
+                                    <div class="avatar-small"></div>
+                                    <div class="online-indicator"></div>
+                                </div>
+                                <div class="conversation-content">
+                                    <div class="conversation-header">
+                                        <div class="conversation-name">Marie Leroy</div>
+                                        <div class="conversation-time">Il y a 3h</div>
+                                    </div>
+                                    <div class="conversation-preview">Merci pour votre visite d'hier. Avez-vous des questions ?</div>
+                                    <div class="conversation-meta">
+                                        <span class="conversation-status">Agent immobilier</span>
+                                        <span class="unread-count">1</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="conversation-item" data-id="4" onclick="selectConversation(4)">
+                                <div class="conversation-avatar">
+                                    <div class="avatar-small"></div>
+                                </div>
+                                <div class="conversation-content">
+                                    <div class="conversation-header">
+                                        <div class="conversation-name">Support Client</div>
+                                        <div class="conversation-time">Il y a 1 jour</div>
+                                    </div>
+                                    <div class="conversation-preview">Votre demande a été traitée avec succès...</div>
+                                    <div class="conversation-meta">
+                                        <span class="conversation-status">Support</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="conversation-item" data-id="5" onclick="selectConversation(5)">
+                                <div class="conversation-avatar">
+                                    <div class="avatar-small"></div>
+                                </div>
+                                <div class="conversation-content">
+                                    <div class="conversation-header">
+                                        <div class="conversation-name">Thomas Petit</div>
+                                        <div class="conversation-time">Il y a 2 jours</div>
+                                    </div>
+                                    <div class="conversation-preview">Le bien que vous avez visité est maintenant vendu...</div>
+                                    <div class="conversation-meta">
+                                        <span class="conversation-status">Agent immobilier</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Zone de conversation -->
+                    <div class="conversation-panel">
+                        <!-- Conversation active -->
+                        <div id="conversation-view" class="conversation-view">
+                            <div class="conversation-header">
+                                <div class="conversation-info">
+                                    <div class="conversation-avatar">
+                                        <div class="avatar-medium"></div>
+                                        <div class="online-indicator"></div>
+                                    </div>
+                                    <div class="conversation-details">
+                                        <h2>Sophie Martin</h2>
+                                        <p>Agent immobilier • En ligne</p>
+                                    </div>
+                                </div>
+                                <div class="conversation-actions">
+                                    <button class="action-btn" onclick="archiveConversation(1)" title="Archiver">
+                                        <span class="material-icons">archive</span>
+                                    </button>
+                                    <button class="action-btn" onclick="deleteConversation(1)" title="Supprimer">
+                                        <span class="material-icons">delete</span>
+                                    </button>
+                                    <button class="action-btn" onclick="showConversationInfo(1)" title="Informations">
+                                        <span class="material-icons">info</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="messages-container">
+                                <div class="message-group">
+                                    <div class="message-date">Aujourd'hui</div>
+
+                                    <div class="message received">
+                                        <div class="message-avatar">
+                                            <div class="avatar-small"></div>
+                                        </div>
+                                        <div class="message-content">
+                                            <div class="message-bubble">
+                                                <p>Bonjour Marie, votre visite de demain à 14h est confirmée !</p>
+                                            </div>
+                                            <div class="message-time">14:30</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="message sent">
+                                        <div class="message-content">
+                                            <div class="message-bubble">
+                                                <p>Parfait, merci Sophie ! Pouvez-vous me confirmer l'adresse exacte ?</p>
+                                            </div>
+                                            <div class="message-time">14:32</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="message received">
+                                        <div class="message-avatar">
+                                            <div class="avatar-small"></div>
+                                        </div>
+                                        <div class="message-content">
+                                            <div class="message-bubble">
+                                                <p>Bien sûr ! L'adresse est : 15 rue de la Paix, 75015 Paris. Le code d'entrée est 1234. Je vous attends devant l'immeuble.</p>
+                                            </div>
+                                            <div class="message-time">14:35</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="message sent">
+                                        <div class="message-content">
+                                            <div class="message-bubble">
+                                                <p>Parfait, je serai là à l'heure ! Merci beaucoup.</p>
+                                            </div>
+                                            <div class="message-time">14:36</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="message received">
+                                        <div class="message-avatar">
+                                            <div class="avatar-small"></div>
+                                        </div>
+                                        <div class="message-content">
+                                            <div class="message-bubble">
+                                                <p>Excellent ! N'hésitez pas si vous avez des questions avant la visite. À demain !</p>
+                                            </div>
+                                            <div class="message-time">14:38</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="message-input-container">
+                                <div class="message-input">
+                                    <button class="attachment-btn" onclick="attachFile()" title="Joindre un fichier">
+                                        <span class="material-icons">attach_file</span>
+                                    </button>
+                                    <textarea placeholder="Tapez votre message..." rows="1" onkeydown="handleKeyDown(event)" oninput="autoResize(this)"></textarea>
+                                    <button class="send-btn" onclick="sendMessage()" title="Envoyer">
+                                        <span class="material-icons">send</span>
+                                    </button>
+                                </div>
+                                <div class="message-options">
+                                    <button class="option-btn" onclick="addQuickReply('Merci')">Merci</button>
+                                    <button class="option-btn" onclick="addQuickReply('D\'accord')">D'accord</button>
+                                    <button class="option-btn" onclick="addQuickReply('Je vous rappelle')">Je vous rappelle</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- État vide -->
+                        <div id="empty-conversation" class="empty-conversation" style="display: none;">
+                            <div class="empty-state">
+                                <span class="material-icons">chat_bubble_outline</span>
+                                <h3>Sélectionnez une conversation</h3>
+                                <p>Choisissez une conversation dans la liste pour commencer à échanger avec votre agent immobilier.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="site-footer" role="contentinfo" aria-label="Pied de page">
+            <div class="footer-left">© 2025 ImmoPro — Tous droits réservés</div>
+            <div class="footer-links">
+                <a href="../auth/mentions-legales.html">Mentions légales</a>
+                <a href="../auth/privacy.html">Politique de confidentialité</a>
+                <a href="../auth/contact.html">Contact</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modal nouveau message -->
+    <div id="new-message-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Nouveau message</h2>
+                <button class="modal-close" onclick="closeNewMessageModal()">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="new-message-form">
+                    <div class="form-group">
+                        <label for="message-recipient">Destinataire</label>
+                        <select id="message-recipient" name="recipient" required>
+                            <option value="">Sélectionner un destinataire</option>
+                            <option value="sophie">Sophie Martin - Agent immobilier</option>
+                            <option value="pierre">Pierre Durand - Agent immobilier</option>
+                            <option value="marie">Marie Leroy - Agent immobilier</option>
+                            <option value="support">Support Client</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message-subject">Sujet</label>
+                        <input type="text" id="message-subject" name="subject" placeholder="Sujet du message">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message-content">Message</label>
+                        <textarea id="message-content" name="content" rows="4" placeholder="Votre message..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message-priority">Priorité</label>
+                        <select id="message-priority" name="priority">
+                            <option value="normal">Normale</option>
+                            <option value="high">Élevée</option>
+                            <option value="urgent">Urgente</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" onclick="closeNewMessageModal()">Annuler</button>
+                <button type="button" class="btn-primary" onclick="sendNewMessage()">Envoyer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal informations conversation -->
+    <div id="conversation-info-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Informations de la conversation</h2>
+                <button class="modal-close" onclick="closeConversationInfoModal()">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="conversation-info-content">
+                    <div class="info-section">
+                        <h3>Contact</h3>
+                        <div class="contact-info">
+                            <div class="contact-avatar">
+                                <div class="avatar-large"></div>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Sophie Martin</h4>
+                                <p>Agent immobilier</p>
+                                <p>📧 sophie.martin@immopro.fr</p>
+                                <p>📞 06 12 34 56 78</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-section">
+                        <h3>Statistiques</h3>
+                        <div class="stats-grid-small">
+                            <div class="stat-item">
+                                <span class="stat-label">Messages échangés</span>
+                                <span class="stat-value">24</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Dernière activité</span>
+                                <span class="stat-value">Il y a 2h</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Conversation créée</span>
+                                <span class="stat-value">15 Jan 2025</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-section">
+                        <h3>Actions</h3>
+                        <div class="action-buttons">
+                            <button class="btn-secondary" onclick="callAgent()">
+                                <span class="material-icons">phone</span>
+                                <span>Appeler</span>
+                            </button>
+                            <button class="btn-secondary" onclick="emailAgent()">
+                                <span class="material-icons">email</span>
+                                <span>Envoyer un email</span>
+                            </button>
+                            <button class="btn-secondary" onclick="scheduleMeeting()">
+                                <span class="material-icons">event</span>
+                                <span>Planifier un RDV</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-primary" onclick="closeConversationInfoModal()">Fermer</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/script.js"></script>
+    <script src="../../js/client_messagerie.js"></script>
+</body>
+
+</html>

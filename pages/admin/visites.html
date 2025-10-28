@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImmoPro - Visites</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/components.css">
+    <link rel="stylesheet" href="../../css/style_admin.css">
+    <link rel="stylesheet" href="../../css/style_admin_visites.css">
+</head>
+
+<body>
+    <div class="sidebar" id="sidebar">
+        <div class="logo">
+            <div class="logo-icon"></div>
+            <span>ImmoPro</span>
+        </div>
+
+        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+            <span class="material-icons">menu</span>
+        </button>
+
+        <a href="dashboard.html" class="menu-item">
+            <span class="material-icons menu-icon">dashboard</span>
+            <span>Tableau de bord</span>
+        </a>
+
+        <a href="biens.html" class="menu-item">
+            <span class="material-icons menu-icon">home</span>
+            <span>Biens immobiliers</span>
+        </a>
+
+        <a href="clients.html" class="menu-item">
+            <span class="material-icons menu-icon">people</span>
+            <span>Clients</span>
+        </a>
+
+        <a href="visites.html" class="menu-item active">
+            <span class="material-icons menu-icon">event</span>
+            <span>Visites</span>
+        </a>
+
+        <a href="messagerie.html" class="menu-item">
+            <span class="material-icons menu-icon">chat</span>
+            <span>Messages</span>
+        </a>
+
+        <a href="parametres.html" class="menu-item">
+            <span class="material-icons menu-icon">settings</span>
+            <span>Paramètres</span>
+        </a>
+
+        <a href="#" class="logout" onclick="handleLogout(event)">
+            <span class="material-icons menu-icon">logout</span>
+            <span>Déconnexion</span>
+        </a>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <div class="search-bar">
+                <span class="material-icons search-icon">search</span>
+                <input type="text" placeholder="Rechercher une visite...">
+            </div>
+
+            <div class="header-right">
+                <div class="notification-icon">
+                    <span class="material-icons">notifications</span>
+                </div>
+                <div class="user-profile">
+                    <div class="avatar"></div>
+                    <div class="user-info">
+                        <div class="user-name">John Doe</div>
+                        <div class="user-role">Agent immobilier</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <main id="page-visites" class="page-visites" role="main" aria-label="Gestion des visites">
+                <header class="page-header">
+                    <div class="title-section">
+                        <h1 class="page-title">Visites</h1>
+                        <div class="date-nav">
+                            <button class="date-nav-btn" onclick="navigateDate('prev')" aria-label="Semaine précédente">
+                                <span class="material-icons">chevron_left</span>
+                            </button>
+                            <span class="current-date">23 - 29 Octobre 2025</span>
+                            <button class="date-nav-btn" onclick="navigateDate('next')" aria-label="Semaine suivante">
+                                <span class="material-icons">chevron_right</span>
+                            </button>
+                        </div>
+                    </div>
+                    <button class="add-btn" onclick="showVisitModal()">
+                        <span class="material-icons">add</span>
+                        <span>Planifier une visite</span>
+                    </button>
+                </header>
+
+                <!-- Filtres -->
+                <form id="filters-form" class="filters-bar" role="search" aria-label="Filtres des visites">
+                    <div class="filter-group">
+                        <label for="filter-agent" class="filter-label">Agent</label>
+                        <select id="filter-agent" name="agent" class="filter-select">
+                            <option value="">Tous les agents</option>
+                            <option value="john-doe">John Doe</option>
+                            <option value="jane-smith">Jane Smith</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="filter-status" class="filter-label">Statut</label>
+                        <select id="filter-status" name="status" class="filter-select">
+                            <option value="">Tous les statuts</option>
+                            <option value="scheduled">Planifiée</option>
+                            <option value="completed">Effectuée</option>
+                            <option value="cancelled">Annulée</option>
+                        </select>
+                    </div>
+
+                    <div class="view-toggle" role="group" aria-label="Vue du calendrier">
+                        <button type="button" class="view-btn active" onclick="changeView('week')" aria-pressed="true">
+                            <span class="material-icons">view_week</span>
+                            <span>Semaine</span>
+                        </button>
+                        <button type="button" class="view-btn" onclick="changeView('day')" aria-pressed="false">
+                            <span class="material-icons">view_day</span>
+                            <span>Jour</span>
+                        </button>
+                        <button type="button" class="view-btn" onclick="changeView('list')" aria-pressed="false">
+                            <span class="material-icons">view_list</span>
+                            <span>Liste</span>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Calendrier -->
+                <div class="calendar-container">
+                    <!-- En-têtes des jours -->
+                    <div class="calendar-header" role="row">
+                        <div class="time-column" aria-hidden="true"></div>
+                        <div class="day-column" role="columnheader">
+                            <div class="day-label">Lun</div>
+                            <div class="date-label">23 Oct</div>
+                        </div>
+                        <div class="day-column" role="columnheader">
+                            <div class="day-label">Mar</div>
+                            <div class="date-label">24 Oct</div>
+                        </div>
+                        <div class="day-column" role="columnheader">
+                            <div class="day-label">Mer</div>
+                            <div class="date-label">25 Oct</div>
+                        </div>
+                        <div class="day-column" role="columnheader">
+                            <div class="day-label">Jeu</div>
+                            <div class="date-label">26 Oct</div>
+                        </div>
+                        <div class="day-column" role="columnheader">
+                            <div class="day-label">Ven</div>
+                            <div class="date-label">27 Oct</div>
+                        </div>
+                        <div class="day-column weekend" role="columnheader">
+                            <div class="day-label">Sam</div>
+                            <div class="date-label">28 Oct</div>
+                        </div>
+                        <div class="day-column weekend" role="columnheader">
+                            <div class="day-label">Dim</div>
+                            <div class="date-label">29 Oct</div>
+                        </div>
+                    </div>
+
+                    <!-- Grille du calendrier -->
+                    <div class="calendar-grid">
+                        <!-- Colonne des heures -->
+                        <div class="time-column">
+                            <div class="time-slot">9:00</div>
+                            <div class="time-slot">10:00</div>
+                            <div class="time-slot">11:00</div>
+                            <div class="time-slot">12:00</div>
+                            <div class="time-slot">13:00</div>
+                            <div class="time-slot">14:00</div>
+                            <div class="time-slot">15:00</div>
+                            <div class="time-slot">16:00</div>
+                            <div class="time-slot">17:00</div>
+                            <div class="time-slot">18:00</div>
+                        </div>
+
+                        <!-- Colonnes des jours -->
+                        <div class="day-grid monday" role="gridcell">
+                            <!-- Exemple de visite -->
+                            <div class="visit-card" style="top: 100px; height: 80px;" role="button" tabindex="0" onclick="openVisitDetails('1')" data-visit-id="1">
+                                <div class="visit-time">10:00 - 11:00</div>
+                                <div class="visit-title">Villa moderne - M. Martin</div>
+                                <div class="visit-location">Paris 16ème</div>
+                            </div>
+                        </div>
+                        <div class="day-grid tuesday" role="gridcell">
+                            <div class="visit-card scheduled" style="top: 300px; height: 80px;" role="button" tabindex="0" onclick="openVisitDetails('2')" data-visit-id="2">
+                                <div class="visit-time">14:00 - 15:00</div>
+                                <div class="visit-title">Appartement haussmannien - Mme Dubois</div>
+                                <div class="visit-location">Paris Le Marais</div>
+                            </div>
+                        </div>
+                        <div class="day-grid wednesday" role="gridcell"></div>
+                        <div class="day-grid thursday" role="gridcell">
+                            <div class="visit-card completed" style="top: 200px; height: 80px;" role="button" tabindex="0" onclick="openVisitDetails('3')" data-visit-id="3">
+                                <div class="visit-time">12:00 - 13:00</div>
+                                <div class="visit-title">Loft industriel - M. Bernard</div>
+                                <div class="visit-location">Lyon Confluence</div>
+                            </div>
+                        </div>
+                        <div class="day-grid friday" role="gridcell">
+                            <div class="visit-card cancelled" style="top: 400px; height: 80px;" role="button" tabindex="0" onclick="openVisitDetails('4')" data-visit-id="4">
+                                <div class="visit-time">15:00 - 16:00</div>
+                                <div class="visit-title">Studio moderne - Mlle Laurent</div>
+                                <div class="visit-location">Lyon Presqu'île</div>
+                            </div>
+                        </div>
+                        <div class="day-grid saturday weekend" role="gridcell"></div>
+                        <div class="day-grid sunday weekend" role="gridcell"></div>
+                    </div>
+                </div>
+
+                <!-- Vue liste (cachée par défaut) -->
+                <div class="visits-list" style="display: none;" role="table" aria-label="Liste des visites">
+                    <div class="list-header" role="row">
+                        <div class="list-cell" role="columnheader">Date & Heure</div>
+                        <div class="list-cell" role="columnheader">Bien</div>
+                        <div class="list-cell" role="columnheader">Client</div>
+                        <div class="list-cell" role="columnheader">Agent</div>
+                        <div class="list-cell" role="columnheader">Statut</div>
+                        <div class="list-cell" role="columnheader">Actions</div>
+                    </div>
+
+                    <div class="list-row" role="row">
+                        <div class="list-cell" role="cell">
+                            <div class="visit-datetime">
+                                <div class="visit-date">23 Oct 2025</div>
+                                <div class="visit-time">10:00 - 11:00</div>
+                            </div>
+                        </div>
+                        <div class="list-cell" role="cell">
+                            <div class="property-info">
+                                <div class="property-name">Villa moderne</div>
+                                <div class="property-location">Paris 16ème</div>
+                            </div>
+                        </div>
+                        <div class="list-cell" role="cell">
+                            <div class="client-info">
+                                <div class="client-name">M. Martin</div>
+                                <div class="client-contact">06 12 34 56 78</div>
+                            </div>
+                        </div>
+                        <div class="list-cell" role="cell">John Doe</div>
+                        <div class="list-cell" role="cell">
+                            <span class="status-badge status-scheduled">Planifiée</span>
+                        </div>
+                        <div class="list-cell" role="cell">
+                            <div class="action-buttons">
+                                <button class="action-btn" title="Modifier" onclick="editVisit('1')">
+                                    <span class="material-icons">edit</span>
+                                </button>
+                                <button class="action-btn" title="Annuler" onclick="cancelVisit('1')">
+                                    <span class="material-icons">close</span>
+                                </button>
+                                <button class="action-btn" title="Rapport" onclick="showReport('1')">
+                                    <span class="material-icons">description</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Autres visites dans la liste -->
+                </div>
+            </main>
+        </div>
+        <footer class="site-footer" role="contentinfo" aria-label="Pied de page">
+            <div class="footer-left">© 2025 ImmoPro — Tous droits réservés</div>
+            <div class="footer-links">
+                <a href="../client/mentions-legales.html">Mentions légales</a>
+                <a href="../client/privacy.html">Politique de confidentialité</a>
+                <a href="../client/contact.html">Contact</a>
+            </div>
+        </footer>
+    </div>
+    <!-- Modal de planification de visite -->
+    <div id="visit-modal" class="modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+        <div class="modal-overlay" onclick="closeVisitModal()"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2 id="modal-title">Planifier une visite</h2>
+                <button class="modal-close" onclick="closeVisitModal()" aria-label="Fermer">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+            <div class="modal-content">
+                <form id="visit-form" class="visit-form" novalidate>
+                    <!-- Section Rendez-vous -->
+                    <section class="form-section" aria-labelledby="appointment-info-title">
+                        <h3 id="appointment-info-title">Informations du rendez-vous</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="visit-date">Date *</label>
+                                <input type="date" id="visit-date" name="date" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="visit-time">Heure *</label>
+                                <input type="time" id="visit-time" name="time" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="visit-duration">Durée</label>
+                                <select id="visit-duration" name="duration">
+                                    <option value="30">30 minutes</option>
+                                    <option value="45">45 minutes</option>
+                                    <option value="60" selected>1 heure</option>
+                                    <option value="90">1 heure 30</option>
+                                    <option value="120">2 heures</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="visit-type">Type de visite *</label>
+                                <select id="visit-type" name="visit_type" required>
+                                    <option value="">Sélectionner</option>
+                                    <option value="first">Première visite</option>
+                                    <option value="second">Seconde visite</option>
+                                    <option value="virtual">Visite virtuelle</option>
+                                    <option value="expertise">Expertise</option>
+                                </select>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section Bien immobilier -->
+                    <section class="form-section" aria-labelledby="property-info-title">
+                        <h3 id="property-info-title">Bien immobilier</h3>
+                        <div class="property-search">
+                            <div class="search-input">
+                                <span class="material-icons">search</span>
+                                <input type="text" id="property-search" placeholder="Rechercher un bien par référence ou adresse...">
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section Client -->
+                    <section class="form-section" aria-labelledby="client-info-title">
+                        <h3 id="client-info-title">Client</h3>
+                        <div class="client-search">
+                            <div class="search-input">
+                                <span class="material-icons">search</span>
+                                <input type="text" id="client-search" placeholder="Rechercher un client par nom ou email...">
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section Agent -->
+                    <section class="form-section" aria-labelledby="agent-info-title">
+                        <h3 id="agent-info-title">Agent responsable</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="visit-agent">Agent assigné *</label>
+                                <select id="visit-agent" name="agent" required>
+                                    <option value="">Sélectionner un agent</option>
+                                    <option value="john-doe">John Doe</option>
+                                    <option value="jane-smith">Jane Smith</option>
+                                    <option value="mike-johnson">Mike Johnson</option>
+                                </select>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section Notes -->
+                    <section class="form-section" aria-labelledby="notes-info-title">
+                        <h3 id="notes-info-title">Notes & Instructions</h3>
+                        <div class="form-group">
+                            <label for="visit-notes">Notes internes</label>
+                            <textarea id="visit-notes" name="notes" rows="4" placeholder="Ajoutez des notes ou instructions particulières pour cette visite..."></textarea>
+                        </div>
+                    </section>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" onclick="closeVisitModal()">Annuler</button>
+                <button type="submit" class="btn-primary" form="visit-form">
+                    <span class="material-icons">event</span>
+                    Planifier la visite
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/script.js"></script>
+    <script src="../../js/admin_visites.js"></script>
+</body>
+
+</html>

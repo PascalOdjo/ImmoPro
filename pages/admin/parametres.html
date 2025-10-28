@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImmoPro - Paramètres du site</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/components.css">
+    <link rel="stylesheet" href="../../css/style_admin.css">
+    <link rel="stylesheet" href="../../css/style_admin_parametres.css">
+</head>
+
+<body>
+    <div class="sidebar" id="sidebar">
+        <div class="logo">
+            <div class="logo-icon"></div>
+            <span>ImmoPro</span>
+        </div>
+
+        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+            <span class="material-icons">menu</span>
+        </button>
+
+        <a href="dashboard.html" class="menu-item">
+            <span class="material-icons menu-icon">dashboard</span>
+            <span>Tableau de bord</span>
+        </a>
+
+        <a href="biens.html" class="menu-item">
+            <span class="material-icons menu-icon">home</span>
+            <span>Biens immobiliers</span>
+        </a>
+
+        <a href="clients.html" class="menu-item">
+            <span class="material-icons menu-icon">people</span>
+            <span>Clients</span>
+        </a>
+
+        <a href="visites.html" class="menu-item">
+            <span class="material-icons menu-icon">event</span>
+            <span>Visites</span>
+        </a>
+
+        <a href="messagerie.html" class="menu-item">
+            <span class="material-icons menu-icon">chat</span>
+            <span>Messages</span>
+        </a>
+
+        <a href="parametres.html" class="menu-item active">
+            <span class="material-icons menu-icon">settings</span>
+            <span>Paramètres</span>
+        </a>
+
+        <a href="#" class="logout" onclick="handleLogout(event)">
+            <span class="material-icons menu-icon">logout</span>
+            <span>Déconnexion</span>
+        </a>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <div class="search-bar">
+                <span class="material-icons search-icon">search</span>
+                <input type="text" placeholder="Rechercher...">
+            </div>
+
+            <div class="header-right">
+                <div class="notification-icon">
+                    <span class="material-icons">notifications</span>
+                </div>
+                <div class="user-profile">
+                    <div class="avatar"></div>
+                    <div class="user-info">
+                        <div class="user-name">John Doe</div>
+                        <div class="user-role">Administrateur</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <main class="settings-page" role="main" aria-label="Paramètres du site">
+                <header class="page-header">
+                    <h1>Paramètres du site</h1>
+                    <p class="subtitle">Configurez l'identité, les couleurs, le SEO et les mentions légales du site.</p>
+                </header>
+
+                <form id="site-settings-form" class="settings-form" novalidate>
+                    <section class="card" aria-labelledby="identity-title">
+                        <h2 id="identity-title">Identité du site</h2>
+                        <div class="card-body">
+                            <div class="form-grid">
+                                <div class="form-group logo-group">
+                                    <label for="site-logo">Logo du site</label>
+                                    <div class="logo-preview" id="logo-preview">
+                                        <img src="../../assets/images/logo-placeholder.png" alt="Aperçu du logo">
+                                    </div>
+                                    <input type="file" id="site-logo" accept="image/*" aria-label="Uploader le logo">
+                                    <small class="hint">Format conseillé : PNG (transparent), max 2MB.</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="site-name">Nom du site</label>
+                                    <input type="text" id="site-name" name="site_name" placeholder="Nom du site" value="ImmoPro">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="site-tagline">Slogan (facultatif)</label>
+                                    <input type="text" id="site-tagline" name="tagline" placeholder="Votre slogan">
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="card" aria-labelledby="colors-title">
+                        <h2 id="colors-title">Couleurs du thème</h2>
+                        <div class="card-body colors-body">
+                            <div class="color-item">
+                                <label for="color-primary">Couleur primaire</label>
+                                <input type="color" id="color-primary" name="color_primary" value="#1c3f60" aria-label="Couleur primaire">
+                                <div class="color-swatch" id="swatch-primary"></div>
+                            </div>
+
+                            <div class="color-item">
+                                <label for="color-secondary">Couleur secondaire</label>
+                                <input type="color" id="color-secondary" name="color_secondary" value="#f5f2ec" aria-label="Couleur secondaire">
+                                <div class="color-swatch" id="swatch-secondary"></div>
+                            </div>
+
+                            <div class="color-item">
+                                <label for="color-accent">Couleur d'accent</label>
+                                <input type="color" id="color-accent" name="color_accent" value="#ffc107" aria-label="Couleur d'accent">
+                                <div class="color-swatch" id="swatch-accent"></div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="card" aria-labelledby="seo-title">
+                        <h2 id="seo-title">SEO & Métadonnées</h2>
+                        <div class="card-body">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="meta-title">Titre de la page d'accueil (meta title)</label>
+                                    <input type="text" id="meta-title" name="meta_title" placeholder="Titre SEO" value="ImmoPro - Agence immobilière">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="meta-description">Meta description</label>
+                                    <textarea id="meta-description" name="meta_description" rows="3" placeholder="Description pour les moteurs de recherche"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="meta-keywords">Mots-clés (séparés par des virgules)</label>
+                                    <input type="text" id="meta-keywords" name="meta_keywords" placeholder="immobilier, appartement, maison, location">
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="card" aria-labelledby="legal-title">
+                        <h2 id="legal-title">Mentions légales</h2>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="mentions-legales">Texte des mentions légales</label>
+                                <textarea id="mentions-legales" name="mentions" rows="8" placeholder="Copiez ici vos mentions légales..."></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="privacy-policy">Politique de confidentialité (URL)</label>
+                                <input type="url" id="privacy-policy" name="privacy_policy" placeholder="https://votre-site.com/privacy">
+                            </div>
+                        </div>
+                    </section>
+
+                    <div class="form-actions">
+                        <button type="reset" class="btn-secondary">Réinitialiser</button>
+                        <button type="submit" class="btn-primary">Enregistrer les modifications</button>
+                    </div>
+                </form>
+            </main>
+        </div>
+
+        <footer class="site-footer" role="contentinfo" aria-label="Pied de page">
+            <div class="footer-left">© 2025 ImmoPro — Tous droits réservés</div>
+            <div class="footer-links">
+                <a href="../client/mentions-legales.html">Mentions légales</a>
+                <a href="../client/privacy.html">Politique de confidentialité</a>
+                <a href="../client/contact.html">Contact</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Preview logo and color swatches
+        (function() {
+            const logoInput = document.getElementById('site-logo');
+            const logoPreviewImg = document.querySelector('#logo-preview img');
+            if (logoInput) {
+                logoInput.addEventListener('change', (e) => {
+                    const file = e.target.files && e.target.files[0];
+                    if (!file) return;
+                    const url = URL.createObjectURL(file);
+                    logoPreviewImg.src = url;
+                });
+            }
+
+            const pairs = [
+                ['color-primary', 'swatch-primary'],
+                ['color-secondary', 'swatch-secondary'],
+                ['color-accent', 'swatch-accent']
+            ];
+            pairs.forEach(([inputId, swatchId]) => {
+                const input = document.getElementById(inputId);
+                const sw = document.getElementById(swatchId);
+                if (input && sw) {
+                    sw.style.backgroundColor = input.value;
+                    input.addEventListener('input', () => sw.style.backgroundColor = input.value);
+                }
+            });
+
+            // Form submit handler (placeholder)
+            const form = document.getElementById('site-settings-form');
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                // TODO: send via fetch to backend
+                alert('Paramètres sauvegardés (simulation)');
+            });
+        })();
+    </script>
+
+    <script src="../../js/script.js"></script>
+    <script src="../../js/admin_parametres.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImmoPro - Mes Biens</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/components.css">
+    <link rel="stylesheet" href="../../css/style_client.css">
+    <link rel="stylesheet" href="../../css/style_client_biens.css">
+</head>
+
+<body>
+    <div class="sidebar client-space" id="sidebar">
+        <div class="logo">
+            <div class="logo-icon"></div>
+            <span>ImmoPro</span>
+        </div>
+
+        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+            <span class="material-icons">menu</span>
+        </button>
+
+        <a href="dashboard.html" class="menu-item">
+            <span class="material-icons menu-icon">dashboard</span>
+            <span>Tableau de bord</span>
+        </a>
+
+        <a href="biens.html" class="menu-item active">
+            <span class="material-icons menu-icon">home</span>
+            <span>Mes biens</span>
+        </a>
+
+        <a href="favoris.html" class="menu-item">
+            <span class="material-icons menu-icon">favorite</span>
+            <span>Mes favoris</span>
+        </a>
+
+        <a href="visites.html" class="menu-item">
+            <span class="material-icons menu-icon">event</span>
+            <span>Mes visites</span>
+        </a>
+
+        <a href="messagerie.html" class="menu-item">
+            <span class="material-icons menu-icon">chat</span>
+            <span>Messagerie</span>
+        </a>
+
+        <a href="profil.html" class="menu-item">
+            <span class="material-icons menu-icon">person</span>
+            <span>Mon profil</span>
+        </a>
+
+        <a href="#" class="logout" onclick="handleLogout(event)">
+            <span class="material-icons menu-icon">logout</span>
+            <span>Déconnexion</span>
+        </a>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <div class="search-bar">
+                <span class="material-icons search-icon">search</span>
+                <input type="text" placeholder="Rechercher parmi mes biens...">
+            </div>
+
+            <div class="header-right">
+                <div class="notification-icon">
+                    <span class="material-icons">notifications</span>
+                    <span class="notification-badge">1</span>
+                </div>
+                <div class="user-profile">
+                    <div class="avatar"></div>
+                    <div class="user-info">
+                        <div class="user-name">Marie Dubois</div>
+                        <div class="user-role">Propriétaire</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Page Mes Biens -->
+            <div id="page-biens" class="page-biens active">
+                <div class="page-header">
+                    <h1 class="page-title">Mes Biens Immobiliers</h1>
+                    <div class="header-actions">
+                        <button class="btn-secondary" onclick="toggleView('list')">
+                            <span class="material-icons">view_list</span>
+                            <span>Liste</span>
+                        </button>
+                        <button class="btn-secondary active" onclick="toggleView('grid')">
+                            <span class="material-icons">view_module</span>
+                            <span>Grille</span>
+                        </button>
+                        <button class="btn-primary" onclick="showAddPropertyModal()">
+                            <span class="material-icons">add</span>
+                            <span>Ajouter un bien</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Statistiques des biens -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <span class="material-icons">home</span>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-label">Total des biens</div>
+                            <div class="stat-value">3</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <span class="material-icons">visibility</span>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-label">Vues totales</div>
+                            <div class="stat-value">1,247</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <span class="material-icons">favorite</span>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-label">Favoris reçus</div>
+                            <div class="stat-value">23</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <span class="material-icons">event</span>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-label">Visites planifiées</div>
+                            <div class="stat-value">7</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filtres et actions -->
+                <div class="filters-bar">
+                    <div class="filter-group">
+                        <label>Statut</label>
+                        <select class="filter-select">
+                            <option value="">Tous les statuts</option>
+                            <option value="online">En ligne</option>
+                            <option value="pending">En attente</option>
+                            <option value="sold">Vendu</option>
+                            <option value="rented">Loué</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Type</label>
+                        <select class="filter-select">
+                            <option value="">Tous les types</option>
+                            <option value="apartment">Appartement</option>
+                            <option value="house">Maison</option>
+                            <option value="studio">Studio</option>
+                            <option value="loft">Loft</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Prix min</label>
+                        <input type="number" class="filter-input" placeholder="0 €">
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Prix max</label>
+                        <input type="number" class="filter-input" placeholder="1 000 000 €">
+                    </div>
+
+                    <div class="filter-actions">
+                        <button class="btn-filter" onclick="applyFilters()">Filtrer</button>
+                        <button class="btn-filter secondary" onclick="resetFilters()">Réinitialiser</button>
+                    </div>
+                </div>
+
+                <!-- Liste des biens -->
+                <div class="properties-container">
+                    <!-- Vue grille -->
+                    <div id="properties-grid" class="properties-grid active">
+                        <div class="property-card-full" data-id="1">
+                            <div class="property-image-container">
+                                <img src="../../assets/images/bien_1.jpg" alt="Appartement T3" class="property-image">
+                                <div class="property-overlay">
+                                    <button class="overlay-btn" onclick="editProperty(1)" title="Modifier">
+                                        <span class="material-icons">edit</span>
+                                    </button>
+                                    <button class="overlay-btn" onclick="viewPropertyStats(1)" title="Statistiques">
+                                        <span class="material-icons">analytics</span>
+                                    </button>
+                                    <button class="overlay-btn" onclick="deleteProperty(1)" title="Supprimer">
+                                        <span class="material-icons">delete</span>
+                                    </button>
+                                </div>
+                                <div class="property-status">
+                                    <span class="status-badge status-online">En ligne</span>
+                                </div>
+                            </div>
+                            <div class="property-info">
+                                <div class="property-title">Appartement T3 moderne</div>
+                                <div class="property-location">
+                                    <span class="material-icons">location_on</span>
+                                    <span>Paris 15ème, 75015</span>
+                                </div>
+                                <div class="property-details">
+                                    <span class="detail-item">
+                                        <span class="material-icons">bed</span>
+                                    <span>3 chambres</span>
+                                    </span>
+                                    <span class="detail-item">
+                                        <span class="material-icons">bathtub</span>
+                                    <span>2 salles de bain</span>
+                                    </span>
+                                    <span class="detail-item">
+                                        <span class="material-icons">square_foot</span>
+                                    <span>75 m²</span>
+                                    </span>
+                                </div>
+                                <div class="property-price">580 000 €</div>
+                                <div class="property-stats">
+                                    <div class="stat-item">
+                                        <span class="material-icons">visibility</span>
+                                        <span>156 vues</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="material-icons">favorite</span>
+                                        <span>12 favoris</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="material-icons">event</span>
+                                        <span>3 visites</span>
+                                    </div>
+                                </div>
+                                <div class="property-actions">
+                                    <button class="action-btn primary" onclick="viewPropertyDetails(1)">
+                                        <span class="material-icons">visibility</span>
+                                        <span>Voir</span>
+                                    </button>
+                                    <button class="action-btn secondary" onclick="editProperty(1)">
+                                        <span class="material-icons">edit</span>
+                                        <span>Modifier</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="property-card-full" data-id="2">
+                            <div class="property-image-container">
+                                <img src="../../assets/images/bien_2.jpg" alt="Maison familiale" class="property-image">
+                                <div class="property-overlay">
+                                    <button class="overlay-btn" onclick="editProperty(2)" title="Modifier">
+                                        <span class="material-icons">edit</span>
+                                    </button>
+                                    <button class="overlay-btn" onclick="viewPropertyStats(2)" title="Statistiques">
+                                        <span class="material-icons">analytics</span>
+                                    </button>
+                                    <button class="overlay-btn" onclick="deleteProperty(2)" title="Supprimer">
+                                        <span class="material-icons">delete</span>
+                                    </button>
+                                </div>
+                                <div class="property-status">
+                                    <span class="status-badge status-pending">En attente</span>
+                                </div>
+                            </div>
+                            <div class="property-info">
+                                <div class="property-title">Maison familiale avec jardin</div>
+                                <div class="property-location">
+                                    <span class="material-icons">location_on</span>
+                                    <span>Neuilly-sur-Seine, 92200</span>
+                                </div>
+                                <div class="property-details">
+                                    <span class="detail-item">
+                                        <span class="material-icons">bed</span>
+                                    <span>4 chambres</span>
+                                    </span>
+                                    <span class="detail-item">
+                                        <span class="material-icons">bathtub</span>
+                                    <span>3 salles de bain</span>
+                                    </span>
+                                    <span class="detail-item">
+                                        <span class="material-icons">square_foot</span>
+                                    <span>140 m²</span>
+                                    </span>
+                                </div>
+                                <div class="property-price">850 000 €</div>
+                                <div class="property-stats">
+                                    <div class="stat-item">
+                                        <span class="material-icons">visibility</span>
+                                        <span>89 vues</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="material-icons">favorite</span>
+                                        <span>7 favoris</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="material-icons">event</span>
+                                        <span>1 visite</span>
+                                    </div>
+                                </div>
+                                <div class="property-actions">
+                                    <button class="action-btn primary" onclick="viewPropertyDetails(2)">
+                                        <span class="material-icons">visibility</span>
+                                        <span>Voir</span>
+                                    </button>
+                                    <button class="action-btn secondary" onclick="editProperty(2)">
+                                        <span class="material-icons">edit</span>
+                                        <span>Modifier</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="property-card-full" data-id="3">
+                            <div class="property-image-container">
+                                <img src="../../assets/images/bien_3.jpg" alt="Studio moderne" class="property-image">
+                                <div class="property-overlay">
+                                    <button class="overlay-btn" onclick="editProperty(3)" title="Modifier">
+                                        <span class="material-icons">edit</span>
+                                    </button>
+                                    <button class="overlay-btn" onclick="viewPropertyStats(3)" title="Statistiques">
+                                        <span class="material-icons">analytics</span>
+                                    </button>
+                                    <button class="overlay-btn" onclick="deleteProperty(3)" title="Supprimer">
+                                        <span class="material-icons">delete</span>
+                                    </button>
+                                </div>
+                                <div class="property-status">
+                                    <span class="status-badge status-sold">Vendu</span>
+                                </div>
+                            </div>
+                            <div class="property-info">
+                                <div class="property-title">Studio moderne centre-ville</div>
+                                <div class="property-location">
+                                    <span class="material-icons">location_on</span>
+                                    <span>Paris 4ème, 75004</span>
+                                </div>
+                                <div class="property-details">
+                                    <span class="detail-item">
+                                        <span class="material-icons">bed</span>
+                                    <span>1 chambre</span>
+                                    </span>
+                                    <span class="detail-item">
+                                        <span class="material-icons">bathtub</span>
+                                    <span>1 salle de bain</span>
+                                    </span>
+                                    <span class="detail-item">
+                                        <span class="material-icons">square_foot</span>
+                                    <span>35 m²</span>
+                                    </span>
+                                </div>
+                                <div class="property-price">420 000 €</div>
+                                <div class="property-stats">
+                                    <div class="stat-item">
+                                        <span class="material-icons">visibility</span>
+                                        <span>234 vues</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="material-icons">favorite</span>
+                                        <span>18 favoris</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="material-icons">event</span>
+                                        <span>5 visites</span>
+                                    </div>
+                                </div>
+                                <div class="property-actions">
+                                    <button class="action-btn primary" onclick="viewPropertyDetails(3)">
+                                        <span class="material-icons">visibility</span>
+                                        <span>Voir</span>
+                                    </button>
+                                    <button class="action-btn secondary" onclick="editProperty(3)">
+                                        <span class="material-icons">edit</span>
+                                        <span>Modifier</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vue liste -->
+                    <div id="properties-list" class="properties-list">
+                        <div class="properties-table-container">
+                            <table class="properties-table">
+                                <thead>
+                                    <tr>
+                                        <th>Bien</th>
+                                        <th>Localisation</th>
+                                        <th>Type</th>
+                                        <th>Prix</th>
+                                        <th>Statut</th>
+                                        <th>Vues</th>
+                                        <th>Favoris</th>
+                                        <th>Visites</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr data-id="1">
+                                        <td>
+                                            <div class="property-cell">
+                                                <img src="../../assets/images/bien_1.jpg" alt="Appartement T3" class="property-thumb">
+                                                <div class="property-cell-info">
+                                                    <div class="property-cell-title">Appartement T3 moderne</div>
+                                                    <div class="property-cell-details">3 chambres • 75 m²</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>Paris 15ème</td>
+                                        <td>Appartement</td>
+                                        <td class="price-cell">580 000 €</td>
+                                        <td><span class="status-badge status-online">En ligne</span></td>
+                                        <td>156</td>
+                                        <td>12</td>
+                                        <td>3</td>
+                                        <td>
+                                            <div class="table-actions">
+                                                <button class="table-btn" onclick="viewPropertyDetails(1)" title="Voir">
+                                                    <span class="material-icons">visibility</span>
+                                                </button>
+                                                <button class="table-btn" onclick="editProperty(1)" title="Modifier">
+                                                    <span class="material-icons">edit</span>
+                                                </button>
+                                                <button class="table-btn" onclick="viewPropertyStats(1)" title="Statistiques">
+                                                    <span class="material-icons">analytics</span>
+                                                </button>
+                                                <button class="table-btn delete" onclick="deleteProperty(1)" title="Supprimer">
+                                                    <span class="material-icons">delete</span>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr data-id="2">
+                                        <td>
+                                            <div class="property-cell">
+                                                <img src="../../assets/images/bien_2.jpg" alt="Maison familiale" class="property-thumb">
+                                                <div class="property-cell-info">
+                                                    <div class="property-cell-title">Maison familiale avec jardin</div>
+                                                    <div class="property-cell-details">4 chambres • 140 m²</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>Neuilly-sur-Seine</td>
+                                        <td>Maison</td>
+                                        <td class="price-cell">850 000 €</td>
+                                        <td><span class="status-badge status-pending">En attente</span></td>
+                                        <td>89</td>
+                                        <td>7</td>
+                                        <td>1</td>
+                                        <td>
+                                            <div class="table-actions">
+                                                <button class="table-btn" onclick="viewPropertyDetails(2)" title="Voir">
+                                                    <span class="material-icons">visibility</span>
+                                                </button>
+                                                <button class="table-btn" onclick="editProperty(2)" title="Modifier">
+                                                    <span class="material-icons">edit</span>
+                                                </button>
+                                                <button class="table-btn" onclick="viewPropertyStats(2)" title="Statistiques">
+                                                    <span class="material-icons">analytics</span>
+                                                </button>
+                                                <button class="table-btn delete" onclick="deleteProperty(2)" title="Supprimer">
+                                                    <span class="material-icons">delete</span>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr data-id="3">
+                                        <td>
+                                            <div class="property-cell">
+                                                <img src="../../assets/images/bien_3.jpg" alt="Studio moderne" class="property-thumb">
+                                                <div class="property-cell-info">
+                                                    <div class="property-cell-title">Studio moderne centre-ville</div>
+                                                    <div class="property-cell-details">1 chambre • 35 m²</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>Paris 4ème</td>
+                                        <td>Studio</td>
+                                        <td class="price-cell">420 000 €</td>
+                                        <td><span class="status-badge status-sold">Vendu</span></td>
+                                        <td>234</td>
+                                        <td>18</td>
+                                        <td>5</td>
+                                        <td>
+                                            <div class="table-actions">
+                                                <button class="table-btn" onclick="viewPropertyDetails(3)" title="Voir">
+                                                    <span class="material-icons">visibility</span>
+                                                </button>
+                                                <button class="table-btn" onclick="editProperty(3)" title="Modifier">
+                                                    <span class="material-icons">edit</span>
+                                                </button>
+                                                <button class="table-btn" onclick="viewPropertyStats(3)" title="Statistiques">
+                                                    <span class="material-icons">analytics</span>
+                                                </button>
+                                                <button class="table-btn delete" onclick="deleteProperty(3)" title="Supprimer">
+                                                    <span class="material-icons">delete</span>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="site-footer" role="contentinfo" aria-label="Pied de page">
+            <div class="footer-left">© 2025 ImmoPro — Tous droits réservés</div>
+            <div class="footer-links">
+                <a href="../auth/mentions-legales.html">Mentions légales</a>
+                <a href="../auth/privacy.html">Politique de confidentialité</a>
+                <a href="../auth/contact.html">Contact</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modal d'ajout de bien -->
+    <div id="add-property-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Ajouter un nouveau bien</h2>
+                <button class="modal-close" onclick="closeAddPropertyModal()">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="add-property-form">
+                    <div class="form-group">
+                        <label for="property-title">Titre du bien</label>
+                        <input type="text" id="property-title" name="title" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="property-type">Type de bien</label>
+                            <select id="property-type" name="type" required>
+                                <option value="">Sélectionner un type</option>
+                                <option value="apartment">Appartement</option>
+                                <option value="house">Maison</option>
+                                <option value="studio">Studio</option>
+                                <option value="loft">Loft</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="property-price">Prix (€)</label>
+                            <input type="number" id="property-price" name="price" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="property-rooms">Nombre de chambres</label>
+                            <input type="number" id="property-rooms" name="rooms" min="1" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="property-area">Surface (m²)</label>
+                            <input type="number" id="property-area" name="area" min="1" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="property-location">Adresse</label>
+                        <input type="text" id="property-location" name="location" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="property-description">Description</label>
+                        <textarea id="property-description" name="description" rows="4"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="property-photos">Photos</label>
+                        <input type="file" id="property-photos" name="photos" multiple accept="image/*">
+                        <div class="file-upload-hint">Glissez-déposez vos photos ou cliquez pour sélectionner</div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" onclick="closeAddPropertyModal()">Annuler</button>
+                <button type="button" class="btn-primary" onclick="saveProperty()">Ajouter le bien</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/script.js"></script>
+    <script src="../../js/client_biens.js"></script>
+</body>
+
+</html>

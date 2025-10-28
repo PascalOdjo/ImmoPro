@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImmoPro - Planifier une visite</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/components.css">
+    <link rel="stylesheet" href="../../css/style_admin.css">
+    <link rel="stylesheet" href="../../css/style_admin_visite_form.css">
+</head>
+
+<body>
+    <div class="sidebar" id="sidebar">
+        <div class="logo">
+            <div class="logo-icon"></div>
+            <span>ImmoPro</span>
+        </div>
+
+        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+            <span class="material-icons">menu</span>
+        </button>
+
+        <a href="dashboard.html" class="menu-item">
+            <span class="material-icons menu-icon">dashboard</span>
+            <span>Tableau de bord</span>
+        </a>
+
+        <a href="biens.html" class="menu-item">
+            <span class="material-icons menu-icon">home</span>
+            <span>Biens immobiliers</span>
+        </a>
+
+        <a href="clients.html" class="menu-item">
+            <span class="material-icons menu-icon">people</span>
+            <span>Clients</span>
+        </a>
+
+        <a href="visites.html" class="menu-item active">
+            <span class="material-icons menu-icon">event</span>
+            <span>Visites</span>
+        </a>
+
+        <a href="messagerie.html" class="menu-item">
+            <span class="material-icons menu-icon">chat</span>
+            <span>Messages</span>
+        </a>
+
+        <a href="parametres.html" class="menu-item">
+            <span class="material-icons menu-icon">settings</span>
+            <span>Paramètres</span>
+        </a>
+
+        <a href="#" class="logout" onclick="handleLogout(event)">
+            <span class="material-icons menu-icon">logout</span>
+            <span>Déconnexion</span>
+        </a>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <button onclick="history.back()" class="back-button" aria-label="Retour">
+                <span class="material-icons">arrow_back</span>
+            </button>
+            <h1>Planifier une visite</h1>
+            <div class="header-right">
+                <div class="user-profile">
+                    <div class="avatar"></div>
+                    <div class="user-info">
+                        <div class="user-name">John Doe</div>
+                        <div class="user-role">Agent immobilier</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <form id="visit-form" class="visit-form" novalidate>
+                <!-- Section Rendez-vous -->
+                <section class="form-section" aria-labelledby="appointment-info-title">
+                    <h2 id="appointment-info-title">Informations du rendez-vous</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="visit-date">Date *</label>
+                            <input type="date" id="visit-date" name="date" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="visit-time">Heure *</label>
+                            <input type="time" id="visit-time" name="time" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="visit-duration">Durée</label>
+                            <select id="visit-duration" name="duration">
+                                <option value="30">30 minutes</option>
+                                <option value="45">45 minutes</option>
+                                <option value="60" selected>1 heure</option>
+                                <option value="90">1 heure 30</option>
+                                <option value="120">2 heures</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="visit-type">Type de visite *</label>
+                            <select id="visit-type" name="visit_type" required>
+                                <option value="">Sélectionner</option>
+                                <option value="first">Première visite</option>
+                                <option value="second">Seconde visite</option>
+                                <option value="virtual">Visite virtuelle</option>
+                                <option value="expertise">Expertise</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section Bien immobilier -->
+                <section class="form-section" aria-labelledby="property-info-title">
+                    <h2 id="property-info-title">Bien immobilier</h2>
+                    <div class="property-search">
+                        <div class="search-input">
+                            <span class="material-icons">search</span>
+                            <input type="text" id="property-search" placeholder="Rechercher un bien par référence ou adresse...">
+                        </div>
+                        <div class="search-results" id="property-results">
+                            <!-- Les résultats de recherche s'afficheront ici -->
+                        </div>
+                    </div>
+
+                    <div class="selected-property" id="selected-property">
+                        <div class="property-preview">
+                            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=400&h=300&fit=crop" alt="Villa moderne" class="property-image">
+                            <div class="property-details">
+                                <h3>Villa moderne avec piscine</h3>
+                                <p>Paris 16ème • 5 chambres • 180 m²</p>
+                                <p class="property-price">2 500 000 €</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section Client -->
+                <section class="form-section" aria-labelledby="client-info-title">
+                    <h2 id="client-info-title">Client</h2>
+                    <div class="client-search">
+                        <div class="search-input">
+                            <span class="material-icons">search</span>
+                            <input type="text" id="client-search" placeholder="Rechercher un client par nom ou email...">
+                        </div>
+                        <button type="button" class="btn-secondary" onclick="showClientForm()">
+                            <span class="material-icons">person_add</span>
+                            Nouveau client
+                        </button>
+                    </div>
+
+                    <div class="selected-client" id="selected-client">
+                        <div class="client-preview">
+                            <div class="client-avatar">
+                                <span class="material-icons">account_circle</span>
+                            </div>
+                            <div class="client-details">
+                                <h3>M. Martin Thomas</h3>
+                                <p>thomas.martin@email.com</p>
+                                <p>06 12 34 56 78</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section Agent -->
+                <section class="form-section" aria-labelledby="agent-info-title">
+                    <h2 id="agent-info-title">Agent responsable</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="visit-agent">Agent assigné *</label>
+                            <select id="visit-agent" name="agent" required>
+                                <option value="">Sélectionner un agent</option>
+                                <option value="john-doe">John Doe</option>
+                                <option value="jane-smith">Jane Smith</option>
+                                <option value="mike-johnson">Mike Johnson</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section Notes -->
+                <section class="form-section" aria-labelledby="notes-info-title">
+                    <h2 id="notes-info-title">Notes & Instructions</h2>
+                    <div class="form-group full-width">
+                        <label for="visit-notes">Notes internes</label>
+                        <textarea id="visit-notes" name="notes" rows="4" placeholder="Ajoutez des notes ou instructions particulières pour cette visite..."></textarea>
+                    </div>
+                </section>
+
+                <!-- Section Notification -->
+                <section class="form-section" aria-labelledby="notification-info-title">
+                    <h2 id="notification-info-title">Notifications</h2>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="notify_client" checked>
+                            <span class="checkbox-label">Envoyer une confirmation au client</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="notify_agent" checked>
+                            <span class="checkbox-label">Notifier l'agent responsable</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="add_calendar">
+                            <span class="checkbox-label">Ajouter au calendrier</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="reminder">
+                            <span class="checkbox-label">Définir un rappel (24h avant)</span>
+                        </label>
+                    </div>
+                </section>
+
+                <!-- Barre d'action -->
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="history.back()">Annuler</button>
+                    <button type="submit" class="btn-primary">
+                        <span class="material-icons">event</span>
+                        Planifier la visite
+                    </button>
+                </div>
+            </form>
+        </div>
+        <footer class="site-footer" role="contentinfo" aria-label="Pied de page">
+            <div class="footer-left">© 2025 ImmoPro — Tous droits réservés</div>
+            <div class="footer-links">
+                <a href="../client/mentions-legales.html">Mentions légales</a>
+                <a href="../client/privacy.html">Politique de confidentialité</a>
+                <a href="../client/contact.html">Contact</a>
+            </div>
+        </footer>
+    </div>
+    <script src="../../js/script.js"></script>
+    <script src="../../js/admin_visite_form.js"></script>
+</body>
+
+</html>

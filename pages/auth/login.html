@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ImmoPro - Connexion</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="../../css/components.css" />
+        <link rel="stylesheet" href="../../css/style_auth.css" />
+    </head>
+    <body>
+        <div class="auth-container">
+            <div class="auth-content">
+                <div class="auth-header">
+                    <div class="logo">
+                        <div class="logo-icon"></div>
+                        <span>ImmoPro</span>
+                    </div>
+                    <h1>Connexion</h1>
+                    <p class="auth-subtitle">
+                        Bienvenue ! Connectez-vous pour accéder à votre espace.
+                    </p>
+                </div>
+
+                <form id="login-form" class="auth-form" novalidate>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <div class="input-with-icon">
+                            <span class="material-icons">email</span>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                required
+                                placeholder="exemple@email.com"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="password-label">
+                            <label for="password">Mot de passe</label>
+                            <a
+                                href="reset-password.html"
+                                class="forgot-password"
+                                >Mot de passe oublié ?</a
+                            >
+                        </div>
+                        <div class="input-with-icon">
+                            <span class="material-icons">lock</span>
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                required
+                                placeholder="Votre mot de passe"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-item">
+                            <input
+                                type="checkbox"
+                                name="remember"
+                                id="remember"
+                            />
+                            <span class="checkbox-label"
+                                >Se souvenir de moi</span
+                            >
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-primary btn-large">
+                        <span class="material-icons">login</span>
+                        Se connecter
+                    </button>
+                </form>
+
+                <div class="auth-footer">
+                    <p>
+                        Vous n'avez pas de compte ?
+                        <a href="register.html">Créer un compte</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <script src="../../js/auth.js"></script>
+    </body>
+</html>

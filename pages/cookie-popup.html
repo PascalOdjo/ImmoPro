@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImmoPro - Cookies et RGPD</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/components_modals.css">
+    <link rel="stylesheet" href="../css/components_toasts.css">
+    <link rel="stylesheet" href="../css/components_loaders.css">
+    <link rel="stylesheet" href="../css/style_cookie_popup.css">
+</head>
+
+<body>
+    <!-- Cookie Banner -->
+    <div id="cookie-banner" class="cookie-banner">
+        <div class="cookie-content">
+            <div class="cookie-icon">
+                <span class="material-icons">cookie</span>
+            </div>
+            <div class="cookie-text">
+                <h3>🍪 Cookies et Confidentialité</h3>
+                <p>Nous utilisons des cookies pour améliorer votre expérience sur notre site, analyser le trafic et personnaliser le contenu. En continuant à naviguer, vous acceptez notre utilisation des cookies.</p>
+                <div class="cookie-links">
+                    <a href="#" onclick="showCookieSettings()">Paramètres</a>
+                    <a href="#" onclick="showPrivacyPolicy()">Politique de confidentialité</a>
+                </div>
+            </div>
+            <div class="cookie-actions">
+                <button class="btn-cookie btn-accept-all" onclick="acceptAllCookies()">
+                    <span class="material-icons">check</span>
+                    <span>Accepter tout</span>
+                </button>
+                <button class="btn-cookie btn-accept-necessary" onclick="acceptNecessaryCookies()">
+                    <span>Nécessaires seulement</span>
+                </button>
+                <button class="btn-cookie btn-customize" onclick="showCookieSettings()">
+                    <span class="material-icons">settings</span>
+                    <span>Personnaliser</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Paramètres Cookies -->
+    <div id="cookie-settings-modal" class="modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2>Paramètres des Cookies</h2>
+                <button class="modal-close" onclick="closeCookieSettings()">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="cookie-settings-content">
+                    <div class="cookie-intro">
+                        <p>Nous utilisons différents types de cookies pour améliorer votre expérience sur notre site. Vous pouvez choisir quels cookies accepter.</p>
+                    </div>
+
+                    <div class="cookie-categories">
+                        <!-- Cookies Nécessaires -->
+                        <div class="cookie-category">
+                            <div class="category-header">
+                                <div class="category-info">
+                                    <h3>Cookies Nécessaires</h3>
+                                    <p>Ces cookies sont essentiels au fonctionnement du site et ne peuvent pas être désactivés.</p>
+                                </div>
+                                <label class="toggle-switch disabled">
+                                    <input type="checkbox" checked disabled>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="category-details">
+                                <ul>
+                                    <li>Authentification utilisateur</li>
+                                    <li>Préférences de langue</li>
+                                    <li>Données de session</li>
+                                    <li>Sécurité du site</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Cookies Fonctionnels -->
+                        <div class="cookie-category">
+                            <div class="category-header">
+                                <div class="category-info">
+                                    <h3>Cookies Fonctionnels</h3>
+                                    <p>Ces cookies améliorent les fonctionnalités du site et votre expérience utilisateur.</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="functional-cookies" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="category-details">
+                                <ul>
+                                    <li>Préférences d'affichage</li>
+                                    <li>Thème sombre/clair</li>
+                                    <li>Paramètres de notification</li>
+                                    <li>Historique de navigation</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Cookies Analytiques -->
+                        <div class="cookie-category">
+                            <div class="category-header">
+                                <div class="category-info">
+                                    <h3>Cookies Analytiques</h3>
+                                    <p>Ces cookies nous aident à comprendre comment vous utilisez notre site.</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="analytics-cookies" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="category-details">
+                                <ul>
+                                    <li>Statistiques de visite</li>
+                                    <li>Pages les plus consultées</li>
+                                    <li>Temps passé sur le site</li>
+                                    <li>Sources de trafic</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Cookies Marketing -->
+                        <div class="cookie-category">
+                            <div class="category-header">
+                                <div class="category-info">
+                                    <h3>Cookies Marketing</h3>
+                                    <p>Ces cookies sont utilisés pour vous proposer des publicités personnalisées.</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="marketing-cookies">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="category-details">
+                                <ul>
+                                    <li>Publicités ciblées</li>
+                                    <li>Suivi des conversions</li>
+                                    <li>Réseaux sociaux</li>
+                                    <li>Partenaires publicitaires</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cookie-info">
+                        <h4>Informations supplémentaires</h4>
+                        <p>Vous pouvez modifier vos préférences à tout moment en cliquant sur l'icône des paramètres en bas de la page.</p>
+                        <p>Pour plus d'informations, consultez notre <a href="#" onclick="showPrivacyPolicy()">Politique de confidentialité</a>.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" onclick="closeCookieSettings()">Annuler</button>
+                <button type="button" class="btn-primary" onclick="saveCookieSettings()">Sauvegarder</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Politique de Confidentialité -->
+    <div id="privacy-policy-modal" class="modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2>Politique de Confidentialité</h2>
+                <button class="modal-close" onclick="closePrivacyPolicy()">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="privacy-content">
+                    <div class="privacy-section">
+                        <h3>1. Collecte des données</h3>
+                        <p>Nous collectons les données personnelles que vous nous fournissez volontairement lors de votre inscription et de votre utilisation de nos services.</p>
+                        <ul>
+                            <li>Nom et prénom</li>
+                            <li>Adresse email</li>
+                            <li>Numéro de téléphone</li>
+                            <li>Adresse postale</li>
+                            <li>Préférences immobilières</li>
+                        </ul>
+                    </div>
+
+                    <div class="privacy-section">
+                        <h3>2. Utilisation des données</h3>
+                        <p>Vos données sont utilisées pour :</p>
+                        <ul>
+                            <li>Fournir nos services immobiliers</li>
+                            <li>Personnaliser votre expérience</li>
+                            <li>Vous contacter concernant nos offres</li>
+                            <li>Améliorer nos services</li>
+                            <li>Respecter nos obligations légales</li>
+                        </ul>
+                    </div>
+
+                    <div class="privacy-section">
+                        <h3>3. Partage des données</h3>
+                        <p>Nous ne vendons jamais vos données personnelles. Nous pouvons partager vos données uniquement avec :</p>
+                        <ul>
+                            <li>Nos agents immobiliers partenaires</li>
+                            <li>Nos prestataires de services (avec votre consentement)</li>
+                            <li>Les autorités légales (si requis par la loi)</li>
+                        </ul>
+                    </div>
+
+                    <div class="privacy-section">
+                        <h3>4. Vos droits</h3>
+                        <p>Conformément au RGPD, vous avez le droit de :</p>
+                        <ul>
+                            <li>Accéder à vos données</li>
+                            <li>Rectifier vos données</li>
+                            <li>Supprimer vos données</li>
+                            <li>Limiter le traitement</li>
+                            <li>Portabilité des données</li>
+                            <li>Vous opposer au traitement</li>
+                        </ul>
+                    </div>
+
+                    <div class="privacy-section">
+                        <h3>5. Sécurité</h3>
+                        <p>Nous mettons en place des mesures de sécurité appropriées pour protéger vos données contre l'accès non autorisé, la modification, la divulgation ou la destruction.</p>
+                    </div>
+
+                    <div class="privacy-section">
+                        <h3>6. Contact</h3>
+                        <p>Pour toute question concernant cette politique de confidentialité, contactez-nous :</p>
+                        <ul>
+                            <li>Email : privacy@immopro.fr</li>
+                            <li>Téléphone : 01 23 45 67 89</li>
+                            <li>Adresse : 123 rue de l'Immobilier, 75001 Paris</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-primary" onclick="closePrivacyPolicy()">Fermer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bouton Paramètres Cookies (flottant) -->
+    <div id="cookie-settings-button" class="cookie-settings-button" onclick="showCookieSettings()">
+        <span class="material-icons">cookie</span>
+    </div>
+
+    <script src="../js/cookie_popup.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page non trouvée - ImmoPro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style_error_pages.css">
+</head>
+
+<body>
+    <div class="error-container">
+        <div class="error-content">
+            <!-- Animation 404 -->
+            <div class="error-animation">
+                <div class="error-number">404</div>
+                <div class="error-icon">
+                    <span class="material-icons">home_work</span>
+                </div>
+            </div>
+
+            <!-- Contenu de l'erreur -->
+            <div class="error-text">
+                <h1>Page non trouvée</h1>
+                <p>Désolé, la page que vous recherchez n'existe pas ou a été déplacée.</p>
+                <p>Il semble que cette propriété ne soit plus disponible...</p>
+            </div>
+
+            <!-- Actions -->
+            <div class="error-actions">
+                <button class="btn-primary" onclick="goHome()">
+                    <span class="material-icons">home</span>
+                    <span>Retour à l'accueil</span>
+                </button>
+                <button class="btn-secondary" onclick="goBack()">
+                    <span class="material-icons">arrow_back</span>
+                    <span>Page précédente</span>
+                </button>
+                <button class="btn-secondary" onclick="searchProperties()">
+                    <span class="material-icons">search</span>
+                    <span>Rechercher des biens</span>
+                </button>
+            </div>
+
+            <!-- Suggestions -->
+            <div class="error-suggestions">
+                <h3>Que souhaitez-vous faire ?</h3>
+                <div class="suggestions-grid">
+                    <div class="suggestion-card" onclick="goToProperties()">
+                        <span class="material-icons">home</span>
+                        <h4>Voir nos biens</h4>
+                        <p>Découvrez notre sélection de propriétés</p>
+                    </div>
+                    <div class="suggestion-card" onclick="goToContact()">
+                        <span class="material-icons">contact_support</span>
+                        <h4>Nous contacter</h4>
+                        <p>Notre équipe est là pour vous aider</p>
+                    </div>
+                    <div class="suggestion-card" onclick="goToAbout()">
+                        <span class="material-icons">info</span>
+                        <h4>À propos</h4>
+                        <p>En savoir plus sur ImmoPro</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recherche rapide -->
+            <div class="error-search">
+                <h3>Recherche rapide</h3>
+                <div class="search-box">
+                    <span class="material-icons search-icon">search</span>
+                    <input type="text" placeholder="Rechercher un bien, une ville..." id="quick-search">
+                    <button class="search-btn" onclick="performQuickSearch()">
+                        <span class="material-icons">search</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="error-footer">
+            <p>© 2025 ImmoPro — Tous droits réservés</p>
+            <div class="footer-links">
+                <a href="#" onclick="goToHelp()">Aide</a>
+                <a href="#" onclick="goToContact()">Contact</a>
+                <a href="#" onclick="goToPrivacy()">Confidentialité</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/error_pages.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,350 @@
+/* Page Clients */
+
+
+/* Police Poppins pour tous les éléments de formulaire */
+
+input,
+button,
+textarea,
+select {
+    font-family: "Poppins", sans-serif;
+}
+
+.page-clients {
+    display: block;
+    width: 100%;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.page-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.add-btn {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: white;
+    background-color: var(--primary-blue);
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.add-btn:hover {
+    background-color: var(--link-hover);
+}
+
+
+/* Filtres */
+
+.filters-bar {
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    margin-bottom: 25px;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 150px;
+}
+
+.filter-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.filter-select,
+.filter-input {
+    padding: 10px 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: "Poppins", sans-serif;
+    background-color: white;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.filter-select:hover,
+.filter-input:hover {
+    border-color: var(--primary-blue-light);
+}
+
+.filter-select:focus,
+.filter-input:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+}
+
+.filter-actions {
+    display: flex;
+    gap: 10px;
+    margin-left: auto;
+}
+
+.btn-filter {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: "Poppins", sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-filter.btn-primary {
+    background-color: var(--primary-blue);
+    color: white;
+}
+
+.btn-filter.btn-primary:hover {
+    background-color: var(--link-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-filter.btn-secondary {
+    background-color: var(--accent-beige-light);
+    color: var(--primary-blue);
+}
+
+.btn-filter.btn-secondary:hover {
+    background-color: var(--accent-beige);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-filter:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.btn-filter .material-icons {
+    font-size: 16px;
+}
+
+
+/* Cartes clients */
+
+.clients-list {
+    display: grid;
+    gap: 20px;
+}
+
+.client-card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.3s;
+}
+
+.client-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.client-info {
+    display: flex;
+    gap: 16px;
+    flex: 2;
+}
+
+.client-avatar {
+    width: 48px;
+    height: 48px;
+    background-color: var(--accent-beige-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.client-avatar .material-icons {
+    font-size: 32px;
+    color: var(--primary-blue);
+}
+
+.client-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.client-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.client-meta {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.client-type {
+    color: var(--primary-blue);
+    font-weight: 500;
+}
+
+.client-id {
+    color: var(--text-secondary);
+    font-size: 13px;
+}
+
+.client-contact {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.client-contact .material-icons {
+    font-size: 16px;
+    color: var(--text-secondary);
+}
+
+.client-activity {
+    display: flex;
+    gap: 24px;
+    flex: 1;
+    justify-content: flex-end;
+}
+
+.activity-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+}
+
+.activity-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.activity-value {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.client-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.action-btn {
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    transition: all 0.3s;
+}
+
+.action-btn:hover {
+    background-color: var(--accent-beige-light);
+    color: var(--primary-blue);
+}
+
+.action-btn .material-icons {
+    font-size: 18px;
+}
+
+
+/* Status badges */
+
+.status-badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.status-active {
+    background-color: rgba(60, 161, 140, 0.1);
+    color: var(--success);
+}
+
+.status-pending {
+    background-color: rgba(212, 166, 90, 0.1);
+    color: var(--warning);
+}
+
+.status-inactive {
+    background-color: rgba(192, 91, 77, 0.1);
+    color: var(--error);
+}
+
+
+/* Responsive */
+
+@media (max-width: 1200px) {
+    .client-card {
+        flex-direction: column;
+        gap: 16px;
+    }
+    .client-activity {
+        justify-content: flex-start;
+        padding-left: 64px;
+    }
+    .client-actions {
+        padding-left: 64px;
+    }
+}
+
+@media (max-width: 768px) {
+    .filters-bar {
+        flex-direction: column;
+    }
+    .filter-actions {
+        width: 100%;
+        margin-left: 0;
+    }
+    .client-activity {
+        padding-left: 0;
+        overflow-x: auto;
+    }
+    .client-actions {
+        padding-left: 0;
+    }
+}

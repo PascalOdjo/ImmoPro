@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImmoPro - Mes Visites</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/components.css">
+    <link rel="stylesheet" href="../../css/style_client.css">
+    <link rel="stylesheet" href="../../css/style_client_visites.css">
+</head>
+
+<body>
+    <div class="sidebar client-space" id="sidebar">
+        <div class="logo">
+            <div class="logo-icon"></div>
+            <span>ImmoPro</span>
+        </div>
+
+        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+            <span class="material-icons">menu</span>
+        </button>
+
+        <a href="dashboard.html" class="menu-item">
+            <span class="material-icons menu-icon">dashboard</span>
+            <span>Tableau de bord</span>
+        </a>
+
+        <a href="biens.html" class="menu-item">
+            <span class="material-icons menu-icon">home</span>
+            <span>Mes biens</span>
+        </a>
+
+        <a href="favoris.html" class="menu-item">
+            <span class="material-icons menu-icon">favorite</span>
+            <span>Mes favoris</span>
+        </a>
+
+        <a href="visites.html" class="menu-item active">
+            <span class="material-icons menu-icon">event</span>
+            <span>Mes visites</span>
+        </a>
+
+        <a href="messagerie.html" class="menu-item">
+            <span class="material-icons menu-icon">chat</span>
+            <span>Messagerie</span>
+        </a>
+
+        <a href="profil.html" class="menu-item">
+            <span class="material-icons menu-icon">person</span>
+            <span>Mon profil</span>
+        </a>
+
+        <a href="#" class="logout" onclick="handleLogout(event)">
+            <span class="material-icons menu-icon">logout</span>
+            <span>Déconnexion</span>
+        </a>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <div class="search-bar">
+                <span class="material-icons search-icon">search</span>
+                <input type="text" placeholder="Rechercher une visite...">
+            </div>
+
+            <div class="header-right">
+                <div class="notification-icon">
+                    <span class="material-icons">notifications</span>
+                    <span class="notification-badge">1</span>
+                </div>
+                <div class="user-profile">
+                    <div class="avatar"></div>
+                    <div class="user-info">
+                        <div class="user-name">Marie Dubois</div>
+                        <div class="user-role">Client</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Page Mes Visites -->
+            <div id="page-visites" class="page-visites active">
+                <div class="page-header">
+                    <h1 class="page-title">Mes Visites Immobilières</h1>
+                    <div class="header-actions">
+                        <button class="btn-secondary" onclick="toggleView('calendar')">
+                            <span class="material-icons">calendar_month</span>
+                            <span>Calendrier</span>
+                        </button>
+                        <button class="btn-secondary active" onclick="toggleView('list')">
+                            <span class="material-icons">view_list</span>
+                            <span>Liste</span>
+                        </button>
+                        <button class="btn-primary" onclick="showScheduleVisitModal()">
+                            <span class="material-icons">add</span>
+                            <span>Planifier une visite</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Statistiques des visites -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <span class="material-icons">event</span>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-label">Visites planifiées</div>
+                            <div class="stat-value">5</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <span class="material-icons">check_circle</span>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-label">Visites confirmées</div>
+                            <div class="stat-value">3</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <span class="material-icons">pending</span>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-label">En attente</div>
+                            <div class="stat-value">2</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <span class="material-icons">history</span>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-label">Visites passées</div>
+                            <div class="stat-value">8</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filtres et actions -->
+                <div class="filters-bar">
+                    <div class="filter-group">
+                        <label>Statut</label>
+                        <select class="filter-select">
+                            <option value="">Tous les statuts</option>
+                            <option value="confirmed">Confirmée</option>
+                            <option value="pending">En attente</option>
+                            <option value="completed">Terminée</option>
+                            <option value="cancelled">Annulée</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Période</label>
+                        <select class="filter-select">
+                            <option value="">Toutes les périodes</option>
+                            <option value="today">Aujourd'hui</option>
+                            <option value="week">Cette semaine</option>
+                            <option value="month">Ce mois</option>
+                            <option value="past">Passées</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Agent</label>
+                        <select class="filter-select">
+                            <option value="">Tous les agents</option>
+                            <option value="sophie">Sophie Martin</option>
+                            <option value="pierre">Pierre Durand</option>
+                            <option value="marie">Marie Leroy</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Date de début</label>
+                        <input type="date" class="filter-input">
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Date de fin</label>
+                        <input type="date" class="filter-input">
+                    </div>
+
+                    <div class="filter-actions">
+                        <button class="btn-filter" onclick="applyFilters()">Filtrer</button>
+                        <button class="btn-filter secondary" onclick="resetFilters()">Réinitialiser</button>
+                    </div>
+                </div>
+
+                <!-- Vue calendrier -->
+                <div id="visits-calendar" class="visits-calendar">
+                    <div class="calendar-header">
+                        <button class="calendar-nav" onclick="previousMonth()">
+                            <span class="material-icons">chevron_left</span>
+                        </button>
+                        <h2 class="calendar-title" id="calendar-title">Janvier 2025</h2>
+                        <button class="calendar-nav" onclick="nextMonth()">
+                            <span class="material-icons">chevron_right</span>
+                        </button>
+                    </div>
+                    <div class="calendar-grid" id="calendar-grid">
+                        <!-- Le calendrier sera généré dynamiquement -->
+                    </div>
+                </div>
+
+                <!-- Vue liste -->
+                <div id="visits-list" class="visits-list active">
+                    <div class="visits-container">
+                        <!-- Visites à venir -->
+                        <div class="visits-section">
+                            <div class="section-header">
+                                <h2 class="section-title">Visites à venir</h2>
+                                <span class="section-count">3 visites</span>
+                            </div>
+
+                            <div class="visit-item" data-id="1">
+                                <div class="visit-date">
+                                    <div class="date-day">15</div>
+                                    <div class="date-month">Jan</div>
+                                    <div class="date-year">2025</div>
+                                </div>
+                                <div class="visit-time">
+                                    <div class="time-hour">14:00</div>
+                                    <div class="time-period">PM</div>
+                                </div>
+                                <div class="visit-details">
+                                    <div class="visit-property">
+                                        <img src="../../assets/images/bien_1.jpg" alt="Appartement" class="property-thumb">
+                                        <div class="property-info">
+                                            <div class="property-title">Appartement moderne, Paris 15ème</div>
+                                            <div class="property-location">Paris 15ème, 75015</div>
+                                            <div class="property-price">650 000 €</div>
+                                        </div>
+                                    </div>
+                                    <div class="visit-agent">
+                                        <div class="agent-avatar"></div>
+                                        <div class="agent-info">
+                                            <div class="agent-name">Sophie Martin</div>
+                                            <div class="agent-phone">06 12 34 56 78</div>
+                                        </div>
+                                    </div>
+                                    <div class="visit-status">
+                                        <span class="status-badge status-confirmed">Confirmée</span>
+                                    </div>
+                                </div>
+                                <div class="visit-actions">
+                                    <button class="action-btn primary" onclick="viewVisitDetails(1)">
+                                        <span class="material-icons">visibility</span>
+                                        <span>Détails</span>
+                                    </button>
+                                    <button class="action-btn secondary" onclick="contactAgent(1)">
+                                        <span class="material-icons">chat</span>
+                                        <span>Contacter</span>
+                                    </button>
+                                    <button class="action-btn warning" onclick="cancelVisit(1)">
+                                        <span class="material-icons">cancel</span>
+                                        <span>Annuler</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="visit-item" data-id="2">
+                                <div class="visit-date">
+                                    <div class="date-day">18</div>
+                                    <div class="date-month">Jan</div>
+                                    <div class="date-year">2025</div>
+                                </div>
+                                <div class="visit-time">
+                                    <div class="time-hour">10:30</div>
+                                    <div class="time-period">AM</div>
+                                </div>
+                                <div class="visit-details">
+                                    <div class="visit-property">
+                                        <img src="../../assets/images/bien_2.jpg" alt="Maison" class="property-thumb">
+                                        <div class="property-info">
+                                            <div class="property-title">Maison avec jardin, Neuilly</div>
+                                            <div class="property-location">Neuilly-sur-Seine, 92200</div>
+                                            <div class="property-price">1 200 000 €</div>
+                                        </div>
+                                    </div>
+                                    <div class="visit-agent">
+                                        <div class="agent-avatar"></div>
+                                        <div class="agent-info">
+                                            <div class="agent-name">Pierre Durand</div>
+                                            <div class="agent-phone">06 98 76 54 32</div>
+                                        </div>
+                                    </div>
+                                    <div class="visit-status">
+                                        <span class="status-badge status-pending">En attente</span>
+                                    </div>
+                                </div>
+                                <div class="visit-actions">
+                                    <button class="action-btn primary" onclick="viewVisitDetails(2)">
+                                        <span class="material-icons">visibility</span>
+                                        <span>Détails</span>
+                                    </button>
+                                    <button class="action-btn secondary" onclick="contactAgent(2)">
+                                        <span class="material-icons">chat</span>
+                                        <span>Contacter</span>
+                                    </button>
+                                    <button class="action-btn warning" onclick="cancelVisit(2)">
+                                        <span class="material-icons">cancel</span>
+                                        <span>Annuler</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="visit-item" data-id="3">
+                                <div class="visit-date">
+                                    <div class="date-day">22</div>
+                                    <div class="date-month">Jan</div>
+                                    <div class="date-year">2025</div>
+                                </div>
+                                <div class="visit-time">
+                                    <div class="time-hour">16:00</div>
+                                    <div class="time-period">PM</div>
+                                </div>
+                                <div class="visit-details">
+                                    <div class="visit-property">
+                                        <img src="../../assets/images/bien_3.jpg" alt="Loft" class="property-thumb">
+                                        <div class="property-info">
+                                            <div class="property-title">Loft industriel, Lyon Confluence</div>
+                                            <div class="property-location">Lyon 2ème, 69002</div>
+                                            <div class="property-price">750 000 €</div>
+                                        </div>
+                                    </div>
+                                    <div class="visit-agent">
+                                        <div class="agent-avatar"></div>
+                                        <div class="agent-info">
+                                            <div class="agent-name">Marie Leroy</div>
+                                            <div class="agent-phone">06 45 67 89 01</div>
+                                        </div>
+                                    </div>
+                                    <div class="visit-status">
+                                        <span class="status-badge status-confirmed">Confirmée</span>
+                                    </div>
+                                </div>
+                                <div class="visit-actions">
+                                    <button class="action-btn primary" onclick="viewVisitDetails(3)">
+                                        <span class="material-icons">visibility</span>
+                                        <span>Détails</span>
+                                    </button>
+                                    <button class="action-btn secondary" onclick="contactAgent(3)">
+                                        <span class="material-icons">chat</span>
+                                        <span>Contacter</span>
+                                    </button>
+                                    <button class="action-btn warning" onclick="cancelVisit(3)">
+                                        <span class="material-icons">cancel</span>
+                                        <span>Annuler</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Visites passées -->
+                        <div class="visits-section">
+                            <div class="section-header">
+                                <h2 class="section-title">Visites passées</h2>
+                                <span class="section-count">8 visites</span>
+                            </div>
+
+                            <div class="visit-item past" data-id="4">
+                                <div class="visit-date">
+                                    <div class="date-day">08</div>
+                                    <div class="date-month">Jan</div>
+                                    <div class="date-year">2025</div>
+                                </div>
+                                <div class="visit-time">
+                                    <div class="time-hour">15:30</div>
+                                    <div class="time-period">PM</div>
+                                </div>
+                                <div class="visit-details">
+                                    <div class="visit-property">
+                                        <img src="../../assets/images/bien_1.jpg" alt="Studio" class="property-thumb">
+                                        <div class="property-info">
+                                            <div class="property-title">Studio moderne centre-ville</div>
+                                            <div class="property-location">Paris 4ème, 75004</div>
+                                            <div class="property-price">420 000 €</div>
+                                        </div>
+                                    </div>
+                                    <div class="visit-agent">
+                                        <div class="agent-avatar"></div>
+                                        <div class="agent-info">
+                                            <div class="agent-name">Thomas Petit</div>
+                                            <div class="agent-phone">06 11 22 33 44</div>
+                                        </div>
+                                    </div>
+                                    <div class="visit-status">
+                                        <span class="status-badge status-completed">Terminée</span>
+                                    </div>
+                                </div>
+                                <div class="visit-actions">
+                                    <button class="action-btn primary" onclick="viewVisitDetails(4)">
+                                        <span class="material-icons">visibility</span>
+                                        <span>Détails</span>
+                                    </button>
+                                    <button class="action-btn secondary" onclick="addToFavorites(4)">
+                                        <span class="material-icons">favorite</span>
+                                        <span>Favoris</span>
+                                    </button>
+                                    <button class="action-btn secondary" onclick="rateVisit(4)">
+                                        <span class="material-icons">star</span>
+                                        <span>Noter</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="visit-item past" data-id="5">
+                                <div class="visit-date">
+                                    <div class="date-day">05</div>
+                                    <div class="date-month">Jan</div>
+                                    <div class="date-year">2025</div>
+                                </div>
+                                <div class="visit-time">
+                                    <div class="time-hour">11:00</div>
+                                    <div class="time-period">AM</div>
+                                </div>
+                                <div class="visit-details">
+                                    <div class="visit-property">
+                                        <img src="../../assets/images/bien_1.jpg" alt="Appartement" class="property-thumb">
+                                        <div class="property-info">
+                                            <div class="property-title">Appartement T3, Paris 11ème</div>
+                                            <div class="property-location">Paris 11ème, 75011</div>
+                                            <div class="property-price">580 000 €</div>
+                                        </div>
+                                    </div>
+                                    <div class="visit-agent">
+                                        <div class="agent-avatar"></div>
+                                        <div class="agent-info">
+                                            <div class="agent-name">Sophie Martin</div>
+                                            <div class="agent-phone">06 12 34 56 78</div>
+                                        </div>
+                                    </div>
+                                    <div class="visit-status">
+                                        <span class="status-badge status-cancelled">Annulée</span>
+                                    </div>
+                                </div>
+                                <div class="visit-actions">
+                                    <button class="action-btn primary" onclick="viewVisitDetails(5)">
+                                        <span class="material-icons">visibility</span>
+                                        <span>Détails</span>
+                                    </button>
+                                    <button class="action-btn secondary" onclick="rescheduleVisit(5)">
+                                        <span class="material-icons">event</span>
+                                        <span>Reprogrammer</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="site-footer" role="contentinfo" aria-label="Pied de page">
+            <div class="footer-left">© 2025 ImmoPro — Tous droits réservés</div>
+            <div class="footer-links">
+                <a href="../auth/mentions-legales.html">Mentions légales</a>
+                <a href="../auth/privacy.html">Politique de confidentialité</a>
+                <a href="../auth/contact.html">Contact</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modal de planification de visite -->
+    <div id="schedule-visit-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Planifier une nouvelle visite</h2>
+                <button class="modal-close" onclick="closeScheduleVisitModal()">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="schedule-visit-form">
+                    <div class="form-group">
+                        <label for="visit-property">Bien à visiter</label>
+                        <select id="visit-property" name="property" required>
+                            <option value="">Sélectionner un bien</option>
+                            <option value="1">Appartement moderne, Paris 15ème</option>
+                            <option value="2">Maison avec jardin, Neuilly</option>
+                            <option value="3">Loft industriel, Lyon Confluence</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="visit-date">Date souhaitée</label>
+                            <input type="date" id="visit-date" name="date" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="visit-time">Heure souhaitée</label>
+                            <input type="time" id="visit-time" name="time" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="visit-agent">Agent préféré</label>
+                        <select id="visit-agent" name="agent">
+                            <option value="">Aucune préférence</option>
+                            <option value="sophie">Sophie Martin</option>
+                            <option value="pierre">Pierre Durand</option>
+                            <option value="marie">Marie Leroy</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="visit-notes">Notes (optionnel)</label>
+                        <textarea id="visit-notes" name="notes" rows="3" placeholder="Informations particulières, questions spécifiques..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" onclick="closeScheduleVisitModal()">Annuler</button>
+                <button type="button" class="btn-primary" onclick="saveVisit()">Planifier la visite</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/script.js"></script>
+    <script src="../../js/client_visites.js"></script>
+</body>
+
+</html>

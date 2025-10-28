@@ -1,0 +1,344 @@
+/* Formulaire de visite */
+
+
+/* Police Poppins pour tous les éléments de formulaire */
+
+input,
+button,
+textarea,
+select {
+    font-family: "Poppins", sans-serif;
+}
+
+.main-content {
+    background-color: var(--bg-light);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.header h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.back-button {
+    border: none;
+    background: none;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: all 0.3s;
+}
+
+.back-button:hover {
+    background-color: var(--accent-beige-light);
+    color: var(--primary-blue);
+}
+
+.content {
+    padding: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+/* Style du formulaire */
+
+.visit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.form-section {
+    background-color: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.form-section h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 24px 0;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+
+/* Labels et inputs */
+
+label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"],
+select,
+textarea {
+    padding: 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: "Poppins", sans-serif;
+    color: var(--text-primary);
+    transition: all 0.3s;
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+    border-color: var(--primary-blue-light);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(28, 63, 96, 0.1);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+
+/* Recherche de bien/client */
+
+.property-search,
+.client-search {
+    margin-bottom: 20px;
+}
+
+.search-input {
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.search-input .material-icons {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+}
+
+.search-input input {
+    width: 100%;
+    padding: 12px 12px 12px 40px;
+}
+
+.search-results {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+}
+
+
+/* Preview bien/client sélectionné */
+
+.selected-property,
+.selected-client {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 16px;
+}
+
+.property-preview,
+.client-preview {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.property-image {
+    width: 120px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.property-details,
+.client-details {
+    flex: 1;
+}
+
+.property-details h3,
+.client-details h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+    color: var(--text-primary);
+}
+
+.property-details p,
+.client-details p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin: 0 0 4px 0;
+}
+
+.property-price {
+    font-weight: 600;
+    color: var(--primary-blue) !important;
+}
+
+.client-avatar {
+    width: 48px;
+    height: 48px;
+    background-color: var(--accent-beige-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.client-avatar .material-icons {
+    font-size: 32px;
+    color: var(--primary-blue);
+}
+
+
+/* Checkboxes */
+
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.checkbox-label {
+    font-size: 14px;
+    color: var(--text-primary);
+}
+
+
+/* Barre d'actions */
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    position: sticky;
+    bottom: 0;
+    background-color: white;
+    padding: 16px 24px;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    margin-top: 16px;
+}
+
+.btn-primary,
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background-color: var(--primary-blue);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--link-hover);
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background-color: var(--accent-beige-light);
+    color: var(--primary-blue);
+}
+
+.btn-secondary:hover {
+    background-color: var(--accent-beige);
+    transform: translateY(-1px);
+}
+
+.btn-primary:active,
+.btn-secondary:active {
+    transform: translateY(0);
+}
+
+
+/* Responsive */
+
+@media (max-width: 768px) {
+    .content {
+        padding: 16px;
+    }
+    .form-section {
+        padding: 20px;
+    }
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    .form-actions {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-radius: 0;
+        margin: 0;
+        z-index: 100;
+    }
+    .visit-form {
+        padding-bottom: 80px;
+    }
+    .property-preview,
+    .client-preview {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .property-image {
+        width: 100%;
+        height: 160px;
+    }
+}

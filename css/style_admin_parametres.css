@@ -1,0 +1,171 @@
+/* Styles pour la page Paramètres */
+
+
+/* Police Poppins pour tous les éléments de formulaire */
+
+input,
+button,
+textarea,
+select {
+    font-family: "Poppins", sans-serif;
+}
+
+.settings-page {
+    padding: 20px;
+}
+
+.page-header h1 {
+    font-size: 24px;
+    margin: 0 0 4px 0;
+    color: var(--text-primary);
+}
+
+.page-header .subtitle {
+    color: var(--text-secondary);
+    margin: 0 0 16px 0;
+}
+
+.settings-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 1100px;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+}
+
+.card h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    padding: 16px 20px;
+    border-bottom: 1px solid #eaeaea;
+    color: var(--text-primary);
+}
+
+.card-body {
+    padding: 18px 20px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 14px;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.form-group input[type="text"],
+.form-group input[type="url"],
+.form-group input[type="file"],
+.form-group textarea,
+.form-group input[type="color"] {
+    padding: 10px 12px;
+    border: 1px solid #e6e6e6;
+    border-radius: 8px;
+    background: white;
+    font-size: 14px;
+    color: var(--text-primary);
+}
+
+.logo-group .logo-preview {
+    width: 160px;
+    height: 80px;
+    border: 1px dashed #e6e6e6;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--bg-light);
+}
+
+.logo-preview img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.hint {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.colors-body {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.color-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.color-item input[type="color"] {
+    width: 48px;
+    height: 32px;
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+.color-swatch {
+    width: 48px;
+    height: 32px;
+    border-radius: 6px;
+    border: 1px solid #e6e6e6;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-primary {
+    background: var(--primary-blue);
+    color: white;
+}
+
+.btn-secondary {
+    background: var(--accent-beige-light);
+    color: var(--text-primary);
+}
+
+@media (max-width: 768px) {
+    .form-actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+    .colors-body {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erreur serveur - ImmoPro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style_error_pages.css">
+</head>
+
+<body>
+    <div class="error-container">
+        <div class="error-content">
+            <!-- Animation 500 -->
+            <div class="error-animation">
+                <div class="error-number">500</div>
+                <div class="error-icon">
+                    <span class="material-icons">error_outline</span>
+                </div>
+            </div>
+
+            <!-- Contenu de l'erreur -->
+            <div class="error-text">
+                <h1>Erreur serveur</h1>
+                <p>Une erreur interne s'est produite sur notre serveur.</p>
+                <p>Notre équipe technique a été notifiée et travaille à résoudre le problème.</p>
+            </div>
+
+            <!-- Actions -->
+            <div class="error-actions">
+                <button class="btn-primary" onclick="goHome()">
+                    <span class="material-icons">home</span>
+                    <span>Retour à l'accueil</span>
+                </button>
+                <button class="btn-secondary" onclick="retryPage()">
+                    <span class="material-icons">refresh</span>
+                    <span>Réessayer</span>
+                </button>
+                <button class="btn-secondary" onclick="goToContact()">
+                    <span class="material-icons">contact_support</span>
+                    <span>Signaler le problème</span>
+                </button>
+            </div>
+
+            <!-- Informations techniques -->
+            <div class="error-details">
+                <h3>Informations techniques</h3>
+                <div class="details-content">
+                    <div class="detail-item">
+                        <span class="label">Code d'erreur :</span>
+                        <span class="value">500 - Internal Server Error</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label">Heure :</span>
+                        <span class="value" id="error-time"></span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="label">ID de session :</span>
+                        <span class="value" id="session-id"></span>
+                    </div>
+                </div>
+                <button class="btn-link" onclick="toggleTechnicalDetails()">
+                    <span class="material-icons">expand_more</span>
+                    <span>Détails techniques</span>
+                </button>
+                <div class="technical-details" id="technical-details" style="display: none;">
+                    <pre id="error-stack"></pre>
+                </div>
+            </div>
+
+            <!-- Status du service -->
+            <div class="service-status">
+                <h3>État des services</h3>
+                <div class="status-grid">
+                    <div class="status-item">
+                        <span class="status-indicator online"></span>
+                        <span class="status-text">Site web</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-indicator offline"></span>
+                        <span class="status-text">Base de données</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-indicator online"></span>
+                        <span class="status-text">API</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-indicator online"></span>
+                        <span class="status-text">Authentification</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact d'urgence -->
+            <div class="emergency-contact">
+                <h3>Besoin d'aide immédiate ?</h3>
+                <p>Si vous rencontrez des difficultés urgentes, contactez-nous directement :</p>
+                <div class="contact-methods">
+                    <a href="tel:0123456789" class="contact-method">
+                        <span class="material-icons">phone</span>
+                        <span>01 23 45 67 89</span>
+                    </a>
+                    <a href="mailto:support@immopro.fr" class="contact-method">
+                        <span class="material-icons">email</span>
+                        <span>support@immopro.fr</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="error-footer">
+            <p>© 2025 ImmoPro — Tous droits réservés</p>
+            <div class="footer-links">
+                <a href="#" onclick="goToHelp()">Aide</a>
+                <a href="#" onclick="goToContact()">Contact</a>
+                <a href="#" onclick="goToPrivacy()">Confidentialité</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/error_pages.js"></script>
+</body>
+
+</html>
