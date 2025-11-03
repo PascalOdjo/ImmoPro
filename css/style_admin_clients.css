@@ -323,28 +323,94 @@ select {
         flex-direction: column;
         gap: 16px;
     }
+    .client-info {
+        flex-direction: column;
+        gap: 12px;
+    }
     .client-activity {
         justify-content: flex-start;
-        padding-left: 64px;
+        padding-left: 0;
+        flex-wrap: wrap;
     }
     .client-actions {
-        padding-left: 64px;
+        padding-left: 0;
+        justify-content: flex-start;
     }
 }
 
 @media (max-width: 768px) {
+    .page-clients {
+        padding: 15px;
+    }
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
     .filters-bar {
         flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+    .filter-group {
+        min-width: 100%;
     }
     .filter-actions {
         width: 100%;
         margin-left: 0;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .btn-filter {
+        width: 100%;
+        justify-content: center;
+    }
+    .client-card {
+        padding: 15px;
     }
     .client-activity {
         padding-left: 0;
         overflow-x: auto;
+        flex-wrap: nowrap;
+        gap: 12px;
     }
     .client-actions {
         padding-left: 0;
+        justify-content: flex-start;
+    }
+    .client-info {
+        gap: 10px;
+    }
+    .client-avatar {
+        width: 40px;
+        height: 40px;
+    }
+    .client-name {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .client-card {
+        padding: 12px;
+    }
+    .client-avatar {
+        width: 36px;
+        height: 36px;
+    }
+    .client-name {
+        font-size: 15px;
+    }
+    .client-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+    .activity-item {
+        min-width: 80px;
+    }
+    .action-btn {
+        width: 28px;
+        height: 28px;
     }
 }

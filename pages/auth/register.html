@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,12 +12,15 @@
     <link rel="stylesheet" href="../../css/components.css">
     <link rel="stylesheet" href="../../css/style_auth.css">
 </head>
+
 <body>
     <div class="auth-container">
         <div class="auth-content">
             <div class="auth-header">
                 <div class="logo">
-                    <div class="logo-icon"></div>
+                    <div class="logo-icon">
+                        <span class="material-icons">home</span>
+                    </div>
                     <span>ImmoPro</span>
                 </div>
                 <h1>Créer un compte</h1>
@@ -28,8 +32,7 @@
                         <label for="firstname">Prénom</label>
                         <div class="input-with-icon">
                             <span class="material-icons">person</span>
-                            <input type="text" id="firstname" name="firstname" required 
-                                placeholder="Votre prénom">
+                            <input type="text" id="firstname" name="firstname" required placeholder="Votre prénom">
                         </div>
                     </div>
 
@@ -37,8 +40,7 @@
                         <label for="lastname">Nom</label>
                         <div class="input-with-icon">
                             <span class="material-icons">person</span>
-                            <input type="text" id="lastname" name="lastname" required 
-                                placeholder="Votre nom">
+                            <input type="text" id="lastname" name="lastname" required placeholder="Votre nom">
                         </div>
                     </div>
                 </div>
@@ -47,8 +49,7 @@
                     <label for="email">Email</label>
                     <div class="input-with-icon">
                         <span class="material-icons">email</span>
-                        <input type="email" id="email" name="email" required 
-                            placeholder="exemple@email.com">
+                        <input type="email" id="email" name="email" required placeholder="exemple@email.com">
                     </div>
                 </div>
 
@@ -58,9 +59,8 @@
                     <label for="password">Mot de passe</label>
                     <div class="input-with-icon">
                         <span class="material-icons">lock</span>
-                        <input type="password" id="password" name="password" required 
-                            placeholder="Créez votre mot de passe" style="padding-right: 40px;">
-                        
+                        <input type="password" id="password" name="password" required placeholder="Créez votre mot de passe" style="padding-right: 40px;">
+
                     </div>
 
                 </div>
@@ -69,9 +69,8 @@
                     <label for="confirm-password">Confirmer le mot de passe</label>
                     <div class="input-with-icon">
                         <span class="material-icons">lock</span>
-                        <input type="password" id="confirm-password" name="confirm-password" required 
-                            placeholder="Confirmez votre mot de passe" style="padding-right: 40px;">
-                        
+                        <input type="password" id="confirm-password" name="confirm-password" required placeholder="Confirmez votre mot de passe" style="padding-right: 40px;">
+
                     </div>
                 </div>
 
@@ -95,4 +94,5 @@
     </div>
     <script src="../../js/auth.js"></script>
 </body>
+
 </html>

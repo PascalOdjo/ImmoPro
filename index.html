@@ -2,271 +2,79 @@
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ImmoPro - Gestion Immobilière</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="css/style_error_pages.css">
-    <style>
-        body {
-            background: linear-gradient(135deg, #1C3F60 0%, #265140 100%);
-            color: white;
-            font-family: "Poppins", sans-serif;
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-        
-        .welcome-container {
-            text-align: center;
-            max-width: 600px;
-            width: 90%;
-            padding: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-        
-        .logo-icon {
-            width: 60px;
-            height: 60px;
-            background-color: white;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-            color: #1C3F60;
-        }
-        
-        .logo-text {
-            font-size: 36px;
-            font-weight: 700;
-            margin: 0;
-        }
-        
-        .welcome-title {
-            font-size: 28px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: white;
-        }
-        
-        .welcome-subtitle {
-            font-size: 18px;
-            margin-bottom: 40px;
-            opacity: 0.9;
-            line-height: 1.6;
-        }
-        
-        .auth-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .auth-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 15px 30px;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            text-decoration: none;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-        
-        .auth-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        .auth-btn.primary {
-            background: white;
-            color: #1C3F60;
-            border-color: white;
-        }
-        
-        .auth-btn.primary:hover {
-            background: rgba(255, 255, 255, 0.9);
-            color: #1C3F60;
-        }
-        
-        .features {
-            margin-top: 50px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-        }
-        
-        .feature {
-            text-align: center;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .feature-icon {
-            font-size: 40px;
-            margin-bottom: 15px;
-            opacity: 0.8;
-        }
-        
-        .feature-title {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-        
-        .feature-desc {
-            font-size: 14px;
-            opacity: 0.7;
-            line-height: 1.4;
-        }
-        
-        @media (max-width: 768px) {
-            body {
-                padding: 20px;
-            }
-            .welcome-container {
-                width: 100%;
-                max-width: none;
-                margin: 0;
-                padding: 30px 20px;
-            }
-            .logo-text {
-                font-size: 28px;
-            }
-            .welcome-title {
-                font-size: 24px;
-            }
-            .auth-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            .auth-btn {
-                width: 100%;
-                max-width: 300px;
-                justify-content: center;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .welcome-container {
-                padding: 20px 15px;
-            }
-            .logo-text {
-                font-size: 24px;
-            }
-            .welcome-title {
-                font-size: 20px;
-            }
-            .welcome-subtitle {
-                font-size: 16px;
-            }
-        }
-    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ImmoPro - Connexion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/style_auth.css" />
 </head>
 
 <body>
-    <div class="welcome-container">
-        <div class="logo">
-            <div class="logo-icon">
-                <span class="material-icons">home</span>
-            </div>
-            <h1 class="logo-text">ImmoPro</h1>
-        </div>
-
-        <h2 class="welcome-title">Bienvenue sur ImmoPro</h2>
-        <p class="welcome-subtitle">
-            Votre solution complète pour la gestion immobilière. Gérez vos biens, clients et visites en toute simplicité.
-        </p>
-
-        <div class="auth-buttons">
-            <a href="pages/auth/login.html" class="auth-btn primary">
-                <span class="material-icons">login</span> Se connecter
-            </a>
-            <a href="pages/auth/register.html" class="auth-btn">
-                <span class="material-icons">person_add</span> S'inscrire
-            </a>
-        </div>
-
-        <div class="features">
-            <div class="feature">
-                <div class="feature-icon">
-                    <span class="material-icons">dashboard</span>
+    <div class="auth-container">
+        <div class="auth-content">
+            <div class="auth-header">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <span class="material-icons">home</span>
+                    </div>
+                    <span>ImmoPro</span>
                 </div>
-                <div class="feature-title">Tableau de bord</div>
-                <div class="feature-desc">Vue d'ensemble de vos activités</div>
+                <h1>Connexion</h1>
+                <p class="auth-subtitle">
+                    Bienvenue ! Connectez-vous pour accéder à votre espace.
+                </p>
             </div>
 
-            <div class="feature">
-                <div class="feature-icon">
-                    <span class="material-icons">home</span>
+            <form id="login-form" class="auth-form" novalidate>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <div class="input-with-icon">
+                        <span class="material-icons">email</span>
+                        <input type="email" id="email" name="email" required placeholder="exemple@email.com" />
+                    </div>
                 </div>
-                <div class="feature-title">Gestion des biens</div>
-                <div class="feature-desc">Ajoutez et gérez vos propriétés</div>
-            </div>
 
-            <div class="feature">
-                <div class="feature-icon">
-                    <span class="material-icons">people</span>
+                <div class="form-group">
+                    <div class="password-label">
+                        <label for="password">Mot de passe</label>
+                        <a href="pages/auth/reset-password.html" class="forgot-password">Mot de passe oublié ?</a>
+                    </div>
+                    <div class="input-with-icon">
+                        <span class="material-icons">lock</span>
+                        <input type="password" id="password" name="password" required placeholder="Votre mot de passe" />
+                    </div>
                 </div>
-                <div class="feature-title">Clients</div>
-                <div class="feature-desc">Suivez vos clients et prospects</div>
-            </div>
 
-            <div class="feature">
-                <div class="feature-icon">
-                    <span class="material-icons">event</span>
+                <div class="form-group">
+                    <label class="checkbox-item">
+                        <input
+                            type="checkbox"
+                            name="remember"
+                            id="remember"
+                        />
+                        <span class="checkbox-label">Se souvenir de moi</span>
+                    </label>
                 </div>
-                <div class="feature-title">Visites</div>
-                <div class="feature-desc">Planifiez et suivez vos rendez-vous</div>
+
+                <button type="submit" class="btn-primary btn-large">
+                    <span class="material-icons">login</span>
+                    Se connecter
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                <p>
+                    Vous n'avez pas de compte ?
+                    <a href="pages/auth/register.html">Créer un compte</a>
+                </p>
             </div>
         </div>
     </div>
-
-    <script>
-        // Redirection automatique après 10 secondes si aucune action
-        let redirectTimer = setTimeout(() => {
-            window.location.href = 'pages/auth/login.html';
-        }, 10000);
-
-        // Annuler la redirection si l'utilisateur interagit
-        document.addEventListener('click', () => {
-            clearTimeout(redirectTimer);
-        });
-
-        document.addEventListener('keydown', () => {
-            clearTimeout(redirectTimer);
-        });
-    </script>
+    <script src="js/auth.js"></script>
 </body>
 
 </html>
